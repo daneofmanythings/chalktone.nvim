@@ -45,8 +45,8 @@ M.setup = function(palette)
 		fg_highlight = colors.grey1,
 
 		bg = colors.black1,
-		bg_float = colors.black1,
-		bg_highlight = colors.black1,
+		bg_float = colors.black2,
+		bg_highlight = colors.grey2,
 
 		bg_fade = colors.grey2,
 

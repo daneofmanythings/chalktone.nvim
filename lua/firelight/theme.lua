@@ -9,7 +9,7 @@ M.setup = function(opts)
 	local c = theme.colors
 	theme.highlights = {
 		Normal = { fg = c.ui.fg, bg = c.ui.bg },
-		NormalFloat = "Normal",
+		NormalFloat = { bg = c.ui.bg_highlight },
 
 		Pmenu = "NormalFloat",
 		PmenuSel = { bg = c.ui.fg_highlight },
