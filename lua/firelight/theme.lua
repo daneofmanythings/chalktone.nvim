@@ -23,6 +23,9 @@ M.setup = function(opts)
 		CursorColumn = { bg = c.ui.bg_fade },
 		CursorLine = "CursorColumn",
 
+		LineNr = { fg = c.ui.accent_dark },
+		CursorLineNr = { fg = c.ui.accent_bold },
+
 		Directory = { fg = c.ui.dir },
 	}
 

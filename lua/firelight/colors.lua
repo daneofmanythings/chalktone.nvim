@@ -52,6 +52,7 @@ M.setup = function(palette)
 
 		accent_light = colors.tan1,
 		accent_dark = colors.tan2,
+		accent_bold = colors.yellow2,
 
 		win_border = colors.white,
 
