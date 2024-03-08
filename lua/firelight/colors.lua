@@ -41,11 +41,11 @@ M.setup = function(palette)
 
 	colors.ui = {
 		fg = colors.white,
-		fg_float = colors.ui.fg,
+		fg_float = colors.white,
 		fg_highlight = colors.grey1,
 
 		bg = colors.black1,
-		bg_float = colors.ui.bg,
+		bg_float = colors.black1,
 		bg_highlight = colors.black1,
 
 		bg_fade = colors.grey2,
@@ -53,7 +53,7 @@ M.setup = function(palette)
 		accent_light = colors.tan1,
 		accent_dark = colors.tan2,
 
-		win_border = colors.ui.fg,
+		win_border = colors.white,
 
 		dir = colors.blue2,
 	}
