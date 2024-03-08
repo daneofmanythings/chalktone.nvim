@@ -9,6 +9,16 @@ M.setup = function(opts)
 	local c = theme.colors
 	theme.highlights = {
 		Normal = { fg = c.ui.fg, bg = c.ui.bg },
+		NormalFloat = "Normal",
+
+		Cursor = { fg = c.ui.bg, bg = c.ui.fg },
+		-- lCursor = {}
+		CursorIM = "Cursor",
+
+		CursorColumn = { bg = c.ui.bg_fade },
+		CursorLine = "CursorColumn",
+
+		Directory = { fg = c.ui.dir },
 	}
 
 	return theme
