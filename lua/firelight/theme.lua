@@ -1,14 +1,17 @@
 local M = {}
----@alias Theme table<string,any> -- This should contain a highlight class, but not sure of the def for it yet
+---@alias Highlight table<string,string|boolean>
 
----comment
----@param opts Config
----@return table
-M.setup = function(opts)
-	local styling = opts.formatting -- used down below after the base has been set
-	local palette = require("firelight.colors").setup(opts.palette_name)
+---@alias Theme table<string,Highlight> -- This should contain a highlight class, but not sure of the def for it yet
 
-	local p = palette
+---@return Theme
+M.setup = function()
+	local config = require("firelight.config")
+	local styling = config.options.formatting
+	local palette_name = config.options.palette_name
+
+	local colors = require("firelight.colors")
+	local p = colors.setup(palette_name)
+
 	local highlights = {
 		-----------------------------------
 		--            EDITOR             --
@@ -23,7 +26,6 @@ M.setup = function(opts)
 		PmenuThumb = { link = "PmenuSel" },
 
 		Cursor = { fg = p.ui.bg_main, bg = p.ui.fg_main },
-		-- lCursor = {}
 		CursorIM = { link = "Cursor" },
 
 		CursorColumn = { bg = p.ui.bg_cursorline },
@@ -51,37 +53,15 @@ M.setup = function(opts)
 		Character = { fg = p.syntax.character },
 		Number = { fg = p.syntax.number },
 		Boolean = { link = "Number" },
-		-- Float = {},
-
 		Statement = { fg = p.syntax.statement },
-		-- Conditional = {},
-		-- Repeat = {},
-		-- Label = {},
 		Operator = { fg = p.syntax.operator },
-		-- Keyword = {},
-		-- Exception = {},
-
 		PreProc = { fg = p.syntax.preproc },
-		-- Include = {},
-		-- Define = {},
-		-- Macro = {},
-		-- PreCondit = {},
-
 		Type = { fg = p.syntax.type },
-		-- StorageClass = {},
-		-- Structure = {},
-		-- Typedef = {},
-
 		Special = { fg = p.syntax.special },
-		-- SpecialChar = {},
-		-- Tag = {},
 		Delimiter = { fg = p.syntax.delimiter },
-		-- SpecialComment = {},
-		-- Debug = {},
-
-		-- Underlined = { underline = fv.underline },
-		-- Bold = { bold = fv.bold },
-		-- Italic = { italic = fv.italic },
+		Underlined = { underline = true },
+		Bold = { bold = true },
+		Italic = { italic = true },
 
 		-- Ignore = { fg = a.ui },
 		-- Error = { bg = d.red },
@@ -108,17 +88,18 @@ end
 
 M._apply_styling = function(styling, highlights)
 	if type(styling) ~= "table" then
+		-- assert(1 == 0, "Something other than a table was passed to _apply_styling")
 		return highlights
 	end
 
 	for _, style in pairs(styling) do
-		M._clean_style(style)
+		style = M._sanitize_style(style)
 	end
 
 	return vim.tbl_deep_extend("force", highlights, styling)
 end
 
-M._clean_style = function(style)
+M._sanitize_style = function(style)
 	for attr_name, _ in pairs(style) do
 		if not M._validate_hl_attr(attr_name) then
 			style[attr_name] = nil
@@ -128,15 +109,23 @@ M._clean_style = function(style)
 end
 
 local _valid_attr_names = {
-	fg = true,
-	bg = true,
-	sp = true,
-	bold = true,
-	underline = true,
-	undercurl = true,
-	strikethrough = true,
-	italic = true,
-	link = true,
+	-- :h nvim_set_hl
+	fg = true, -- color name or "#RRGGBB"
+	bg = true, -- color name or "#RRGGBB"
+	sp = true, -- color name or "#RRGGBB"
+	blend = false, -- integer between 0 and 100
+	bold = true, -- boolean
+	standout = false, -- boolean
+	underline = true, -- boolean
+	undercurl = true, -- boolean
+	underdouble = false, -- boolean
+	underdotted = false, -- boolean
+	underdashed = false, -- boolean
+	strikethrough = true, -- boolean
+	italic = true, -- boolean
+	reverse = false, -- boolean
+	nocombine = false, -- boolean
+	link = true, -- name of another highlight group to link to. :hi-link
 }
 
 ---comment validates the attr name as one the color scheme supports altering

@@ -74,7 +74,7 @@ M.setup = function(palette_name)
 	}
 
 	palette.diag = {
-		error = cd.red3,
+		error = cd.red2,
 		warn = cd.yellow3,
 		hint = cd.cyan1,
 		info = cd.magenta2,

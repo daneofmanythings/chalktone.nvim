@@ -5,7 +5,7 @@ describe("config", function()
 	local default
 
 	before_each(function()
-		default = require("firelight.config").default()
+		default = require("firelight.config").options()
 	end)
 
 	it("merge_options: nil opts", function()
@@ -56,18 +56,23 @@ describe("theme", function()
 		local result = theme._validate_hl_attr(style)
 		assert.are.same(false, result)
 	end)
+
 	it("validate_styling: italic", function()
 		local style = "italic"
 		local result = theme._validate_hl_attr(style)
 		assert.are.same(true, result)
 	end)
 
-	it("sanity check", function()
+	it("setup: check opts", function()
+		local opts = require("firelight.config").options()
+		local theme = theme.setup(opts)
+	end)
+
+	it("sanity check 1", function()
 		local hls = { a = { b = true, c = false } }
 		local styling = { a = { c = true, d = true } }
 		local expected = { a = { b = true, c = true, d = true } }
 		local result = vim.tbl_deep_extend("force", hls, styling)
-		-- local result = theme._apply_styling(styling, hls)
 		assert.are.same(expected, result)
 	end)
 end)

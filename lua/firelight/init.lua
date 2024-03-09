@@ -1,17 +1,10 @@
+local Config = require("firelight.config")
+
 local M = {}
 
----@type Config
-M.__config = {}
+M.setup = Config.setup
 
----comment Accepts the users options and stores them locally to be used when loaded.
----@param opts Config?
-M.setup = function(opts)
-	local cfg = require("firelight.config")
-	opts = cfg.merge_options(opts)
-	M.__config = opts
-end
-
----comment Called by neovim when loading the colorscheme. Sets the highlight groups
+---comment Called by neovim when loading the colorscheme.
 M.__load = function()
 	vim.cmd("hi clear")
 	vim.cmd("syntax reset")
@@ -19,7 +12,8 @@ M.__load = function()
 	vim.g.colors_name = "firelight"
 
 	---@type Theme
-	local theme = require("firelight.theme").setup(M.__config)
+	local theme = require("firelight.theme").setup()
+	-- local theme = require("firelight.theme").setup(require("firelight.config").default())
 
 	M.set_highlights(theme)
 end
@@ -29,15 +23,7 @@ end
 M.set_highlights = function(highlights)
 	for hl_group, attrs in pairs(highlights) do
 		vim.api.nvim_set_hl(0, hl_group, attrs)
-		-- M.highlight(hl_group, attrs)
 	end
 end
 
--- ---comment
--- ---@param hl_group string
--- ---@param attrs table
--- M.highlight = function(hl_group, attrs)
--- 	vim.api.nvim_set_hl(0, hl_group, attrs)
--- end
---
 return M
