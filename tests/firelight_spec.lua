@@ -43,6 +43,14 @@ describe("theme", function()
 		assert.are.same(expected, result)
 	end)
 
+	it("apply_styling: invalid attr", function()
+		local hls = { Comment = { fg = "test", bg = "test" } }
+		local style = { Comment = { fg = "not test", deez = true } }
+		local expected = { Comment = { fg = "not test", bg = "test" } }
+		local result = theme._apply_styling(style, hls)
+		assert.are.same(expected, result)
+	end)
+
 	it("validate_styling: deez", function()
 		local style = "deez"
 		local result = theme._validate_hl_attr(style)
@@ -58,8 +66,8 @@ describe("theme", function()
 		local hls = { a = { b = true, c = false } }
 		local styling = { a = { c = true, d = true } }
 		local expected = { a = { b = true, c = true, d = true } }
-		-- local result = vim.tbl_deep_extend("force", start, styls)
-		local result = theme._apply_styling(styling, hls)
+		local result = vim.tbl_deep_extend("force", hls, styling)
+		-- local result = theme._apply_styling(styling, hls)
 		assert.are.same(expected, result)
 	end)
 end)

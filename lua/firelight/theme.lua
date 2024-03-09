@@ -110,15 +110,21 @@ M._apply_styling = function(styling, highlights)
 	if type(styling) ~= "table" then
 		return highlights
 	end
-	-- -- Turning invalid styles to nil
-	-- for _, style in pairs(styling) do
-	-- 	for attr_name, _ in pairs(style) do
-	-- 		if not M._validate_hl_attr(attr_name) then
-	-- 			style[attr_name] = nil
-	-- 		end
-	-- 	end
-	-- end
+
+	for _, style in pairs(styling) do
+		M._clean_style(style)
+	end
+
 	return vim.tbl_deep_extend("force", highlights, styling)
+end
+
+M._clean_style = function(style)
+	for attr_name, _ in pairs(style) do
+		if not M._validate_hl_attr(attr_name) then
+			style[attr_name] = nil
+		end
+	end
+	return style
 end
 
 local _valid_attr_names = {
@@ -137,6 +143,7 @@ local _valid_attr_names = {
 ---@param attr_name string
 ---@return boolean
 M._validate_hl_attr = function(attr_name)
-	return _valid_attr_names[attr_name] ~= nil
+	return _valid_attr_names[attr_name] == true
 end
+
 return M
