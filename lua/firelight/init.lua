@@ -1,26 +1,25 @@
+local Config = require("firelight.config")
+
 local M = {}
 
-M.setup = function(opts)
-	local defaults = require("firelight.config").default
-	opts = opts or {}
-	opts = vim.tbl_deep_extend("force", defaults, opts)
+M.setup = Config.setup
 
+---comment Called by neovim when loading the colorscheme.
+M.__load = function()
+	vim.cmd("hi clear")
+	vim.cmd("syntax reset")
 	vim.o.termguicolors = true
 	vim.g.colors_name = "firelight"
 
-	local theme = require("firelight.theme").setup(opts)
+	---@type Theme
+	local theme = require("firelight.theme").setup()
 
-	M.highlight(theme.highlights)
+	M.set_highlights(theme)
 end
 
--- TODO: This will need to be ajusted to fit styling data into the highlighting
-M.highlight = function(hls)
-	for group, attrs in pairs(hls) do
-		if type(attrs) == "table" then -- this logic is defined by the data shape in theme.lua.
-			vim.api.nvim_set_hl(0, group, attrs)
-		else
-			vim.api.nvim_set_hl(0, group, { link = attrs })
-		end
+M.set_highlights = function(highlights)
+	for hl_group, attrs in pairs(highlights) do
+		vim.api.nvim_set_hl(0, hl_group, attrs)
 	end
 end
 

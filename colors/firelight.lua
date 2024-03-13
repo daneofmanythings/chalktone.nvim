@@ -1,1 +1,1 @@
-require("firelight").setup()
+require("firelight").__load()
