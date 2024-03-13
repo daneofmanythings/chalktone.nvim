@@ -1,50 +1,30 @@
----@class Palette
-local _default = {
-	fg_main = "#ECE1D7",
-	select_hl = "#524f4c",
-	cursorline = "#363432",
-	bg_washed = "#34302C",
-	bg_main = "#292522",
-	black3 = "#000000",
-
-	comments = "#91908e",
-	ui_accent = "#867462",
-	delimiter = "#8B7449",
-	punctuation = "#D47766",
-
-	ok = "#78997A",
-	warn = "#EBC06D",
-	info = "#7F91B2",
-	hint = "#938794",
-	error_light = "#BD8183",
-	error_dark = "#7D2A2F",
-
-	pop1 = "#69f59c",
-	idk1 = "#85B695",
-	idk2 = "#89B3B6",
-	idk3 = "#253333",
-	idk4 = "#273142",
-
-	type = "#7B9695",
-	string = "#A3A9CE",
-	statement = "#E49B5D",
-	number = "#CF9BC2",
-	constant = "#B380B0",
-	preproc = "#987fb8",
-}
-
--- NOTE: Add the color palettes here by name
-local _Builtin_palettes = {
-	default = _default,
-}
-
+-- Keeping for now. not currently being used.
 local M = {}
 
----comment Grabs the palette from the builtins and returns it.
----@param palette_name string
----@return Palette
-M.setup = function(palette_name)
-	return _Builtin_palettes[palette_name] or _default -- only default exists right now
+M.hex_to_rgb = function(hex_color)
+	return {
+		red = tonumber(string.sub(hex_color, 2, 3), 16),
+		green = tonumber(string.sub(hex_color, 4, 5), 16),
+		blue = tonumber(string.sub(hex_color, 6, 7), 16),
+	}
+end
+
+M.rgb_to_hex = function(rgb_table)
+	return string.format('#%.2x%.2x%.2x', rgb_table.red, rgb_table.green, rgb_table.blue)
+end
+
+M.blend_colors = function(hex1, hex2, weight)
+	local rgb1 = M.hex_to_rgb(hex1)
+	local rgb2 = M.hex_to_rgb(hex2)
+
+	local blended_rgb = {
+		red = math.floor((1 - weight) * rgb1.red + weight * rgb2.red),
+		green = math.floor((1 - weight) * rgb1.green + weight * rgb2.green),
+		blue = math.floor((1 - weight) * rgb1.blue + weight * rgb2.blue),
+	}
+
+	local blended_hex = M.rgb_to_hex(blended_rgb)
+	return blended_hex
 end
 
 return M
