@@ -1,4 +1,3 @@
--- Keeping for now. not currently being used.
 local M = {}
 
 M.hex_to_rgb = function(hex_color)

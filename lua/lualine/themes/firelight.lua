@@ -3,28 +3,28 @@ local p = require('firelight.palettes').palette
 local firelight = {
 	normal = {
 		a = { fg = p.black, bg = p.fg_main, gui = 'bold' },
-		b = { fg = p.fg_main, bg = p.black },
-		c = { fg = p.fg_main, bg = p.bg_washed },
+		b = { fg = p.fg_main, bg = p.bg_statusline1 },
+		c = { fg = p.fg_main, bg = p.bg_statusline2 },
 	},
 	insert = {
 		a = { fg = p.bg_main, bg = p.string, gui = 'bold' },
-		b = { fg = p.string, bg = p.bg_main },
+		b = { fg = p.fg_main, bg = p.bg_statusline1 },
 	},
 	visual = {
-		a = { fg = p.bg_main, bg = p.fg_main, gui = 'bold' },
-		b = { fg = p.fg_main, bg = p.bg_main },
+		a = { fg = p.bg_main, bg = p.keyword, gui = 'bold' },
+		b = { fg = p.fg_main, bg = p.bg_statusline1 },
 	},
 	command = {
 		a = { fg = p.bg_main, bg = p.operator, gui = 'bold' },
-		b = { fg = p.operator, bg = p.bg_main },
+		b = { fg = p.fg_main, bg = p.bg_statusline1 },
 	},
 	inactive = {
 		a = { fg = p.bg_main, bg = p.comments, gui = 'bold' },
-		b = { fg = p.comments, bg = p.bg_main },
+		b = { fg = p.fg_main, bg = p.bg_statusline1 },
 	},
 	replace = {
 		a = { fg = p.bg_main, bg = p.func, gui = 'bold' },
-		b = { fg = p.func, bg = p.bg_main },
+		b = { fg = p.fg_main, bg = p.bg_statusline1 },
 	},
 }
 
