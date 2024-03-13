@@ -162,7 +162,7 @@ M.setup = function()
 		-- Identifiers
 		['@variable']                   = { link = 'Identifiers' }, -- various variable names
 		['@variable.builtin']           = { link = 'Keyword' }, -- built-in variable names (e.g. `this`)
-		-- ['@variable.parameter']         = { fg = p.preproc }, -- parameters of a function
+		['@variable.parameter']         = { fg = p.func_param }, -- parameters of a function
 		-- ['@variable.parameter.builtin'] = {}, -- special parameters (e.g. `_`, `it`)
 		-- ['@variable.member']            = { fg = p.jasmine }, -- object and struct fields
 
