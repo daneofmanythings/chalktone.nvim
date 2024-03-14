@@ -43,6 +43,7 @@ M.setup = function()
 		Normal              = { fg = p.fg_main, bg = p.bg_main },
 		NormalFloat         = { bg = p.bg_main },
 		NormalNC            = { fg = p.fg_main, bg = p.bg_washed },
+    NormalFloatNC       = { bg = p.bg_washed },
 		NvimInternalError   = { fg = p.fg_main, bg = p.error_dark },
 		Pmenu               = { link = 'NormalFloat' },
 		PmenuExtra          = { link = 'Pmenu' },
@@ -52,6 +53,7 @@ M.setup = function()
 		PmenuSbar           = { link = 'Pmenu' },
 		PmenuThumb          = { link = 'PmenuSel' },
 		PmenuSel            = { link = 'Visual' },
+    -- TODO: these control the bright blue confirmation text
 		-- Question            = {},
 		-- QuickFixLink        = {},
 		Search              = { link = 'CurSearch' },
