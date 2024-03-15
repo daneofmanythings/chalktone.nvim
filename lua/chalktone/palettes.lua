@@ -1,4 +1,4 @@
-local colors = require('firelight.colors')
+local colors = require('chalktone.colors')
 
 ---@class Palette
 local _default = {
@@ -21,13 +21,23 @@ local _default = {
   method            = "#8fd1b9",
 	string        	  = "#9db2d2",
 	type              = "#f1b47e",
-  field             = "#f5dcc6",
+  field             = "#fbdc98",
   keyword        	  = "#cd88b8",
 	constant      	  = "#dfaad2", -- and numbers
 	preproc        	  = "#cfbfe3",
 	-- preproc       	  = "#cd8f65",
 	operator      	  = "#D47766",
 
+	ok            	  = "#78997A",
+	warn          	  = "#EBC06D",
+	info          	  = "#7F91B2",
+	hint          	  = "#9C848F",
+	error_light   	  = "#BD8183",
+	error_dark    	  = "#7D2A2F",
+
+	pop1          	  = "#69f59c",
+
+  -- testers
   puce          	  = "#d6a2ad",
   khaki         	  = "#c3b59f",
   olivine       	  = "#a0af84",
@@ -39,7 +49,7 @@ local _default = {
   flourescent_cyan  = "#00e5e8",
   screamin_green    = "#87ff65",
   carrot_orange     = "#f9a03f",
-  jasmine           = "#fbdc98",
+  -- jasmine           = "#fbdc98",
   cream             = "#eaefb1",
   nyanza            = "#e9f7ca",
   pale_dogwood      = "#ceb5a7",
@@ -49,19 +59,6 @@ local _default = {
   slate_gray        = "#767b91",
   rufous            = "#a33b20",
 
-	ok            	  = "#78997A",
-	warn          	  = "#EBC06D",
-	info          	  = "#7F91B2",
-	hint          	  = "#9C848F",
-	error_light   	  = "#BD8183",
-	error_dark    	  = "#7D2A2F",
-
-	pop1          	  = "#69f59c",
-
-	idk1          	  = "#85B695",
-	idk2          	  = "#7B9695",
-	idk3          	  = "#253333",
-	idk4          	  = "#273142",
 	-- stylua: ignore end
 }
 

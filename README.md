@@ -1,1 +1,1 @@
-# firelight.nvim
+# chalktone.nvim

@@ -1,11 +1,11 @@
 ---@diagnostic disable:undefined-global, undefined-field
 
 describe('config', function()
-	local cfg = require('firelight.config')
+	local cfg = require('chalktone.config')
 	local default
 
 	before_each(function()
-		default = require('firelight.config').options
+		default = require('chalktone.config').options
 	end)
 
 	it('merge_options: nil opts', function()
@@ -33,7 +33,7 @@ describe('config', function()
 end)
 
 describe('theme', function()
-	local theme = require('firelight.theme')
+	local theme = require('chalktone.theme')
 
 	it('apply_styling: basic', function()
 		local hls = { Comment = { fg = 'test', bg = 'test' } }
@@ -64,7 +64,7 @@ describe('theme', function()
 	end)
 
 	it('setup: check opts', function()
-		local opts = require('firelight.config').options
+		local opts = require('chalktone.config').options
 		local theme = theme.setup()
 	end)
 
@@ -79,14 +79,14 @@ end)
 
 describe('init:', function()
 	it('config stored: no opts ', function()
-		local m = require('firelight')
+		local m = require('chalktone')
 		m.setup()
 		local expected = { palette_name = 'Default', formatting = { Comment = { italic = true, bold = true } } }
 		assert(expected, m.__config)
 	end)
 
 	it('config stored: some opts ', function()
-		local m = require('firelight')
+		local m = require('chalktone')
 		m.setup({ formatting = { Comment = { italic = false } } })
 		local expected = { palette_name = 'Default', formatting = { Comment = { italic = false, bold = true } } }
 		assert(expected, m.__config)
@@ -96,7 +96,7 @@ end)
 describe('colors', function()
 	local C
 	before_each(function()
-		C = require('firelight.colors')
+		C = require('chalktone.colors')
 	end)
 
 	it('hex to rbg: simple', function()

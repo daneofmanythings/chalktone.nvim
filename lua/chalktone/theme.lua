@@ -5,11 +5,11 @@ local M = {}
 
 ---@return Theme
 M.setup = function()
-	local config = require('firelight.config')
+	local config = require('chalktone.config')
 	local styling = config.options.formatting
 	local palette_name = config.options.palette_name
 
-	local p = require('firelight.palettes').setup(palette_name)
+	local p = require('chalktone.palettes').setup(palette_name)
 
 	local highlights = {
 		-----------------------------------
@@ -53,9 +53,8 @@ M.setup = function()
 		PmenuSbar           = { link = 'Pmenu' },
 		PmenuThumb          = { link = 'PmenuSel' },
 		PmenuSel            = { link = 'Visual' },
-    -- TODO: these control the bright blue confirmation text
-		-- Question            = {},
-		-- QuickFixLink        = {},
+		Question            = { fg = p.constant },
+		QuickFixLink        = { fg = p.constant },
 		Search              = { link = 'CurSearch' },
 		SignColumn          = { bg = p.bg_main },
 		SignColumnSB        = { link = 'SignColumn' },
@@ -172,7 +171,7 @@ M.setup = function()
 		-- ['@constant.builtin'] 					= {}, -- built-in constant values
 		['@constant.macro']   					= { link = 'Constant' }, -- constants defined by the preprocessor
 
-		['@module']         						= { fg = p.jasmine }, -- modules or namespaces
+		['@module']         						= { fg = p.field }, -- modules or namespaces
 		['@module.builtin'] 						= { link = '@module' }, -- built-in modules or namespaces
 		-- ['@label']          						= {}, -- GOTO and other labels (e.g. `label:` in C), including heredoc labels
 
@@ -195,7 +194,7 @@ M.setup = function()
 
 		-- Types
 		['@type']             					= { link = 'Structure' }, -- type or class definitions and annotations
-		['@type.builtin']     					= { fg = p.jasmine }, -- built-in types
+		['@type.builtin']     					= { fg = p.field }, -- built-in types
 		['@type.definition']  					= { link = 'Type' }, -- identifiers in type definitions (e.g. `typedef <type> <identifier>` in C)
 		-- ['@type.qualifier']   					= { link = 'Keyword' }, -- type qualifiers (e.g. `const`)
 
@@ -218,8 +217,8 @@ M.setup = function()
 
 		-- Keywords
 		['@keyword']            				= { link = 'Keyword' }, -- keywords not fitting into specific categories
-		['@keyword.coroutine']  				= { fg = p.jasmine }, -- keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
-		['@keyword.function']   				= { fg = p.jasmine}, -- keywords that define a function (e.g. `func` in Go, `def` in Python)
+		['@keyword.coroutine']  				= { fg = p.field }, -- keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
+		['@keyword.function']   				= { fg = p.field}, -- keywords that define a function (e.g. `func` in Go, `def` in Python)
 		['@keyword.operator']   				= { link = 'Operator' }, -- operators that are English words (e.g. `and` / `or`)
 		['@keyword.import']     				= { link = 'Include' }, -- keywords for including modules (e.g. `import` / `from` in Python)
 		['@keyword.storage']    				= { link = 'StorageClass' }, -- modifiers that affect storage in memory or life-time
@@ -297,6 +296,7 @@ M.setup = function()
 
 		['@lsp.type.enum'] = { link = '@type' },
     ['@lsp.type.variable'] = { link = 'Identifier' },
+    -- ['@lsp.type.variable.go'] = { link = '@variable.parameter' },
     -- ['@lsp.typemod.property'] = { fg = p.jasmine },
 
 		------------------------------------

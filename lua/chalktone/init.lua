@@ -1,4 +1,4 @@
-local Config = require("firelight.config")
+local Config = require('chalktone.config')
 
 local M = {}
 
@@ -6,13 +6,13 @@ M.setup = Config.setup
 
 ---comment Called by neovim when loading the colorscheme.
 M.__load = function()
-	vim.cmd("hi clear")
-	vim.cmd("syntax reset")
+	vim.cmd('hi clear')
+	vim.cmd('syntax reset')
 	vim.o.termguicolors = true
-	vim.g.colors_name = "firelight"
+	vim.g.colors_name = 'chalktone'
 
 	---@type Theme
-	local theme = require("firelight.theme").setup()
+	local theme = require('chalktone.theme').setup()
 
 	M.set_highlights(theme)
 end

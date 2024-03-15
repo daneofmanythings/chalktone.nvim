@@ -1,6 +1,6 @@
-local p = require('firelight.palettes').palette
+local p = require('chalktone.palettes').palette
 
-local firelight = {
+local chalktone = {
 	normal = {
 		a = { fg = p.black, bg = p.fg_main, gui = 'bold' },
 		b = { fg = p.fg_main, bg = p.bg_statusline1 },
@@ -28,4 +28,4 @@ local firelight = {
 	},
 }
 
-return firelight
+return chalktone
