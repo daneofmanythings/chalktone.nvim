@@ -8,7 +8,7 @@
 
 ## Summary
 </div>
-A warm, low-contrast colorscheme for [Neovim](https://neovim.io/). New project, actively in development!
+A colorscheme for [neovim](https://neovim.io/). New project, actively in development!
 
 ## Installation
 
@@ -31,6 +31,7 @@ Installation with your favorite plugin manager:
 
 
 ## Setup
+
     ```lua
     require('chalktone').setup({
         -- defaults
