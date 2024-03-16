@@ -353,6 +353,11 @@ M.setup = function()
 		------------------------------------
 		FlashBackdrop = { fg = p.comments, bg = p.black, italic = false },
 		FlashLabel    = { fg = p.black, bg = p.pop1, bold = false },
+
+		------------------------------------
+		--            NOUGAT              -- -- TODO: This
+		------------------------------------
+
 		-- stylua: ignore end
 	}
 
