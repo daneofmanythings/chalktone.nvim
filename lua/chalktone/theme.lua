@@ -39,7 +39,7 @@ M.setup = function()
 		MatchParen          = { bg = p.select_hl },
 		ModeMsg             = { link = 'Normal' },
 		MoreMsg             = { link = 'Normal' },
-		-- NonText             = { fg = p.bg_main, bg = p.bg_main },
+		NonText             = { fg = p.select_hl },
 		Normal              = { fg = p.fg_main, bg = p.bg_main },
 		NormalFloat         = { bg = p.bg_main },
 		NormalNC            = { fg = p.fg_main, bg = p.bg_washed },
