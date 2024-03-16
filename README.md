@@ -51,7 +51,7 @@ require('chalktone').setup({
 
 There are currently no supported aggregate configuration options availible. 
 Under formatting, you may specifiy options to be passed to `vim.api.nvim_set_hl` for
-a Neovim highlight group (see `:h highlight-groups`). See `:h nvim_set_hl` for the fields and specifications that can be passed in.
+a Neovim highlight group (see `:h highlight-groups` and `:h group-name`). See `:h nvim_set_hl` for the fields and specifications that can be passed in.
 The options are restricted to `fg, bg, sp, bold, underline, undercurl, strikethrough, italic, link`.
 An example to change the highlight group 'Comment':
 ```lua
