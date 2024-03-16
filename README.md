@@ -8,7 +8,7 @@
 
 ## Summary
 
-A colorscheme for [neovim](https://neovim.io/). New project, actively in development!
+A colorscheme for [neovim](https://neovim.io/) made with [lush.nvim](https://github.com/rktjmp/lush.nvim). New project, actively in development!
 
 </div>
 
@@ -78,6 +78,7 @@ An example to change the highlight group 'Comment':
 
 ## Shoutouts
 
+- [lush.nvim](https://github.com/rktjmp/lush.nvim)
 - [nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [melange.nvim](https://github.com/savq/melange-nvim)
