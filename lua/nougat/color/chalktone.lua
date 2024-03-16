@@ -1,38 +1,40 @@
+local p = require('chalktone.palettes').palette
+
 local M = {}
 
 M.get = function()
 	return {
-		red = '#bd8183' ,
-		green = '#89b3b6',
-		yellow = '#f1b47e',
-		blue = '#9db2d2',
-		magenta = '#cd88b8',
-		cyan = '#89b3b6',
+		red = p.error_light,
+		green = p.green,
+		yellow = p.type,
+		blue = p.string,
+		magenta = p.keyword,
+		cyan = p.green,
 
 		accent = {
-			red = '#d47766',
-			green = '#9fc6b8',
-			yellow = '#fbdc98',
-			blue = '#cfbfe3',
-			magenta = '#dfaad2',
-			cyan = '#8fd1b9',
-			bg = '#524f4c',
-			fg = '#ece1d7',
+			red = p.operator,
+			green = p.func,
+			yellow = p.field,
+			blue = p.preproc,
+			magenta = p.constant,
+			cyan = p.method,
+			bg = p.select_hl,
+			fg = p.fg_main,
 		},
 
-		bg = '#292522',
-		bg0 = '#34302c',
-		bg1 = '#403d3b',
-		bg2 = '#292522',
-		bg3 = '#292522',
-		bg4 = '#292522',
+		bg = p.bg_main,
+		bg0 = p.bg_washed,
+		bg1 = p.cursorline,
+		bg2 = p.bg_statusline1,
+		bg3 = p.bg_statusline2,
+		bg4 = p.func_param,
 
-		fg = '#ece1d7',
-		fg0 = '#ece1d7',
-		fg1 = '#ece1d7',
-		fg2 = '#ece1d7',
-		fg3 = '#ece1d7',
-		fg4 = '#ece1d7',
+		fg = p.fg_main,
+		fg0 = p.fg_main,
+		fg1 = p.fg_main,
+		fg2 = p.fg_main,
+		fg3 = p.fg_main,
+		fg4 = p.fg_main,
 	}
 end
 

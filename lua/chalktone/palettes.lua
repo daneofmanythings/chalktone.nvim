@@ -16,7 +16,6 @@ local _default = {
 	delimiter     	  = "#d7b475",
 
   var_main      	  = "#ECE1D7",
-	-- type          	  = "#89B3B6",
 	func          	  = "#9fc6b8",
   method            = "#8fd1b9",
 	string        	  = "#9db2d2",
@@ -27,6 +26,7 @@ local _default = {
 	preproc        	  = "#cfbfe3",
 	-- preproc       	  = "#cd8f65",
 	operator      	  = "#D47766",
+	green          	  = "#89B3B6",
 
 	ok            	  = "#78997A",
 	warn          	  = "#EBC06D",
