@@ -73,6 +73,7 @@ An example to change the highlight group 'Comment':
 
 - Finalizing colors
 - Filling in remaining highlight groups (ex: treesitter markdown)
+- Adding language specific touch-ups as needed
 - Adding integrations for more plugins
 - (...maybe) a *light* theme
 
