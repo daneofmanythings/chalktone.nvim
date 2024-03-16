@@ -4,10 +4,11 @@
 
 ![chalktone_demo](/assets/chalktone_demo.gif)
 
-###### a warm chalky colorscheme
+###### mmmmmm warm and chalky
 
 ## Summary
 </div>
+
 A colorscheme for [neovim](https://neovim.io/). New project, actively in development!
 
 ## Installation
@@ -32,20 +33,20 @@ Installation with your favorite plugin manager:
 
 ## Setup
 
-    ```lua
-    require('chalktone').setup({
-        -- defaults
-        palette_name = 'default',
-        formatting = {
-            Comment = {
-                italic = true,
-            },
-            String = {
-                italic = true,
-            },
+```lua
+require('chalktone').setup({
+    -- defaults
+    palette_name = 'default',
+    formatting = {
+        Comment = {
+            italic = true,
         },
-    })
-    ```
+        String = {
+            italic = true,
+        },
+    },
+})
+```
 
 There are currently no supported aggregate configuration options availible. 
 Under formatting, you may specifiy options to be passed to `vim.api.nvim_set_hl` for
