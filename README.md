@@ -14,7 +14,7 @@ A colorscheme for [neovim](https://neovim.io/) made with [lush.nvim](https://git
 
 ## Installation
 
-Installation with your favorite plugin manager:
+Pick your plugin manager!
 
 -
     <details>
