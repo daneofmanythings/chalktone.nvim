@@ -7,9 +7,10 @@
 ###### mmmmmm warm and chalky
 
 ## Summary
-</div>
 
 A colorscheme for [neovim](https://neovim.io/). New project, actively in development!
+
+</div>
 
 ## Installation
 
