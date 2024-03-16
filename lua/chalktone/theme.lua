@@ -355,8 +355,15 @@ M.setup = function()
 		FlashLabel    = { fg = p.black, bg = p.pop1, bold = false },
 
 		------------------------------------
-		--            NOUGAT              -- -- TODO: This
+		--            WHICHKEY            -- 
 		------------------------------------
+    -- WhichKey = {}, -- the key
+    -- WhichKeyGroup = {}, -- a group
+    -- WhichKeySeparator = {}, -- the sparator between the key and its label
+    -- WhichKeyDesc = {}, -- the label of the key
+    WhichKeyFloat = { bg = p.bg_washed }, -- normal in the popup window
+		-- WhichKeyBorder = {}, -- normal in the popup window
+		-- WhichKeyValue = {}, -- used by plugins that provide values
 
 		-- stylua: ignore end
 	}

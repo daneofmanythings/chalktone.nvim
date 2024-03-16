@@ -69,6 +69,7 @@ An example to change the highlight group 'Comment':
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim): A blazing fast and easy to configure neovim statusline plugin written in pure lua. 
 - [nougat.nvim](https://github.com/MunifTanjim/nougat.nvim/tree/main): Hyperextensible Statusline / Tabline / Winbar for Neovim.
 - [flash.nvim](https://github.com/folke/flash.nvim): Navigate your code with search labels, enhanced character motions and Treesitter integration.
+- [which-key.nvim](https://github.com/folke/which-key.nvim): Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing. 
 
 
 ## In Progress
@@ -81,8 +82,8 @@ An example to change the highlight group 'Comment':
 
 ## Shoutouts
 
-- [lush.nvim](https://github.com/rktjmp/lush.nvim)
-- [nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
-- [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
-- [melange.nvim](https://github.com/savq/melange-nvim)
+- [lush.nvim](https://github.com/rktjmp/lush.nvim) (color generation tool)
+- [nightfox.nvim](https://github.com/EdenEast/nightfox.nvim) (reference)
+- [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) (plugin structure)
+- [melange.nvim](https://github.com/savq/melange-nvim) (color inspiration)
 
