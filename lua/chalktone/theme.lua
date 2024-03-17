@@ -6,7 +6,7 @@ local M = {}
 ---@return Theme
 M.setup = function()
 	local config = require('chalktone.config')
-	local formatting = config.options.formatting
+	local formatting = config.options.formatting -- NOTE: Part of the config rework. unused atm.
 	local raw_formatting = config.options.formatting.raw
 	local palette_name = config.options.palette_name
 
@@ -358,13 +358,13 @@ M.setup = function()
 		------------------------------------
 		--            WHICHKEY            -- 
 		------------------------------------
-    -- WhichKey = {}, -- the key
-    -- WhichKeyGroup = {}, -- a group
-    -- WhichKeySeparator = {}, -- the sparator between the key and its label
-    -- WhichKeyDesc = {}, -- the label of the key
-    WhichKeyFloat = { bg = p.bg_washed }, -- normal in the popup window
-		-- WhichKeyBorder = {}, -- normal in the popup window
-		-- WhichKeyValue = {}, -- used by plugins that provide values
+    -- WhichKey           = {}, -- the key
+    -- WhichKeyGroup      = {}, -- a group
+    -- WhichKeySeparator  = {}, -- the sparator between the key and its label
+    -- WhichKeyDesc       = {}, -- the label of the key
+    WhichKeyFloat      = { bg = p.bg_washed }, -- normal in the popup window
+		-- WhichKeyBorder     = {}, -- normal in the popup window
+		-- WhichKeyValue      = {}, -- used by plugins that provide values
 
 		------------------------------------
 		--              LAZY              --
@@ -401,6 +401,48 @@ M.setup = function()
 		-- LazyTaskOutput       = { 'MsgArea' }, -- task output
 		-- LazyUrl              = { '@markup.link' }, -- url
 		-- LazyValue            = { '@string' }, -- value of a property
+
+		------------------------------------
+		--              NEORG             --
+		------------------------------------
+    ['@neorg.headings.1.title'] = { fg = p.operator },
+    ['@neorg.headings.2.title'] = { fg = p.type },
+    ['@neorg.headings.3.title'] = { fg = p.field },
+    ['@neorg.headings.4.title'] = { fg = p.func },
+    ['@neorg.headings.5.title'] = { fg = p.string },
+    ['@neorg.headings.6.title'] = { fg = p.preproc },
+    ['@neorg.headings.1.prefix'] = { link = 'Identifier' },
+    ['@neorg.headings.2.prefix'] = { link = 'Identifier' },
+    ['@neorg.headings.3.prefix'] = { link = 'Identifier' },
+    ['@neorg.headings.4.prefix'] = { link = 'Identifier' },
+    ['@neorg.headings.5.prefix'] = { link = 'Identifier' },
+    ['@neorg.headings.6.prefix'] = { link = 'Identifier' },
+
+		-- ['@neorg.links.location.heading.1'] = {},
+		-- ['@neorg.links.location.heading.2'] = {},
+		-- ['@neorg.links.location.heading.3'] = {},
+		-- ['@neorg.links.location.heading.4'] = {},
+		-- ['@neorg.links.location.heading.5'] = {},
+		-- ['@neorg.links.location.heading.6'] = {},
+		--
+		['@neorg.todo_items.undone'] = { fg = p.delimiter },
+		['@neorg.todo_items.done'] = { fg = p.func },
+		['@neorg.todo_items.on_hold'] = { fg = p.ui_accent },
+		['@neorg.todo_items.cancelled'] = { fg = p.comments },
+		['@neorg.todo_items.uncertain'] = { fg = p.string },
+		['@neorg.todo_items.pending'] = { fg = p.field },
+		['@neorg.todo_items.recurring'] = { fg = p.preproc },
+		['@neorg.todo_items.urgent'] = { fg = p.operator },
+		-- ['@neorg.lists.unordered.prefix'] = {},
+		-- ['@neorg.lists.ordered.prefix'] = {},
+		--
+		-- ['@neorg.markup.verbatim'] = {},
+		-- ['@neorg.tags.ranged_verbatim.code_block'] = {},
+		-- ['@neorg.links'] = {},
+		-- ['@neorg.links.file'] = {},
+		-- ['@neorg.links.description'] = {},
+		--
+		-- ['@neorg.delimiters.horizontal_line'] = {},
 
 		-- stylua: ignore end
 	}
