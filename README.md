@@ -66,12 +66,14 @@ An example to change the highlight group 'Comment':
 
 ## Integrations
 
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Nvim Treesitter configurations and abstraction layer
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) A completion plugin for neovim coded in lua
-- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim): A blazing fast and easy to configure neovim statusline plugin written in pure lua. 
+- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Nvim Treesitter configurations and abstraction layer.
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp): A completion plugin for neovim coded in lua.
+- [neorg](https://github.com/nvim-neorg/neorg/tree/main): Modernity meets insane extensibility. The future of organizing your life in Neovim.
+- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim): A blazing fast and easy to configure neovim statusline plugin written in pure lua.
 - [nougat.nvim](https://github.com/MunifTanjim/nougat.nvim/tree/main): Hyperextensible Statusline / Tabline / Winbar for Neovim.
 - [flash.nvim](https://github.com/folke/flash.nvim): Navigate your code with search labels, enhanced character motions and Treesitter integration.
-- [which-key.nvim](https://github.com/folke/which-key.nvim): Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing. 
+- [which-key.nvim](https://github.com/folke/which-key.nvim): Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing.
+- [lazy.nvim](https://github.com/folke/lazy.nvim): A modern plugin manager for Neovim.
 
 
 ## In Progress
