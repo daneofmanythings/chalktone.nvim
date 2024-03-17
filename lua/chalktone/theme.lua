@@ -252,28 +252,28 @@ M.setup = function()
     -- TODO: Implement markup!
 
 		-- -- Markup
-		-- ['@markup.strong']        			= {}, -- bold text
-		-- ['@markup.italic']        			= {}, -- italic text
-		-- ['@markup.strikethrough'] 			= {}, -- struck-through text
-		-- ['@markup.underline']     			= {}, -- underlined text (only for literal underline markup!)
-		--
-		-- ['@markup.heading']   					= {}, -- headings, titles (including markers)
-		-- ['@markup.heading.1'] 					= {}, -- top-level heading
-		-- ['@markup.heading.2'] 					= {}, -- section heading
-		-- ['@markup.heading.3'] 					= {}, -- subsection heading
-		-- ['@markup.heading.4'] 					= {}, -- and so on
-		-- ['@markup.heading.5'] 					= {}, -- and so forth
-		-- ['@markup.heading.6'] 					= {}, -- six levels ought to be enough for anybody
+		['@markup.strong']        			= { link = 'Bold' }, -- bold text
+		['@markup.italic']        			= { link = 'Italic' }, -- italic text
+		['@markup.strikethrough'] 			= { strikethrough = true }, -- struck-through text
+		['@markup.underline']     			= { link = 'Underlined' }, -- underlined text (only for literal underline markup!)
+
+		['@markup.heading']   					= { link = 'CursorLineNr' }, -- headings, titles (including markers)
+		-- ['@markup.heading.1'] 					= { link = 'Type' }, -- top-level heading
+		-- ['@markup.heading.2'] 					= { fg = p.field }, -- section heading
+		-- ['@markup.heading.3'] 					= { link = 'Function' }, -- subsection heading
+		-- ['@markup.heading.4'] 					= { fg = p.string }, -- and so on
+		-- ['@markup.heading.5'] 					= { link = 'Constant' }, -- and so forth
+		['@markup.heading.6'] 					= { fg = p.func_param }, -- six levels ought to be enough for anybody
 		--
 		-- ['@markup.quote']               = {}, -- block quotes
 		-- ['@markup.math']                = {}, -- math environments (e.g. `$ ... $` in LaTeX)
 		--
-		-- ['@markup.link']        				= {}, -- text references, footnotes, citations, etc.
-		-- ['@markup.link.label']  				= {}, -- link, reference descriptions
-		-- ['@markup.link.url']    				= {}, -- URL-style links
+		['@markup.link']        				= { underline = false }, -- text references, footnotes, citations, etc.
+		['@markup.link.label']  				= { fg = p.func_param }, -- link, reference descriptions
+		['@markup.link.url']    				= { link = 'String' }, -- URL-style links
 		--
-		-- ['@markup.raw']         				= {}, -- literal or verbatim text (e.g. inline code)
-		-- ['@markup.raw.block']   				= {}, -- literal or verbatim text as a stand-alone block
+		['@markup.raw']         				= { fg = p.fg_main }, -- literal or verbatim text (e.g. inline code)
+		['@markup.raw.block']   				= { fg = p.fg_main }, -- literal or verbatim text as a stand-alone block
 		-- -- (use priority 90 for blocks with injections)
 		--
 		-- ['@markup.list']                = {}, -- list markers
@@ -365,6 +365,42 @@ M.setup = function()
     WhichKeyFloat = { bg = p.bg_washed }, -- normal in the popup window
 		-- WhichKeyBorder = {}, -- normal in the popup window
 		-- WhichKeyValue = {}, -- used by plugins that provide values
+
+		------------------------------------
+		--              LAZY              --
+		------------------------------------
+		-- LazyButton           = { 'CursorLine' },
+		-- LazyButtonActive     = { 'Visual' },
+		-- LazyComment          = { 'Comment' },
+		-- LazyCommit           = { '@variable.builtin' }, -- commit ref
+		-- LazyCommitIssue      = { 'Number' },
+		-- LazyCommitScope      = { 'Italic' }, -- conventional commit scope
+		-- LazyCommitType       = { 'Title' }, -- conventional commit type
+		-- LazyDimmed           = { 'Conceal' }, -- property
+		-- LazyDir              = { '@markup.link' }, -- directory
+		-- LazyH1               = { 'IncSearch' }, -- home button
+		-- LazyH2               = { 'Bold' }, -- titles
+		-- LazyLocal            = { 'Constant' },
+		-- LazyNoCond           = { 'DiagnosticWarn' }, -- unloaded icon for a plugin where cond() was false
+		-- LazyNormal           = { 'NormalFloat' },
+		-- LazyProgressDone     = { 'Constant' }, -- progress bar done
+		-- LazyProgressTodo     = { 'LineNr' }, -- progress bar todo
+		LazyProp             = { fg = p.type }, -- property
+		-- LazyReasonCmd        = { 'Operator' },
+		-- LazyReasonEvent      = { 'Constant' },
+		-- LazyReasonFt         = { 'Character' },
+		LazyReasonImport     = { fg = p.func_param },
+		LazyReasonKeys       = { fg = p.func },
+		LazyReasonPlugin     = { fg = p.type },
+		-- LazyReasonRequire    = { '@variable.parameter' },
+		LazyReasonRuntime    = { fg = p.comments },
+		LazyReasonSource     = { fg = p.string },
+		LazyReasonStart      = { fg = p.func },
+		-- LazySpecial          = { '@punctuation.special' },
+		-- LazyTaskError        = { 'ErrorMsg' }, -- task errors
+		-- LazyTaskOutput       = { 'MsgArea' }, -- task output
+		-- LazyUrl              = { '@markup.link' }, -- url
+		-- LazyValue            = { '@string' }, -- value of a property
 
 		-- stylua: ignore end
 	}

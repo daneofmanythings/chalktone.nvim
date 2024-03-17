@@ -16,20 +16,20 @@ A colorscheme for [neovim](https://neovim.io/) made with [lush.nvim](https://git
 
 Pick your plugin manager!
 
--
-    <details>
-    <summary><a href='https://github.com/folke/lazy.nvim'>lazy.nvim</a></summary>
 
-    ```lua
-    'daneofmanythings/chalktone.nvim',
-    priority = 1000,
-    lazy = false,
-    config = function()
-        require('chalktone').setup({})
-        vim.g.colorscheme('chalktone')
-    end
-    ```
-    </details>
+<details>
+<summary><a href='https://github.com/folke/lazy.nvim'>lazy.nvim</a></summary>
+
+```lua
+'daneofmanythings/chalktone.nvim',
+priority = 1000,
+lazy = false,
+config = function()
+    require('chalktone').setup({})
+    vim.g.colorscheme('chalktone')
+end
+```
+</details>
 
 
 ## Setup
