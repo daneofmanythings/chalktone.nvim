@@ -39,7 +39,7 @@ describe('theme', function()
 		local hls = { Comment = { fg = 'test', bg = 'test' } }
 		local style = { Comment = { fg = 'not test', italic = true } }
 		local expected = { Comment = { fg = 'not test', bg = 'test', italic = true } }
-		local result = theme._apply_styling(style, hls)
+		local result = theme._apply_raw_formatting(style, hls)
 		assert.are.same(expected, result)
 	end)
 
@@ -47,7 +47,7 @@ describe('theme', function()
 		local hls = { Comment = { fg = 'test', bg = 'test' } }
 		local style = { Comment = { fg = 'not test', deez = true } }
 		local expected = { Comment = { fg = 'not test', bg = 'test' } }
-		local result = theme._apply_styling(style, hls)
+		local result = theme._apply_raw_formatting(style, hls)
 		assert.are.same(expected, result)
 	end)
 

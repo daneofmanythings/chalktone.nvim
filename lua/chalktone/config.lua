@@ -1,13 +1,16 @@
 local M = {}
 
 M.options = {
-	palette_name = "Default",
+	palette_name = 'Default',
 	formatting = {
-		Comment = {
-			italic = true,
-		},
-		String = {
-			italic = true,
+		italics = true,
+		raw = {
+			Comment = {
+				italic = true,
+			},
+			String = {
+				italic = true,
+			},
 		},
 	},
 }
@@ -17,7 +20,7 @@ M.setup = function(opts)
 end
 
 M.merge_options = function(opts)
-	return vim.tbl_deep_extend("force", M.options, opts or {})
+	return vim.tbl_deep_extend('force', M.options, opts or {})
 end
 
 return M

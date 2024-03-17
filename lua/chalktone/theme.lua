@@ -6,7 +6,8 @@ local M = {}
 ---@return Theme
 M.setup = function()
 	local config = require('chalktone.config')
-	local styling = config.options.formatting
+	local formatting = config.options.formatting
+	local raw_formatting = config.options.formatting.raw
 	local palette_name = config.options.palette_name
 
 	local p = require('chalktone.palettes').setup(palette_name)
@@ -368,12 +369,12 @@ M.setup = function()
 		-- stylua: ignore end
 	}
 
-	highlights = M._apply_styling(styling, highlights)
+	highlights = M._apply_raw_formatting(highlights, raw_formatting)
 
 	return highlights
 end
 
-M._apply_styling = function(styling, highlights)
+M._apply_raw_formatting = function(highlights, styling)
 	if type(styling) ~= 'table' then
 		-- assert(1 == 0, "Something other than a table was passed to _apply_styling")
 		return highlights

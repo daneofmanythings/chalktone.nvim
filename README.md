@@ -2,7 +2,7 @@
 
 # chalktone.nvim
 
-![chalktone_demo](/assets/chalktone_demo.gif)
+![chalktone_demo](/assets/chalktone_1.png)
 
 ###### mmmmmm warm and chalky
 
