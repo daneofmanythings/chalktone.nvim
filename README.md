@@ -75,6 +75,10 @@ An example to change the highlight group 'Comment':
 - [which-key.nvim](https://github.com/folke/which-key.nvim): Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing.
 - [lazy.nvim](https://github.com/folke/lazy.nvim): A modern plugin manager for Neovim.
 
+## Extras
+
+- [alacritty](https://github.com/alacritty/alacritty): A cross-platform, OpenGL terminal emulator.
+
 
 ## In Progress
 
