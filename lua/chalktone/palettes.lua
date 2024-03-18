@@ -62,9 +62,9 @@ local _default = {
 	-- stylua: ignore end
 }
 
-_default.bg_statusline1 = colors.blend_colors(_default.select_hl, _default.bg_main, 0.6)
-_default.bg_statusline2 = colors.blend_colors(_default.select_hl, _default.bg_main, 0.2)
-_default.func_param = colors.blend_colors(_default.slate_gray, _default.fg_main, 0.75)
+_default.bg_statusline1 = colors.blend_hex_colors(_default.select_hl, _default.bg_main, 0.6)
+_default.bg_statusline2 = colors.blend_hex_colors(_default.select_hl, _default.bg_main, 0.2)
+_default.func_param = colors.blend_hex_colors(_default.slate_gray, _default.fg_main, 0.75)
 
 ---@class Palette
 local _testing = {}

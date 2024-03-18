@@ -102,28 +102,28 @@ describe('colors', function()
 	it('hex to rbg: simple', function()
 		local hex_color = '#000000'
 		local expected = { red = 0, blue = 0, green = 0 }
-		local result = C._hex_to_rgb(hex_color)
+		local result = C.hex_to_rgb(hex_color)
 		assert.are.same(expected, result)
 	end)
 
 	it('hex to rbg: wierd green', function()
 		local hex_color = '#69f59c'
 		local expected = { red = 105, green = 245, blue = 156 }
-		local result = C._hex_to_rgb(hex_color)
+		local result = C.hex_to_rgb(hex_color)
 		assert.are.same(expected, result)
 	end)
 
 	it('rgb to hex: simple', function()
 		local rgb_table = { red = 0, blue = 0, green = 0 }
 		local expected = '#000000'
-		local result = C._rgb_to_hex(rgb_table)
+		local result = C.rgb_to_hex(rgb_table)
 		assert.are.same(expected, result)
 	end)
 
 	it('rgb to hex: wierd green', function()
 		local rgb_table = { red = 105, green = 245, blue = 156 }
 		local expected = '#69f59c'
-		local result = C._rgb_to_hex(rgb_table)
+		local result = C.rgb_to_hex(rgb_table)
 		assert.are.same(expected, result)
 	end)
 
@@ -131,8 +131,8 @@ describe('colors', function()
 		local black = '#000000'
 		local white = '#ffffff'
 
-		local result_no_weight = C._blend_colors(black, white, 0)
-		local result_all_weight = C._blend_colors(black, white, 1)
+		local result_no_weight = C.blend_hex_colors(black, white, 0)
+		local result_all_weight = C.blend_hex_colors(black, white, 1)
 		assert.are.same(result_no_weight, black)
 		assert.are.same(result_all_weight, white)
 	end)
@@ -141,7 +141,14 @@ describe('colors', function()
 		local red = '#ff0000'
 		local blue = '#0000ff'
 		local expected = '#7f007f'
-		local result = C._blend_colors(red, blue, 0.5)
+		local result = C.blend_hex_colors(red, blue, 0.5)
+		assert.are.same(expected, result)
+	end)
+
+	it('hex to hsl: wierd green', function()
+		local hex_color = '#69f59c'
+		local expected = { hue = 142, saturation = 0.88, luminance = 0.69 }
+		local result = C.hex_to_hsl(hex_color)
 		assert.are.same(expected, result)
 	end)
 end)
