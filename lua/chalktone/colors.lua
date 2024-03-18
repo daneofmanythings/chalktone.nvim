@@ -31,42 +31,40 @@ end
 ---@param rgb RGB
 ---@return HSL
 M.rgb_to_hsl = function(rgb) -- modification of formula from https://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/
-	-- find the min and max of rgb
-	local m = M._min_max_rgb(rgb)
-	local range = m.max.val - m.min.val -- convenience
+	local m = M._min_max_rgb(rgb) -- find the min and max of rgb
+	local min = m.min.val
+	local max = m.max.val
+	local max_color = m.max.color
 
-	-- We will divide by 2 later
-	local luminance = (m.min.val + m.max.val)
+	local range = max - min -- convenience
+	local luminance = min + max -- We will divide by 2 later
 
-	-- Find saturation
 	local saturation
-	if m.min.val == m.max.val then
+	if min == max then -- found a shade of gray
 		saturation = 0
 	elseif luminance <= 255 then
 		saturation = range / luminance
 	else
-		saturation = range / (510 - luminance) -- I think it is this branch
+		saturation = range / (510 - luminance)
 	end
 
 	local hue
-	if luminance == 0 then -- If saturation is 0, there is no hue
+	if min == max then -- found a shade of gray
 		hue = 0
-	elseif m.max.color == 'red' then
+	elseif max_color == 'red' then
 		hue = (rgb.green - rgb.blue) / range
-	elseif m.max.color == 'green' then
+	elseif max_color == 'green' then
 		hue = (2 * range + rgb.blue - rgb.red) / range
-	else
+	else -- max_color == 'blue'
 		hue = (4 * range + rgb.red - rgb.green) / range
 	end
 
-	hue = hue * 60 -- turn hue into degrees
-
-	if hue < 0 then -- if hue is negative, push it back around into [0, 360)
-		hue = hue + 360
+	if hue < 0 then -- if hue is negative, push it back around into [0, 6)
+		hue = hue + 6
 	end
 
 	return {
-		hue = hue,
+		hue = hue * 60, -- turning hue into degrees
 		saturation = saturation,
 		luminance = luminance / 510, -- normalize and divide by 2 from earlier
 	}
@@ -75,36 +73,78 @@ end
 ---@param rgb RGB
 ---@return table
 M._min_max_rgb = function(rgb)
-	local mini = { color = '', val = 256 }
-	local maxi = { color = '', val = -1 }
+	local min = { color = '', val = 256 }
+	local max = { color = '', val = -1 }
 	for color, value in pairs(rgb) do
-		if value < mini.val then
-			mini.color = color
-			mini.val = value
+		if value < min.val then
+			min.color = color
+			min.val = value
 		end
-		if value > maxi.val then
-			maxi.color = color
-			maxi.val = value
+		if value > max.val then
+			max.color = color
+			max.val = value
 		end
 	end
-	return { min = mini, max = maxi }
+	return { min = min, max = max }
 end
 
 ---@param hsl HSL
 ---@return RGB
-M.hsl_to_rgb = function(hsl)
-	-- C = (1 - |2L - 1|) * hsl.saturation
-	-- H' = hsl.hue / 60
-	-- X = C * (1 - |H'%2 - 1|)
-	-- annoying piecewise formula
-	-- m = hsl.luminance - C / 2
-	-- add m to r, g, and b
+M.hsl_to_rgb = function(hsl) -- Taken from the wiki
+	local abs = math.abs
+	local floor = math.floor
+	local C = (1 - abs(2 * hsl.luminance - 1)) * hsl.saturation
+	local H = hsl.hue / 60
+	local X = C * (1 - abs(H % 2 - 1))
+	local m = hsl.luminance - C / 2
+	H = floor(H)
+	return M._hsl_to_rgb_piecewise(H, C, X, m)
+end
+
+---@param H integer
+---@param C integer
+---@param X integer
+---@return RGB
+M._hsl_to_rgb_piecewise = function(H, C, X, m)
+	local rgb = { M._h0, M._h1, M._h2, M._h3, M._h4, M._h5 }
+	return rgb[H + 1](C * 255, X * 255, m * 255)
+end
+
+M._h0 = function(C, X, m)
+	return { red = C + m, green = X + m, blue = m }
+end
+
+M._h1 = function(C, X, m)
+	return { red = X + m, green = C + m, blue = m }
+end
+
+M._h2 = function(C, X, m)
+	return { red = m, green = C + m, blue = X + m }
+end
+
+M._h3 = function(C, X, m)
+	return { red = m, green = X + m, blue = C + m }
+end
+
+M._h4 = function(C, X, m)
+	return { red = X + m, green = m, blue = C + m }
+end
+
+M._h5 = function(C, X, m)
+	return { red = C + m, green = m, blue = X + m }
 end
 
 ---@param hex Hex
 ---@return HSL
 M.hex_to_hsl = function(hex)
 	return M.rgb_to_hsl(M.hex_to_rgb(hex))
+end
+
+---comment
+---@param hsl HSL
+---@return Hex
+M.hsl_to_hex = function(hsl)
+	return M.rgb_to_hex(M.hsl_to_rgb(hsl))
 end
 
 ---@param hex1 Hex

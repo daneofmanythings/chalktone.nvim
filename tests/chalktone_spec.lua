@@ -93,38 +93,47 @@ describe('init:', function()
 	end)
 end)
 
-describe('colors', function()
+describe('colors.lua |', function()
 	local C
 	before_each(function()
 		C = require('chalktone.colors')
 	end)
 
-	it('hex to rbg: simple', function()
-		local hex_color = '#000000'
-		local expected = { red = 0, blue = 0, green = 0 }
-		local result = C.hex_to_rgb(hex_color)
-		assert.are.same(expected, result)
+	local abs = math.abs
+
+	local hex_equality_tolerance = function(hex1, hex2) -- hsl transformations drift slightly
+		local rgb1 = C.hex_to_rgb(hex1)
+		local rgb2 = C.hex_to_rgb(hex2)
+		local red_diff = abs(rgb1.red - rgb2.red)
+		local green_diff = abs(rgb1.green - rgb2.green)
+		local blue_diff = abs(rgb1.blue - rgb2.blue)
+		return red_diff < 3 and green_diff < 3 and blue_diff < 3
+	end
+
+	it('hex to rbg >>', function()
+		local test_cases = {
+			{ name = 'black', hex = '#000000', rgb = { red = 0, green = 0, blue = 0 } },
+			{ name = 'green', hex = '#69f59c', rgb = { red = 105, green = 245, blue = 156 } },
+		}
+		for _, tc in ipairs(test_cases) do
+			it(tc.name, function()
+				local result = C.hex_to_rgb(tc.hex)
+				assert.are.same(tc.rgb, result)
+			end)
+		end
 	end)
 
-	it('hex to rbg: wierd green', function()
-		local hex_color = '#69f59c'
-		local expected = { red = 105, green = 245, blue = 156 }
-		local result = C.hex_to_rgb(hex_color)
-		assert.are.same(expected, result)
-	end)
-
-	it('rgb to hex: simple', function()
-		local rgb_table = { red = 0, blue = 0, green = 0 }
-		local expected = '#000000'
-		local result = C.rgb_to_hex(rgb_table)
-		assert.are.same(expected, result)
-	end)
-
-	it('rgb to hex: wierd green', function()
-		local rgb_table = { red = 105, green = 245, blue = 156 }
-		local expected = '#69f59c'
-		local result = C.rgb_to_hex(rgb_table)
-		assert.are.same(expected, result)
+	it('rgb to hex >>', function()
+		local test_cases = {
+			{ name = 'black', hex = '#000000', rgb = { red = 0, green = 0, blue = 0 } },
+			{ name = 'green', hex = '#69f59c', rgb = { red = 105, green = 245, blue = 156 } },
+		}
+		for _, tc in ipairs(test_cases) do
+			it(tc.name, function()
+				local result = C.rgb_to_hex(tc.rgb)
+				assert.are.same(tc.hex, result)
+			end)
+		end
 	end)
 
 	it('blend colors: sanity check', function()
@@ -147,20 +156,54 @@ describe('colors', function()
 
 	it('hex to hsl...', function()
 		local test_cases = {
-			{ name = 'green1', color = '#69f59c', expected = { hue = 141.86, saturation = 0.88, luminance = 0.69 } },
-			{ name = 'red1', color = '#c9194b', expected = { hue = 342.95, saturation = 0.78, luminance = 0.44 } },
-			{ name = 'yellow1', color = '#fbdc98', expected = { hue = 41.21, saturation = 0.93, luminance = 0.79 } },
-			{ name = 'purple1', color = '#362698', expected = { hue = 248.42, saturation = 0.60, luminance = 0.37 } },
-			{ name = 'pink1', color = '#bf40bf', expected = { hue = 300.00, saturation = 0.50, luminance = 0.50 } },
-			{ name = 'lavendar1', color = '#7e7eb8', expected = { hue = 240.0, saturation = 0.29, luminance = 0.61 } },
+			{ name = 'green1', hex = '#69f59c', expected = { hue = 141.86, saturation = 0.88, luminance = 0.69 } },
+			{ name = 'red1', hex = '#c9194b', expected = { hue = 342.95, saturation = 0.78, luminance = 0.44 } },
+			{ name = 'yellow1', hex = '#fbdc98', expected = { hue = 41.21, saturation = 0.93, luminance = 0.79 } },
+			{ name = 'purple1', hex = '#362698', expected = { hue = 248.42, saturation = 0.60, luminance = 0.37 } },
+			{ name = 'pink1', hex = '#bf40bf', expected = { hue = 300.00, saturation = 0.50, luminance = 0.50 } },
+			{ name = 'lavendar1', hex = '#7e7eb8', expected = { hue = 240.0, saturation = 0.29, luminance = 0.61 } },
 		}
 		for _, tc in ipairs(test_cases) do
 			it('testing color: ' .. tc.name, function()
-				local result = C.hex_to_hsl(tc.color)
-				for color, val in pairs(result) do
-					result[color] = tonumber(string.format('%.2f', val))
+				local result = C.hex_to_hsl(tc.hex)
+				for part, val in pairs(result) do
+					result[part] = tonumber(string.format('%.2f', val))
 				end
 				assert.are.same(tc.expected, result)
+			end)
+		end
+	end)
+
+	it('hsl to hex...', function()
+		local test_cases = {
+			{ name = 'green1', expected = '#69f59c', hsl = { hue = 141.86, saturation = 0.88, luminance = 0.69 } },
+			{ name = 'red1', expected = '#c9194b', hsl = { hue = 342.95, saturation = 0.78, luminance = 0.44 } },
+			{ name = 'yellow1', expected = '#fbdc98', hsl = { hue = 41.21, saturation = 0.93, luminance = 0.79 } },
+			{ name = 'blue1', expected = '#362698', hsl = { hue = 248.3, saturation = 0.601, luminance = 0.373 } },
+			{ name = 'pink1', expected = '#bf40bf', hsl = { hue = 300.00, saturation = 0.50, luminance = 0.50 } },
+			{ name = 'lavendar1', expected = '#7e7eb8', hsl = { hue = 240.0, saturation = 0.29, luminance = 0.61 } },
+		}
+		for _, tc in ipairs(test_cases) do
+			it('testing color: ' .. tc.name, function()
+				local result = C.hsl_to_hex(tc.hsl)
+				assert.are.equal(hex_equality_tolerance(tc.expected, result), true)
+			end)
+		end
+	end)
+
+	it('hex to hsl to hex...', function()
+		local test_cases = {
+			{ name = 'green1', hex = '#69f59c' },
+			{ name = 'red1', hex = '#c9194b' },
+			{ name = 'yellow1', hex = '#fbdc98' },
+			{ name = 'purple1', hex = '#362698' },
+			{ name = 'pink1', hex = '#bf40bf' },
+			{ name = 'lavendar1', hex = '#7e7eb8' },
+		}
+		for _, tc in ipairs(test_cases) do
+			it('testing color: ' .. tc.name, function()
+				local result = C.hsl_to_hex(C.hex_to_hsl(tc.hex))
+				assert.are.equal(hex_equality_tolerance(tc.hex, result), true)
 			end)
 		end
 	end)
