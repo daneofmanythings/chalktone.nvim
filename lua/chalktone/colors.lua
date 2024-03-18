@@ -39,18 +39,17 @@ M.rgb_to_hsl = function(rgb)
 	local luminance = (m.min.val + m.max.val)
 
 	-- Find saturation
-	local saturation -- FIXME: THIS IS WRONG. FIX IT.
+	local saturation
 	if m.min.val == m.max.val then
 		saturation = 0
 	elseif luminance <= 255 then
-		saturation = range / (m.max.val + m.min.val)
+		saturation = range / luminance
 	else
-		saturation = range / (510 - range) -- I think it is this branch
+		saturation = range / (510 - luminance) -- I think it is this branch
 	end
 
-	-- Check Luminance level to select the correct Saturation Formula
 	local hue
-	if saturation == 0 then
+	if luminance == 0 then -- If saturation is 0, there is no hue
 		hue = 0
 	elseif m.max.color == 'red' then
 		hue = (rgb.green - rgb.blue) / range
@@ -60,10 +59,16 @@ M.rgb_to_hsl = function(rgb)
 		hue = (4 * range + rgb.red - rgb.green) / range
 	end
 
+	hue = hue * 60 -- turn hue into degrees
+
+	if hue < 0 then -- if hue is negative, push it back around into [0, 360)
+		hue = hue + 360
+	end
+
 	return {
-		hue = hue * 60, -- normalize and convert to degrees
-		saturation = saturation, -- normalize
-		luminance = luminance / 510, -- normalize and divide by from earlier
+		hue = hue,
+		saturation = saturation,
+		luminance = luminance / 510, -- normalize and divide by 2 from earlier
 	}
 end
 
