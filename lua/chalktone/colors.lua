@@ -1,20 +1,38 @@
+---@alias Hex string
+---
+---@class RGB
+---@field red integer
+---@field green integer
+---@field blue integer
+---
+---@class HSL
+---@field hue integer
+---@field saturation number
+---@field luminance number
+
 local M = {}
 
-M.hex_to_rgb = function(hex_color)
+---@param hex Hex
+---@return RGB
+M.hex_to_rgb = function(hex)
 	return {
-		red = tonumber(string.sub(hex_color, 2, 3), 16),
-		green = tonumber(string.sub(hex_color, 4, 5), 16),
-		blue = tonumber(string.sub(hex_color, 6, 7), 16),
+		red = tonumber(string.sub(hex, 2, 3), 16),
+		green = tonumber(string.sub(hex, 4, 5), 16),
+		blue = tonumber(string.sub(hex, 6, 7), 16),
 	}
 end
 
-M.rgb_to_hex = function(rgb_table)
-	return string.format('#%.2x%.2x%.2x', rgb_table.red, rgb_table.green, rgb_table.blue)
+---@param rgb RGB
+---@return Hex
+M.rgb_to_hex = function(rgb)
+	return string.format('#%.2x%.2x%.2x', rgb.red, rgb.green, rgb.blue)
 end
 
-M.rgb_to_hsl = function(rgb_table)
+---@param rgb RGB
+---@return HSL
+M.rgb_to_hsl = function(rgb)
 	-- find the min and max of rgb
-	local m = M._min_max_rgb(rgb_table)
+	local m = M._min_max_rgb(rgb)
 	local range = m.max.val - m.min.val -- convenience
 
 	-- We will divide by 2 later
@@ -35,11 +53,11 @@ M.rgb_to_hsl = function(rgb_table)
 	if saturation == 0 then
 		hue = 0
 	elseif m.max.color == 'red' then
-		hue = (rgb_table.green - rgb_table.blue) / range
+		hue = (rgb.green - rgb.blue) / range
 	elseif m.max.color == 'green' then
-		hue = (2 * range + rgb_table.blue - rgb_table.red) / range
+		hue = (2 * range + rgb.blue - rgb.red) / range
 	else
-		hue = (4 * range + rgb_table.red - rgb_table.green) / range
+		hue = (4 * range + rgb.red - rgb.green) / range
 	end
 
 	return {
@@ -49,10 +67,12 @@ M.rgb_to_hsl = function(rgb_table)
 	}
 end
 
-M._min_max_rgb = function(rgb_table)
+---@param rgb RGB
+---@return table
+M._min_max_rgb = function(rgb)
 	local mini = { color = '', val = 256 }
 	local maxi = { color = '', val = -1 }
-	for color, value in pairs(rgb_table) do
+	for color, value in pairs(rgb) do
 		if value < mini.val then
 			mini.color = color
 			mini.val = value
@@ -65,10 +85,16 @@ M._min_max_rgb = function(rgb_table)
 	return { min = mini, max = maxi }
 end
 
+---@param hex Hex
+---@return HSL
 M.hex_to_hsl = function(hex)
 	return M.rgb_to_hsl(M.hex_to_rgb(hex))
 end
 
+---@param hex1 Hex
+---@param hex2 Hex
+---@param weight number -- [0, 1]
+---@return Hex
 M.blend_hex_colors = function(hex1, hex2, weight)
 	local rgb1 = M.hex_to_rgb(hex1)
 	local rgb2 = M.hex_to_rgb(hex2)
