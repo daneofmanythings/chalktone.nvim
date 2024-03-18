@@ -293,63 +293,63 @@ M.setup = function()
 
     -- LEGACY  TODO: Remove with v10
 
-    ['@parameter'] = { link = '@variable.parameter' },
-    ['@field'] = { link = '@variable.member' },
-    ['@namespace'] = { link = '@module' },
-    ['@float'] = { link = '@number.float' },
-    ['@symbol'] = { link = '@string.special.symbol' },
-    ['@string.regex'] = { link = '@string.regexp' },
-
-    ['@text'] = { link = '@markup' },
-    ['@text.strong'] = { link = '@markup.strong' },
-    ['@text.emphasis'] = { link = '@markup.italic' },
-    ['@text.underline'] = { link = '@markup.underline' },
-    ['@text.strike'] = { link = '@markup.strikethrough' },
-    ['@text.uri'] = { link = '@markup.link.url' },
-    ['@text.math'] = { link = '@markup.math' },
-    ['@text.environment'] = { link = '@markup.environment' },
-    ['@text.environment.name'] = { link = '@markup.environment.name' },
-
-    ['@text.title'] = { link = '@markup.heading' },
-    ['@text.literal'] = { link = '@markup.raw' },
-    ['@text.reference'] = { link = '@markup.link' },
-
-    ['@text.todo.checked'] = { link = '@markup.list.checked' },
-    ['@text.todo.unchecked'] = { link = '@markup.list.unchecked' },
-
-    -- @text.todo is now for todo comments, not todo notes like in markdown
-    ['@text.todo'] = { link = '@comment.todo' },
-    ['@text.warning'] = { link = '@comment.warning' },
-    ['@text.note'] = { link = '@comment.note' },
-    ['@text.danger'] = { link = '@comment.error' },
-
-    -- @text.uri is now
-    -- > @markup.link.url in markup links
-    -- > @string.special.url outside of markup
-    -- ['@text.uri'] = { link = '@markup.link.uri' },
-
-    ['@method'] = { link = '@function.method' },
-    ['@method.call'] = { link = '@function.method.call' },
-
-    ['@text.diff.add'] = { link = '@diff.plus' },
-    ['@text.diff.delete'] = { link = '@diff.minus' },
-
-    ['@define'] = { link = '@keyword.directive.define' },
-    ['@preproc'] = { link = '@keyword.directive' },
-    ['@storageclass'] = { link = '@keyword.storage' },
-    ['@conditional'] = { link = '@keyword.conditional' },
-    ['@exception'] = { link = '@keyword.exception' },
-    ['@include'] = { link = '@keyword.import' },
-    ['@repeat'] = { link = '@keyword.repeat' },
-
-    ['@variable.member.yaml'] = { link = '@field.yaml' },
-
-    ['@text.title.1.markdown'] = { link = '@markup.heading.1.markdown' },
-    ['@text.title.2.markdown'] = { link = '@markup.heading.2.markdown' },
-    ['@text.title.3.markdown'] = { link = '@markup.heading.3.markdown' },
-    ['@text.title.4.markdown'] = { link = '@markup.heading.4.markdown' },
-    ['@text.title.5.markdown'] = { link = '@markup.heading.5.markdown' },
-    ['@text.title.6.markdown'] = { link = '@markup.heading.6.markdown' },
+    -- ['@parameter'] = { link = '@variable.parameter' },
+    -- ['@field'] = { link = '@variable.member' },
+    -- ['@namespace'] = { link = '@module' },
+    -- ['@float'] = { link = '@number.float' },
+    -- ['@symbol'] = { link = '@string.special.symbol' },
+    -- ['@string.regex'] = { link = '@string.regexp' },
+    --
+    -- ['@text'] = { link = '@markup' },
+    -- ['@text.strong'] = { link = '@markup.strong' },
+    -- ['@text.emphasis'] = { link = '@markup.italic' },
+    -- ['@text.underline'] = { link = '@markup.underline' },
+    -- ['@text.strike'] = { link = '@markup.strikethrough' },
+    -- ['@text.uri'] = { link = '@markup.link.url' },
+    -- ['@text.math'] = { link = '@markup.math' },
+    -- ['@text.environment'] = { link = '@markup.environment' },
+    -- ['@text.environment.name'] = { link = '@markup.environment.name' },
+    --
+    -- ['@text.title'] = { link = '@markup.heading' },
+    -- ['@text.literal'] = { link = '@markup.raw' },
+    -- ['@text.reference'] = { link = '@markup.link' },
+    --
+    -- ['@text.todo.checked'] = { link = '@markup.list.checked' },
+    -- ['@text.todo.unchecked'] = { link = '@markup.list.unchecked' },
+    --
+    -- -- @text.todo is now for todo comments, not todo notes like in markdown
+    -- ['@text.todo'] = { link = '@comment.todo' },
+    -- ['@text.warning'] = { link = '@comment.warning' },
+    -- ['@text.note'] = { link = '@comment.note' },
+    -- ['@text.danger'] = { link = '@comment.error' },
+    --
+    -- -- @text.uri is now
+    -- -- > @markup.link.url in markup links
+    -- -- > @string.special.url outside of markup
+    -- -- ['@text.uri'] = { link = '@markup.link.uri' },
+    --
+    -- ['@method'] = { link = '@function.method' },
+    -- ['@method.call'] = { link = '@function.method.call' },
+    --
+    -- ['@text.diff.add'] = { link = '@diff.plus' },
+    -- ['@text.diff.delete'] = { link = '@diff.minus' },
+    --
+    -- ['@define'] = { link = '@keyword.directive.define' },
+    -- ['@preproc'] = { link = '@keyword.directive' },
+    -- ['@storageclass'] = { link = '@keyword.storage' },
+    -- ['@conditional'] = { link = '@keyword.conditional' },
+    -- ['@exception'] = { link = '@keyword.exception' },
+    -- ['@include'] = { link = '@keyword.import' },
+    -- ['@repeat'] = { link = '@keyword.repeat' },
+    --
+    -- ['@variable.member.yaml'] = { link = '@field.yaml' },
+    --
+    -- ['@text.title.1.markdown'] = { link = '@markup.heading.1.markdown' },
+    -- ['@text.title.2.markdown'] = { link = '@markup.heading.2.markdown' },
+    -- ['@text.title.3.markdown'] = { link = '@markup.heading.3.markdown' },
+    -- ['@text.title.4.markdown'] = { link = '@markup.heading.4.markdown' },
+    -- ['@text.title.5.markdown'] = { link = '@markup.heading.5.markdown' },
+    -- ['@text.title.6.markdown'] = { link = '@markup.heading.6.markdown' },
 
 		------------------------------------
 		--   LSP SEMANTIC TOKEN GROUPS    -- https://neovim.io/doc/user/lsp.html#lsp-semantic-highlight
