@@ -147,6 +147,31 @@ M.hsl_to_hex = function(hsl)
 	return M.rgb_to_hex(M.hsl_to_rgb(hsl))
 end
 
+---@param val number
+---@param max number
+---@param t number [-1, 1]
+---@return number
+M._lerp = function(val, max, t)
+	if t >= 0 then
+		return val + (max - val) * (t > 1 and 1 or t)
+	else
+		return val - (val * (t < -1 and -1 or t))
+	end
+end
+
+---@param hsl HSL
+---@param t number [-1, 1]
+---@return HSL
+M.sat = function(hsl, t)
+	return {
+		hue = hsl.hue,
+		saturation = M._lerp(hsl.saturation, 1, t),
+		luminance = hsl.luminance,
+	}
+end
+
+M.lit = function(hsl, t) end
+
 ---@param hex1 Hex
 ---@param hex2 Hex
 ---@param weight number -- [0, 1]
