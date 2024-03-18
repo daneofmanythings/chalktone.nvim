@@ -145,33 +145,23 @@ describe('colors', function()
 		assert.are.same(expected, result)
 	end)
 
-	it('hex to hsl: wierd green', function()
-		local hex_color = '#69f59c'
-		local expected = { hue = 141.86, saturation = 0.88, luminance = 0.69 }
-		local result = C.hex_to_hsl(hex_color)
-		for color, val in pairs(result) do
-			result[color] = tonumber(string.format('%.2f', val))
+	it('hex to hsl...', function()
+		local test_cases = {
+			{ name = 'green1', color = '#69f59c', expected = { hue = 141.86, saturation = 0.88, luminance = 0.69 } },
+			{ name = 'red1', color = '#c9194b', expected = { hue = 342.95, saturation = 0.78, luminance = 0.44 } },
+			{ name = 'yellow1', color = '#fbdc98', expected = { hue = 41.21, saturation = 0.93, luminance = 0.79 } },
+			{ name = 'purple1', color = '#362698', expected = { hue = 248.42, saturation = 0.60, luminance = 0.37 } },
+			{ name = 'pink1', color = '#bf40bf', expected = { hue = 300.00, saturation = 0.50, luminance = 0.50 } },
+			{ name = 'lavendar1', color = '#7e7eb8', expected = { hue = 240.0, saturation = 0.29, luminance = 0.61 } },
+		}
+		for _, tc in ipairs(test_cases) do
+			it('testing color: ' .. tc.name, function()
+				local result = C.hex_to_hsl(tc.color)
+				for color, val in pairs(result) do
+					result[color] = tonumber(string.format('%.2f', val))
+				end
+				assert.are.same(tc.expected, result)
+			end)
 		end
-		assert.are.same(expected, result)
-	end)
-
-	it('hex to hsl: wierd red', function()
-		local hex_color = '#c9194b'
-		local expected = { hue = 342.95, saturation = 0.78, luminance = 0.44 }
-		local result = C.hex_to_hsl(hex_color)
-		for color, val in pairs(result) do
-			result[color] = tonumber(string.format('%.2f', val))
-		end
-		assert.are.same(expected, result)
-	end)
-
-	it('hex to hsl: weird yellow', function()
-		local hex_color = '#fbdc98'
-		local expected = { hue = 41.21, saturation = 0.93, luminance = 0.79 }
-		local result = C.hex_to_hsl(hex_color)
-		for color, val in pairs(result) do
-			result[color] = tonumber(string.format('%.2f', val))
-		end
-		assert.are.same(expected, result)
 	end)
 end)

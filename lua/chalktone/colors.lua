@@ -6,7 +6,7 @@
 ---@field blue integer
 ---
 ---@class HSL
----@field hue integer
+---@field hue number
 ---@field saturation number
 ---@field luminance number
 
@@ -30,7 +30,7 @@ end
 
 ---@param rgb RGB
 ---@return HSL
-M.rgb_to_hsl = function(rgb)
+M.rgb_to_hsl = function(rgb) -- modification of formula from https://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/
 	-- find the min and max of rgb
 	local m = M._min_max_rgb(rgb)
 	local range = m.max.val - m.min.val -- convenience
@@ -88,6 +88,17 @@ M._min_max_rgb = function(rgb)
 		end
 	end
 	return { min = mini, max = maxi }
+end
+
+---@param hsl HSL
+---@return RGB
+M.hsl_to_rgb = function(hsl)
+	-- C = (1 - |2L - 1|) * hsl.saturation
+	-- H' = hsl.hue / 60
+	-- X = C * (1 - |H'%2 - 1|)
+	-- annoying piecewise formula
+	-- m = hsl.luminance - C / 2
+	-- add m to r, g, and b
 end
 
 ---@param hex Hex
