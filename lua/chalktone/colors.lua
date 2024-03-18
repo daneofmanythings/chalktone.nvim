@@ -155,22 +155,22 @@ M._lerp = function(val, max, t)
 	if t >= 0 then
 		return val + (max - val) * (t > 1 and 1 or t)
 	else
-		return val - (val * (t < -1 and -1 or t))
+		return val + (val * (t < -1 and -1 or t))
 	end
 end
 
 ---@param hsl HSL
----@param t number [-1, 1]
+---@param rot_t number [0, 1]
+---@param sat_t number [0, 1]
+---@param lum_t number [0, 1]
 ---@return HSL
-M.sat = function(hsl, t)
+M.hsl_trans = function(hsl, rot_t, sat_t, lum_t)
 	return {
-		hue = hsl.hue,
-		saturation = M._lerp(hsl.saturation, 1, t),
-		luminance = hsl.luminance,
+		M._lerp(hsl.hue, 360, rot_t),
+		M._lerp(hsl.saturation, 1, sat_t),
+		M._lerp(hsl.luminance, 1, lum_t),
 	}
 end
-
-M.lit = function(hsl, t) end
 
 ---@param hex1 Hex
 ---@param hex2 Hex

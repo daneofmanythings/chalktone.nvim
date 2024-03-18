@@ -207,4 +207,20 @@ describe('colors.lua |', function()
 			end)
 		end
 	end)
+
+	it('_lerp check...', function()
+		local test_cases = {
+			{ name = 'no t', val = 0.5, max = 1, t = 0, expected = 0.5 },
+			{ name = 'all t', val = 0.5, max = 1, t = 1, expected = 1 },
+			{ name = 'some t', val = 0.5, max = 1, t = 0.5, expected = 0.75 },
+			{ name = 'too much t', val = 0.5, max = 1, t = 1.5, expected = 1 },
+			{ name = 'too much neg t', val = 0.5, max = 1, t = -1.5, expected = 0 },
+		}
+		for _, tc in ipairs(test_cases) do
+			it('testing case: ' .. tc.name, function()
+				local result = C._lerp(tc.val, tc.max, tc.t)
+				assert.are.equal(tc.expected, result)
+			end)
+		end
+	end)
 end)
