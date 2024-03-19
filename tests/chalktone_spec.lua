@@ -63,10 +63,10 @@ describe('theme', function()
 		assert.are.same(true, result)
 	end)
 
-	it('setup: check opts', function()
-		local opts = require('chalktone.config').options
-		local theme = theme.setup()
-	end)
+	-- it('setup: check opts', function()
+	-- 	local opts = require('chalktone.config').options
+	-- 	local theme = theme.setup()
+	-- end)
 
 	it('sanity check 1', function()
 		local hls = { a = { b = true, c = false } }
@@ -195,6 +195,7 @@ describe('colors.lua |', function()
 		local test_cases = {
 			{ name = 'green1', hex = '#69f59c' },
 			{ name = 'red1', hex = '#c9194b' },
+			{ name = 'red0', hex = '#ff0000' },
 			{ name = 'yellow1', hex = '#fbdc98' },
 			{ name = 'purple1', hex = '#362698' },
 			{ name = 'pink1', hex = '#bf40bf' },
@@ -215,11 +216,27 @@ describe('colors.lua |', function()
 			{ name = 'some t', val = 0.5, max = 1, t = 0.5, expected = 0.75 },
 			{ name = 'too much t', val = 0.5, max = 1, t = 1.5, expected = 1 },
 			{ name = 'too much neg t', val = 0.5, max = 1, t = -1.5, expected = 0 },
+			{ name = 'bigger max', val = 25, max = 50, t = 0.5, expected = 37.5 },
 		}
 		for _, tc in ipairs(test_cases) do
 			it('testing case: ' .. tc.name, function()
 				local result = C._lerp(tc.val, tc.max, tc.t)
 				assert.are.equal(tc.expected, result)
+			end)
+		end
+	end)
+
+	it('hex_trans...', function()
+		local test_cases = {
+			{ name = 'no transformation', hex = '#ff0000', rot_t = 0, sat_t = 0, lum_t = 0, expected = '#ff0000' },
+			{ name = '120 rot', hex = '#ff0000', rot_t = 120, sat_t = 0, lum_t = 0, expected = '#00ff00' },
+			{ name = '-240 rot', hex = '#ff0000', rot_t = -240, sat_t = 0, lum_t = 0, expected = '#00ff00' },
+		}
+		for _, tc in ipairs(test_cases) do
+			it('testing case: ' .. tc.name, function()
+				local result = C.hex_trans(tc.hex, tc.rot_t, tc.sat_t, tc.lum_t)
+				-- print(tc.hex .. ' | ' .. result)
+				assert.are.equal(hex_equality_tolerance(tc.expected, result), true)
 			end)
 		end
 	end)

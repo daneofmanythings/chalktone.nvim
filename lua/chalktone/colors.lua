@@ -160,21 +160,39 @@ M._lerp = function(val, max, t)
 end
 
 ---@param hsl HSL
----@param rot_t number [0, 1]
----@param sat_t number [0, 1]
----@param lum_t number [0, 1]
+---@param rot_t number [0, 1) | [0, 359]
+---@param sat_t number [0, 1] | [0, 100]
+---@param lum_t number [0, 1] | [0, 100]
 ---@return HSL
 M.hsl_trans = function(hsl, rot_t, sat_t, lum_t)
+	-- if we are not given percentages, we calculate the percentago based on the max
+	if rot_t > 1 or rot_t < -1 then
+		rot_t = (rot_t % 360) / 360
+	end
+	if sat_t > 1 or sat_t < -1 then
+		sat_t = (sat_t % 100) / 100
+	end
+	if lum_t > 1 or lum_t < -1 then
+		lum_t = (lum_t % 100) / 100
+	end
+
 	return {
-		M._lerp(hsl.hue, 360, rot_t),
-		M._lerp(hsl.saturation, 1, sat_t),
-		M._lerp(hsl.luminance, 1, lum_t),
+		hue = M._lerp(hsl.hue, 360, rot_t),
+		saturation = M._lerp(hsl.saturation, 1, sat_t),
+		luminance = M._lerp(hsl.luminance, 1, lum_t),
 	}
+end
+
+M.hex_trans = function(hex, rot_t, sat_t, lum_t)
+	local hsl = M.hex_to_hsl(hex)
+	local new_hsl = M.hsl_trans(hsl, rot_t, sat_t, lum_t)
+	local new_hex = M.hsl_to_hex(new_hsl)
+	return new_hex
 end
 
 ---@param hex1 Hex
 ---@param hex2 Hex
----@param weight number -- [0, 1]
+---@param weight number [0, 1]
 ---@return Hex
 M.blend_hex_colors = function(hex1, hex2, weight)
 	local rgb1 = M.hex_to_rgb(hex1)
