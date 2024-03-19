@@ -110,7 +110,7 @@ describe('colors.lua |', function()
 		return red_diff < 3 and green_diff < 3 and blue_diff < 3
 	end
 
-	it('hex to rbg >>', function()
+	it('hex to rbg...', function()
 		local test_cases = {
 			{ name = 'black', hex = '#000000', rgb = { red = 0, green = 0, blue = 0 } },
 			{ name = 'green', hex = '#69f59c', rgb = { red = 105, green = 245, blue = 156 } },
@@ -123,7 +123,7 @@ describe('colors.lua |', function()
 		end
 	end)
 
-	it('rgb to hex >>', function()
+	it('rgb to hex...', function()
 		local test_cases = {
 			{ name = 'black', hex = '#000000', rgb = { red = 0, green = 0, blue = 0 } },
 			{ name = 'green', hex = '#69f59c', rgb = { red = 105, green = 245, blue = 156 } },
@@ -215,6 +215,7 @@ describe('colors.lua |', function()
 			{ name = 'all t', val = 0.5, max = 1, t = 1, expected = 1 },
 			{ name = 'some t', val = 0.5, max = 1, t = 0.5, expected = 0.75 },
 			{ name = 'too much t', val = 0.5, max = 1, t = 1.5, expected = 1 },
+			{ name = 'some neg t', val = 0.5, max = 1, t = -0.5, expected = 0.25 },
 			{ name = 'too much neg t', val = 0.5, max = 1, t = -1.5, expected = 0 },
 			{ name = 'bigger max', val = 25, max = 50, t = 0.5, expected = 37.5 },
 		}
@@ -231,6 +232,9 @@ describe('colors.lua |', function()
 			{ name = 'no transformation', hex = '#ff0000', rot_t = 0, sat_t = 0, lum_t = 0, expected = '#ff0000' },
 			{ name = '120 rot', hex = '#ff0000', rot_t = 120, sat_t = 0, lum_t = 0, expected = '#00ff00' },
 			{ name = '-240 rot', hex = '#ff0000', rot_t = -240, sat_t = 0, lum_t = 0, expected = '#00ff00' },
+			{ name = '344 rot, 10 sat', hex = '#A3A9CE', rot_t = 344, sat_t = 10, lum_t = 0, expected = '#9db2d2' },
+			{ name = '-16 rot, -90 sat', hex = '#A3A9CE', rot_t = -16, sat_t = -90, lum_t = 0, expected = '#b6b8ba' },
+			{ name = '15 sat, 21 lum', hex = '#CF9BC2', rot_t = 0, sat_t = 15, lum_t = 21, expected = '#dfaad2' },
 		}
 		for _, tc in ipairs(test_cases) do
 			it('testing case: ' .. tc.name, function()
