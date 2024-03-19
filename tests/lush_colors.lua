@@ -27,6 +27,7 @@ local constants = setmetatable({}, {
 local var_main = hsl('#ECE1D7')
 local func = hsl('#85b695')
 local string = hsl('#A3A9CE').sa(10).ro(344)
+print('string: ' .. tostring(string))
 local type = hsl('#E49B5D').li(25).sa(31)
 print('type: ' .. tostring(type))
 local field = hsl('#E49B5D').li(65)
