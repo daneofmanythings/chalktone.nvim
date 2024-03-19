@@ -24,7 +24,7 @@ M.setup = function()
 		CursorColumn        = { link = 'CursorLine' },
 		CursorIM            = { link = 'Cursor' },
 		CursorLine          = { bg = p.cursorline },
-		CursorLineNr        = { fg = p.carrot_orange },
+		CursorLineNr        = { fg = p.cursor_line_nr },
 		DiffAdd             = { fg = p.ok },
 		DiffChange          = { fg = p.warn },
 		DiffDelete          = { fg = p.error_light },

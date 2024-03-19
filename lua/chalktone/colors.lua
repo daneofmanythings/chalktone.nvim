@@ -183,7 +183,7 @@ M.hsl_trans = function(hsl, rot_t, sat_t, lum_t)
 	}
 end
 
-M.hex_trans = function(hex, rot_t, sat_t, lum_t)
+M.hex_trans_with_hsl = function(hex, rot_t, sat_t, lum_t)
 	local hsl = M.hex_to_hsl(hex)
 	-- print('pre: ' .. vim.inspect(hsl))
 	local new_hsl = M.hsl_trans(hsl, rot_t, sat_t, lum_t)
