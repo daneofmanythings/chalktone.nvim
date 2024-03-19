@@ -80,13 +80,12 @@ local M = {}
 -- Safeguard. Probably don't need
 M.palette = _builtin_palettes.default
 
----comment
 ---@param palette_name string
 local get_palette = function(palette_name)
 	return _builtin_palettes[palette_name] or _builtin_palettes.default
 end
 
----comment Grabs the palette from the builtins then extends and returns it.
+--- Grabs the palette from the builtins then extends and returns it.
 ---@param palette_name string
 ---@return Palette
 M.setup = function(palette_name)

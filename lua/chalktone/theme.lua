@@ -497,7 +497,7 @@ M.setup = function()
 		-- ['@neorg.lists.ordered.prefix'] = {},
 		--
 		-- ['@neorg.markup.verbatim'] = {},
-		-- ['@neorg.tags.ranged_verbatim.code_block'] = {},
+		['@neorg.tags.ranged_verbatim.name.norg'] = { link = 'Keyword' },
 		-- ['@neorg.links'] = {},
 		-- ['@neorg.links.file'] = {},
 		-- ['@neorg.links.description'] = {},

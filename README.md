@@ -39,12 +39,15 @@ require('chalktone').setup({
     -- defaults
     palette_name = 'default',
     formatting = {
-        Comment = {
-            italic = true,
-        },
-        String = {
-            italic = true,
-        },
+        italics = true,
+        raw = {
+            Comment = {
+                italic = true,
+            },
+            String = {
+                italic = true,
+            },
+        }
     },
 })
 ```
