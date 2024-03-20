@@ -37,32 +37,35 @@ end
 ```lua
 require('chalktone').setup({
     -- defaults
-    palette_name = 'default',
+    theme = 'default', -- currently the only theme
     formatting = {
-        italics = true,
-        raw = {
-            Comment = {
-                italic = true,
-            },
-            String = {
-                italic = true,
-            },
-        }
+        -- Coming soon
+    },
+    format_by_group = {
+        -- Examples
+        -- Comment = {
+        --     italic = false,
+        -- },
+        -- String = {
+        --     italic = false,
+        -- },
     },
 })
 ```
 
 There are currently no supported aggregate configuration options availible. 
-Under formatting, you may specifiy options to be passed to `vim.api.nvim_set_hl` for
+Under format_by_group, you may specifiy options to be passed to `vim.api.nvim_set_hl` for
 a Neovim highlight group (see `:h highlight-groups` and `:h group-name`). See `:h nvim_set_hl` for the fields and specifications that can be passed in.
 The options are restricted to `fg, bg, sp, bold, underline, undercurl, strikethrough, italic, link`.
 An example to change the highlight group 'Comment':
 ```lua
 ...
-    Comment = {
+    Comment = { -- This won't look good.
         fg = '#ffffff',
         italic = false,
         bold = true,
+        underline = true,
+        strikethrough = true,
     },
 ...
 ```
