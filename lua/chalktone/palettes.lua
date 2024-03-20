@@ -82,7 +82,8 @@ local M = {}
 ---@param palette_name string
 ---@return Palette
 local _setup_palette = function(palette_name)
-	local p = _builtin_palettes[palette_name]() or _builtin_palettes['default']()
+	local name = palette_name or 'default'
+	local p = _builtin_palettes[palette_name]()
 	local blend = colors.blend_hex_colors
 	local trans = colors.hex_trans_with_hsl
 
