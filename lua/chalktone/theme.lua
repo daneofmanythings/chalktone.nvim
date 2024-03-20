@@ -6,11 +6,10 @@ local M = {}
 ---@return Theme
 M.setup = function()
 	local config = require('chalktone.config')
-	local formatting = config.options.formatting -- NOTE: Part of the config rework. unused atm.
-	local raw_formatting = config.options.formatting.raw
-	local palette_name = config.options.palette_name
+	local by_group = config.options.format_by_group
+	local theme_name = config.options.theme
 
-	local p = require('chalktone.palettes').setup(palette_name)
+	local p = require('chalktone.palettes').setup(theme_name)
 
 	local highlights = {
 		-----------------------------------
@@ -107,8 +106,8 @@ M.setup = function()
 		-----------------------------------
 		Comment             = { fg = p.comments },
 		Constant            = { fg = p.constant },
-		String              = { fg = p.string, italic = true },
-		Character           = { link = 'String' },
+		String              = { fg = p.string },
+		Character           = { fg = p.string },
 		Number              = { fg = p.constant },
 		Float               = { link = 'Number' },
 		Boolean             = { link = 'Number' },
@@ -357,6 +356,7 @@ M.setup = function()
 
 		['@lsp.type.enum'] = { link = '@type' },
     ['@lsp.type.variable'] = { link = 'Identifier' },
+    ['@lsp.type.parameter'] = { link = '@variable.parameter' },
     -- ['@lsp.type.variable.go'] = { link = '@variable.parameter' },
     -- ['@lsp.typemod.property'] = { fg = p.jasmine },
 
@@ -507,7 +507,7 @@ M.setup = function()
 		-- stylua: ignore end
 	}
 
-	highlights = M._apply_raw_formatting(highlights, raw_formatting)
+	highlights = M._apply_raw_formatting(highlights, by_group)
 
 	return highlights
 end
@@ -538,7 +538,7 @@ local _valid_attr_names = { -- :h nvim_set_hl
   -- stylua: ignore start
 	fg            = true, -- color name or "#RRGGBB"
 	bg            = true, -- color name or "#RRGGBB"
-	sp            = true, -- color name or "#RRGGBB"
+	sp            = true, --:q color name or "#RRGGBB"
 	blend         = false, -- integer between 0 and 100
 	bold          = true, -- boolean
 	standout      = false, -- boolean

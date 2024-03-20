@@ -1,6 +1,6 @@
 ---@diagnostic disable:undefined-global, undefined-field
 
-describe('config', function()
+describe('config.lua |', function()
 	local cfg = require('chalktone.config')
 	local default
 
@@ -11,13 +11,13 @@ describe('config', function()
 	it('merge_options: nil opts', function()
 		local opts = nil
 		local expected = default
-		local result = cfg.merge_options(opts)
+		local result = cfg._merge_options(opts)
 		assert.are.same(result, expected)
 	end)
 
 	it('merge_options: non-overlapping opts', function()
 		local opts = { test = { test = true } }
-		local result = cfg.merge_options(opts)
+		local result = cfg._merge_options(opts)
 		local expected = default
 		expected.test = { test = true }
 		assert.are.same(result, default)
