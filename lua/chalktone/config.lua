@@ -5,7 +5,7 @@ local _generate_default = function()
 		theme = 'default',
 		formatting = {
 			comments = {
-				styling = { italic = true, bold = true },
+				styling = { italic = true },
 				groups = {
 					'Comment',
 					'WildMenu',
@@ -61,8 +61,18 @@ local _squash_formatting = function(options)
 	return options
 end
 
+local _saturate_options = function(defaults, options)
+	for name, tbl in pairs(options.formatting) do
+		if not tbl['groups'] then
+			tbl['groups'] = defaults.formatting[name].groups
+		end
+	end
+	return options
+end
+
 M.setup = function(options)
 	local defaults = _generate_default()
+	options = _saturate_options(defaults, options)
 
 	defaults = _squash_formatting(defaults)
 	options = _squash_formatting(options or {})
