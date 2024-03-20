@@ -8,28 +8,20 @@ describe('config.lua |', function()
 		default = require('chalktone.config').options
 	end)
 
-	it('merge_options: nil opts', function()
-		local opts = nil
-		local expected = default
-		local result = cfg._merge_options(opts)
-		assert.are.same(result, expected)
+	it('convert formatting...', function()
+		local formatting = {
+			comment = {
+				styling = { italic = true },
+				groups = { 'Comment', 'String' },
+			},
+		}
+		local expected = {
+			Comment = { italic = true },
+			String = { italic = true },
+		}
+		local result = cfg._convert_formatting(formatting)
+		assert.are.same(expected, result)
 	end)
-
-	it('merge_options: non-overlapping opts', function()
-		local opts = { test = { test = true } }
-		local result = cfg._merge_options(opts)
-		local expected = default
-		expected.test = { test = true }
-		assert.are.same(result, default)
-	end)
-
-	-- it('merge_options: overlapping opts', function()
-	-- 	local opts = { formatting = { Comment = { italic = false } } }
-	-- 	local result = cfg.merge_options(opts)
-	-- 	local expected = default
-	-- 	expected.formatting.Comment = { italic = false, bold = true }
-	-- 	assert.are.same(result, expected)
-	-- end)
 end)
 
 describe('theme', function()
@@ -227,7 +219,7 @@ describe('colors.lua |', function()
 		end
 	end)
 
-	it('hex_trans...', function()
+	it('hex_trans_with_hsl...', function()
 		local test_cases = {
 			{ name = 'no transformation', hex = '#ff0000', rot_t = 0, sat_t = 0, lum_t = 0, expected = '#ff0000' },
 			{ name = '120 rot', hex = '#ff0000', rot_t = 120, sat_t = 0, lum_t = 0, expected = '#00ff00' },
@@ -238,7 +230,7 @@ describe('colors.lua |', function()
 		}
 		for _, tc in ipairs(test_cases) do
 			it('testing case: ' .. tc.name, function()
-				local result = C.hex_trans(tc.hex, tc.rot_t, tc.sat_t, tc.lum_t)
+				local result = C.hex_trans_with_hsl(tc.hex, tc.rot_t, tc.sat_t, tc.lum_t)
 				-- print(tc.hex .. ' | ' .. result)
 				assert.are.equal(hex_equality_tolerance(tc.expected, result), true)
 			end)

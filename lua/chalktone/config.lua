@@ -5,7 +5,7 @@ local _generate_default = function()
 		theme = 'default',
 		formatting = {
 			comments = {
-				styling = { italic = true },
+				styling = { italic = true, bold = true },
 				groups = {
 					'Comment',
 					'WildMenu',
@@ -18,9 +18,7 @@ local _generate_default = function()
 			numbers = {},
 			operators = {},
 			strings = {
-				styling = {
-					italic = true,
-				},
+				styling = { italic = true },
 				groups = {
 					'String',
 					'Character',
@@ -30,37 +28,46 @@ local _generate_default = function()
 			variables = {},
 		},
 		format_by_group = {
-			-- Examples:
-			Comment = {
-				italic = true,
-				-- underline = true,
-			},
-			String = {
-				italic = true,
-				-- 	fg = '#ff0000'
-			},
+			-- Comment = {
+			-- 	italic = false,
+			-- },
+			-- String = {
+			-- 	italic = false,
+			-- },
 		},
 	}
 
 	return options
 end
 
-M.options = _generate_default()
--- M.options = options
+M._convert_formatting = function(formatting)
+	local converted = {}
+	for _, tbl in pairs(formatting or {}) do
+		local styling = tbl.styling
+		local groups = tbl.groups
+		for _, group in ipairs(groups or {}) do
+			converted[group] = styling
+		end
+	end
 
-M.setup = function(opts)
-	local config = vim.tbl_deep_extend('force', M.options, opts or {})
-	-- local formatting = config.formatting
-	-- local by_groups = config.format_by_groups
-	-- local new_by_groups = {}
-	-- for _, style_grouping in ipairs(formatting) do
-	-- 	local groups = style_grouping.groups
-	-- 	local styling = style_grouping.styling
-	-- 	for _, group in ipairs(groups) do
-	-- 		new_by_groups[group] = vim.tbl_deep_extend('force', by_groups[group], styling)
-	-- 	end
-	-- end
-	-- config.format_by_groups = new_by_groups
+	return converted
+end
+
+local _squash_formatting = function(options)
+	local converted_formatting = M._convert_formatting(options.formatting)
+	options.formatting = nil
+	options.format_by_group = vim.tbl_deep_extend('force', options.format_by_group, converted_formatting)
+
+	return options
+end
+
+M.setup = function(options)
+	local defaults = _generate_default()
+
+	defaults = _squash_formatting(defaults)
+	options = _squash_formatting(options or {})
+
+	local config = vim.tbl_deep_extend('force', defaults, options or {})
 	M.options = config
 end
 
