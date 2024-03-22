@@ -17,7 +17,7 @@ M.setup = function()
 		-----------------------------------
     -- stylua: ignore start
 		ColorColumn         = { link = "CursorLine" },
-		Conceal             = { link = 'Comment' },
+		Conceal             = { fg = p.comments },
 		CurSearch           = { fg = p.fg_main, bg = p.select_hl, bold = true, italic = false },
 		Cursor              = { fg = p.bg_main, bg = p.fg_main },
 		CursorColumn        = { link = 'CursorLine' },
@@ -101,6 +101,8 @@ M.setup = function()
 		DiagnosticSignWarn      = { link = 'DiagnosticWarn' },
 		DiagnosticSignOk        = { link = 'DiagnosticOK' },
 
+    DiagnosticUnnecessary   = { fg = p.hint }, -- unused/empty code
+
 		-----------------------------------
 		--            SYNTAX             -- https://neovim.io/doc/user/syntax.html#highlight-groups
 		-----------------------------------
@@ -110,7 +112,7 @@ M.setup = function()
 		Character           = { fg = p.string },
 		Number              = { fg = p.constant },
 		Float               = { link = 'Number' },
-		Boolean             = { link = 'Number' },
+		Boolean             = { fg = p.constant },
 
 		Identifier          = { fg = p.fg_main },
 		Function            = { fg = p.func },
@@ -161,11 +163,11 @@ M.setup = function()
 		------------------------------------
 
 		-- Identifiers
-		['@variable']                   = { link = 'Identifiers' }, -- various variable names
+		['@variable']                   = { link = 'Identifier' }, -- various variable names
 		['@variable.builtin']           = { link = 'Keyword' }, -- built-in variable names (e.g. `this`)
 		['@variable.parameter']         = { fg = p.func_param }, -- parameters of a function
-		-- ['@variable.parameter.builtin'] = {}, -- special parameters (e.g. `_`, `it`)
-		-- ['@variable.member']            = { fg = p.jasmine }, -- object and struct fields
+		['@variable.parameter.builtin'] = { fg = p.func_param }, -- special parameters (e.g. `_`, `it`)
+		-- ['@variable.member']            = { fg = p.member }, -- object and struct fields
 
 		['@constant']         					= { link = 'Constant' }, -- constant identifiers
 		-- ['@constant.builtin'] 					= {}, -- built-in constant values
@@ -188,9 +190,9 @@ M.setup = function()
 		['@character']                  = { link = 'String' }, -- character literals
 		-- ['@character.special']          = {}, -- special characters (e.g. wildcards)
 
-		['@boolean']                    = { link = 'Number' }, -- boolean literals
+		['@boolean']                    = { link = 'Boolean' }, -- boolean literals
 		['@number']                     = { link = 'Number' }, -- numeric literals
-		['@number.float']               = { link = 'Number' }, -- floating-point number literals
+		['@number.float']               = { link = 'Float' }, -- floating-point number literals
 
 		-- Types
 		['@type']             					= { link = 'Structure' }, -- type or class definitions and annotations
@@ -200,7 +202,7 @@ M.setup = function()
 
 		['@attribute']                  = { link = 'PreProc' }, -- attribute annotations (e.g. Python decorators)
 		['@attribute.builtin']          = { link = 'PreProc' }, -- builtin annotations (e.g. `@property` in Python)
-		-- ['@property']                   = {}, -- the key in key/value pairs
+		['@property']                   = { fg = p.member }, -- the key in key/value pairs
 
 		-- Functions
 		['@function']         					= { fg = p.func }, -- function definitions
@@ -256,19 +258,19 @@ M.setup = function()
 		['@markup.strikethrough'] 			= { strikethrough = true }, -- struck-through text
 		['@markup.underline']     			= { link = 'Underlined' }, -- underlined text (only for literal underline markup!)
 
-		['@markup.heading']   					= { link = 'CursorLineNr' }, -- headings, titles (including markers)
-		-- ['@markup.heading.1'] 					= { link = 'Type' }, -- top-level heading
-		-- ['@markup.heading.2'] 					= { fg = p.field }, -- section heading
-		-- ['@markup.heading.3'] 					= { link = 'Function' }, -- subsection heading
-		-- ['@markup.heading.4'] 					= { fg = p.string }, -- and so on
-		-- ['@markup.heading.5'] 					= { link = 'Constant' }, -- and so forth
-		['@markup.heading.6'] 					= { fg = p.func_param }, -- six levels ought to be enough for anybody
+		['@markup.heading']   					= { fg = p.header1 }, -- headings, titles (including markers)
+		-- ['@markup.heading.1'] 					= { fg = p.header1 }, -- top-level heading
+		-- ['@markup.heading.2'] 					= { fg = p.header2 }, -- section heading
+		-- ['@markup.heading.3'] 					= { fg = p.header3 }, -- subsection heading
+		-- ['@markup.heading.4'] 					= { fg = p.header4 }, -- and so on
+		-- ['@markup.heading.5'] 					= { fg = p.header5 }, -- and so forth
+		-- ['@markup.heading.6'] 					= { fg = p.header6 }, -- six levels ought to be enough for anybody
 		--
 		-- ['@markup.quote']               = {}, -- block quotes
 		-- ['@markup.math']                = {}, -- math environments (e.g. `$ ... $` in LaTeX)
 		--
 		['@markup.link']        				= { underline = false }, -- text references, footnotes, citations, etc.
-		['@markup.link.label']  				= { fg = p.func_param }, -- link, reference descriptions
+		['@markup.link.label']  				= { fg = p.preproc }, -- link, reference descriptions
 		['@markup.link.url']    				= { link = 'String' }, -- URL-style links
 		--
 		['@markup.raw']         				= { fg = p.fg_main }, -- literal or verbatim text (e.g. inline code)
@@ -292,63 +294,63 @@ M.setup = function()
 
     -- LEGACY  TODO: Remove with v10
 
-    -- ['@parameter'] = { link = '@variable.parameter' },
-    -- ['@field'] = { link = '@variable.member' },
-    -- ['@namespace'] = { link = '@module' },
-    -- ['@float'] = { link = '@number.float' },
-    -- ['@symbol'] = { link = '@string.special.symbol' },
-    -- ['@string.regex'] = { link = '@string.regexp' },
-    --
-    -- ['@text'] = { link = '@markup' },
-    -- ['@text.strong'] = { link = '@markup.strong' },
-    -- ['@text.emphasis'] = { link = '@markup.italic' },
-    -- ['@text.underline'] = { link = '@markup.underline' },
-    -- ['@text.strike'] = { link = '@markup.strikethrough' },
-    -- ['@text.uri'] = { link = '@markup.link.url' },
-    -- ['@text.math'] = { link = '@markup.math' },
-    -- ['@text.environment'] = { link = '@markup.environment' },
-    -- ['@text.environment.name'] = { link = '@markup.environment.name' },
-    --
-    -- ['@text.title'] = { link = '@markup.heading' },
-    -- ['@text.literal'] = { link = '@markup.raw' },
-    -- ['@text.reference'] = { link = '@markup.link' },
-    --
-    -- ['@text.todo.checked'] = { link = '@markup.list.checked' },
-    -- ['@text.todo.unchecked'] = { link = '@markup.list.unchecked' },
-    --
-    -- -- @text.todo is now for todo comments, not todo notes like in markdown
-    -- ['@text.todo'] = { link = '@comment.todo' },
-    -- ['@text.warning'] = { link = '@comment.warning' },
-    -- ['@text.note'] = { link = '@comment.note' },
-    -- ['@text.danger'] = { link = '@comment.error' },
-    --
-    -- -- @text.uri is now
-    -- -- > @markup.link.url in markup links
-    -- -- > @string.special.url outside of markup
-    -- -- ['@text.uri'] = { link = '@markup.link.uri' },
-    --
-    -- ['@method'] = { link = '@function.method' },
-    -- ['@method.call'] = { link = '@function.method.call' },
-    --
-    -- ['@text.diff.add'] = { link = '@diff.plus' },
-    -- ['@text.diff.delete'] = { link = '@diff.minus' },
-    --
-    -- ['@define'] = { link = '@keyword.directive.define' },
-    -- ['@preproc'] = { link = '@keyword.directive' },
-    -- ['@storageclass'] = { link = '@keyword.storage' },
-    -- ['@conditional'] = { link = '@keyword.conditional' },
-    -- ['@exception'] = { link = '@keyword.exception' },
-    -- ['@include'] = { link = '@keyword.import' },
-    -- ['@repeat'] = { link = '@keyword.repeat' },
-    --
-    -- ['@variable.member.yaml'] = { link = '@field.yaml' },
-    --
-    -- ['@text.title.1.markdown'] = { link = '@markup.heading.1.markdown' },
-    -- ['@text.title.2.markdown'] = { link = '@markup.heading.2.markdown' },
-    -- ['@text.title.3.markdown'] = { link = '@markup.heading.3.markdown' },
-    -- ['@text.title.4.markdown'] = { link = '@markup.heading.4.markdown' },
-    -- ['@text.title.5.markdown'] = { link = '@markup.heading.5.markdown' },
-    -- ['@text.title.6.markdown'] = { link = '@markup.heading.6.markdown' },
+    ['@parameter'] = { link = '@variable.parameter' },
+    ['@field'] = { link = '@variable.member' },
+    ['@namespace'] = { link = '@module' },
+    ['@float'] = { link = '@number.float' },
+    ['@symbol'] = { link = '@string.special.symbol' },
+    ['@string.regex'] = { link = '@string.regexp' },
+
+    ['@text'] = { link = '@markup' },
+    ['@text.strong'] = { link = '@markup.strong' },
+    ['@text.emphasis'] = { link = '@markup.italic' },
+    ['@text.underline'] = { link = '@markup.underline' },
+    ['@text.strike'] = { link = '@markup.strikethrough' },
+    ['@text.uri'] = { link = '@markup.link.url' },
+    ['@text.math'] = { link = '@markup.math' },
+    ['@text.environment'] = { link = '@markup.environment' },
+    ['@text.environment.name'] = { link = '@markup.environment.name' },
+
+    ['@text.title'] = { link = '@markup.heading' },
+    ['@text.literal'] = { link = '@markup.raw' },
+    ['@text.reference'] = { link = '@markup.link' },
+
+    ['@text.todo.checked'] = { link = '@markup.list.checked' },
+    ['@text.todo.unchecked'] = { link = '@markup.list.unchecked' },
+
+    -- @text.todo is now for todo comments, not todo notes like in markdown
+    ['@text.todo'] = { link = '@comment.todo' },
+    ['@text.warning'] = { link = '@comment.warning' },
+    ['@text.note'] = { link = '@comment.note' },
+    ['@text.danger'] = { link = '@comment.error' },
+
+    -- @text.uri is now
+    -- > @markup.link.url in markup links
+    -- > @string.special.url outside of markup
+    -- ['@text.uri'] = { link = '@markup.link.uri' },
+
+    ['@method'] = { link = '@function.method' },
+    ['@method.call'] = { link = '@function.method.call' },
+
+    ['@text.diff.add'] = { link = '@diff.plus' },
+    ['@text.diff.delete'] = { link = '@diff.minus' },
+
+    ['@define'] = { link = '@keyword.directive.define' },
+    ['@preproc'] = { link = '@keyword.directive' },
+    ['@storageclass'] = { link = '@keyword.storage' },
+    ['@conditional'] = { link = '@keyword.conditional' },
+    ['@exception'] = { link = '@keyword.exception' },
+    ['@include'] = { link = '@keyword.import' },
+    ['@repeat'] = { link = '@keyword.repeat' },
+
+    ['@variable.member.yaml'] = { link = '@field.yaml' },
+
+    ['@text.title.1.markdown'] = { link = '@markup.heading.1.markdown' },
+    ['@text.title.2.markdown'] = { link = '@markup.heading.2.markdown' },
+    ['@text.title.3.markdown'] = { link = '@markup.heading.3.markdown' },
+    ['@text.title.4.markdown'] = { link = '@markup.heading.4.markdown' },
+    ['@text.title.5.markdown'] = { link = '@markup.heading.5.markdown' },
+    ['@text.title.6.markdown'] = { link = '@markup.heading.6.markdown' },
 
 		------------------------------------
 		--   LSP SEMANTIC TOKEN GROUPS    -- https://neovim.io/doc/user/lsp.html#lsp-semantic-highlight
@@ -364,7 +366,7 @@ M.setup = function()
 		--         CMP HIGHLIGHTS         --
 		------------------------------------
 		CmpDocumentation            = { link = 'Normal' },
-		CmpDocumentationBorder      = { link = 'CmpDocumentationBorder' },
+		CmpDocumentationBorder      = { link = 'Normal' },
 
 		CmpItemAbbr                 = { fg = p.comments },
 		CmpItemAbbrDeprecated       = { fg = p.ui_accent, italic = true },
@@ -372,7 +374,7 @@ M.setup = function()
 		CmpItemAbbrMatchFuzzy       = { fg = p.fg_main },
 
 		CmpItemKindDefault          = { fg = p.fg_main },
-		CmpItemMenu                 = { link = 'Comment' },
+		CmpItemMenu                 = { fg = p.comments },
 
 		CmpItemKindKeyword          = { link = 'Identifier' },
 
@@ -465,12 +467,12 @@ M.setup = function()
 		------------------------------------
 		--              NEORG             --
 		------------------------------------
-    ['@neorg.headings.1.title'] = { fg = p.operator },
-    ['@neorg.headings.2.title'] = { fg = p.type },
-    ['@neorg.headings.3.title'] = { fg = p.field },
-    ['@neorg.headings.4.title'] = { fg = p.func },
-    ['@neorg.headings.5.title'] = { fg = p.string },
-    ['@neorg.headings.6.title'] = { fg = p.preproc },
+    ['@neorg.headings.1.title'] = { fg = p.header1 },
+    ['@neorg.headings.2.title'] = { fg = p.header2 },
+    ['@neorg.headings.3.title'] = { fg = p.header3 },
+    ['@neorg.headings.4.title'] = { fg = p.header4 },
+    ['@neorg.headings.5.title'] = { fg = p.header5 },
+    ['@neorg.headings.6.title'] = { fg = p.header6 },
     ['@neorg.headings.1.prefix'] = { link = 'Identifier' },
     ['@neorg.headings.2.prefix'] = { link = 'Identifier' },
     ['@neorg.headings.3.prefix'] = { link = 'Identifier' },
@@ -539,18 +541,18 @@ local _valid_attr_names = { -- :h nvim_set_hl
 	fg            = true, -- color name or "#RRGGBB"
 	bg            = true, -- color name or "#RRGGBB"
 	sp            = true, --:q color name or "#RRGGBB"
-	blend         = false, -- integer between 0 and 100
+	-- blend         = true, -- integer between 0 and 100
 	bold          = true, -- boolean
-	standout      = false, -- boolean
+	-- standout      = true, -- boolean
 	underline     = true, -- boolean
 	undercurl     = true, -- boolean
-	underdouble   = false, -- boolean
-	underdotted   = false, -- boolean
-	underdashed   = false, -- boolean
+	-- underdouble   = true, -- boolean
+	-- underdotted   = true, -- boolean
+	-- underdashed   = true, -- boolean
 	strikethrough = true, -- boolean
 	italic        = true, -- boolean
-	reverse       = false, -- boolean
-	nocombine     = false, -- boolean
+	-- reverse       = true, -- boolean
+	-- nocombine     = true, -- boolean
 	link          = true, -- name of another highlight group to link to. :hi-link
 	-- stylua: ignore end
 }

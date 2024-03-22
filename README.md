@@ -25,7 +25,7 @@ Pick your plugin manager!
 priority = 1000,
 lazy = false,
 config = function()
-    require('chalktone').setup({})
+    require('chalktone').setup()
     vim.g.colorscheme('chalktone')
 end
 ```
@@ -58,6 +58,7 @@ Under format_by_group, you may specifiy options to be passed to `vim.api.nvim_se
 a Neovim highlight group (see `:h highlight-groups` and `:h group-name`). See `:h nvim_set_hl` for the fields and specifications that can be passed in.
 The options are restricted to `fg, bg, sp, bold, underline, undercurl, strikethrough, italic, link`.
 An example to change the highlight group 'Comment':
+
 ```lua
 ...
     Comment = { -- This won't look good.

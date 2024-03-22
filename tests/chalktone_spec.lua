@@ -22,26 +22,45 @@ describe('config.lua |', function()
 		local result = cfg._convert_formatting(formatting)
 		assert.are.same(expected, result)
 	end)
+
+	it('squash formatting...', function()
+		local options = {
+			formatting = {
+				comment = {
+					styling = { italic = true },
+					groups = { 'Comment', 'String' },
+				},
+			},
+		}
+		local expected = {
+			format_by_group = {
+				Comment = { italic = true },
+				String = { italic = true },
+			},
+		}
+		local result = cfg._squash_formatting(options)
+		assert.are.same(expected, result)
+	end)
 end)
 
 describe('theme', function()
 	local theme = require('chalktone.theme')
 
-	-- it('apply_styling: basic', function()
-	-- 	local hls = { Comment = { fg = 'test', bg = 'test' } }
-	-- 	local style = { Comment = { fg = 'not test', italic = true } }
-	-- 	local expected = { Comment = { fg = 'not test', bg = 'test', italic = true } }
-	-- 	local result = theme._apply_raw_formatting(style, hls)
-	-- 	assert.are.same(expected, result)
-	-- end)
-	--
-	-- it('apply_styling: invalid attr', function()
-	-- 	local hls = { Comment = { fg = 'test', bg = 'test' } }
-	-- 	local style = { Comment = { fg = 'not test', deez = true } }
-	-- 	local expected = { Comment = { fg = 'not test', bg = 'test' } }
-	-- 	local result = theme._apply_raw_formatting(style, hls)
-	-- 	assert.are.same(expected, result)
-	-- end)
+	it('apply_styling: basic', function()
+		local hls = { Comment = { fg = 'test', bg = 'test' } }
+		local style = { Comment = { fg = 'not test', italic = true } }
+		local expected = { Comment = { fg = 'not test', bg = 'test', italic = true } }
+		local result = theme._apply_raw_formatting(hls, style)
+		assert.are.same(expected, result)
+	end)
+
+	it('apply_styling: invalid attr', function()
+		local hls = { Comment = { fg = 'test', bg = 'test' } }
+		local style = { Comment = { fg = 'not test', deez = true } }
+		local expected = { Comment = { fg = 'not test', bg = 'test' } }
+		local result = theme._apply_raw_formatting(hls, style)
+		assert.are.same(expected, result)
+	end)
 
 	it('validate_styling: deez', function()
 		local style = 'deez'
@@ -55,33 +74,12 @@ describe('theme', function()
 		assert.are.same(true, result)
 	end)
 
-	-- it('setup: check opts', function()
-	-- 	local opts = require('chalktone.config').options
-	-- 	local theme = theme.setup()
-	-- end)
-
 	it('sanity check 1', function()
 		local hls = { a = { b = true, c = false } }
 		local styling = { a = { c = true, d = true } }
 		local expected = { a = { b = true, c = true, d = true } }
 		local result = vim.tbl_deep_extend('force', hls, styling)
 		assert.are.same(expected, result)
-	end)
-end)
-
-describe('init:', function()
-	it('config stored: no opts ', function()
-		local m = require('chalktone')
-		m.setup()
-		local expected = { palette_name = 'Default', formatting = { Comment = { italic = true, bold = true } } }
-		assert(expected, m.__config)
-	end)
-
-	it('config stored: some opts ', function()
-		local m = require('chalktone')
-		m.setup({ formatting = { Comment = { italic = false } } })
-		local expected = { palette_name = 'Default', formatting = { Comment = { italic = false, bold = true } } }
-		assert(expected, m.__config)
 	end)
 end)
 

@@ -4,7 +4,7 @@ local M = {}
 
 M.setup = Config.setup
 
----comment Called by neovim when loading the colorscheme.
+--- Called by neovim when loading the colorscheme.
 M.__load = function()
 	vim.cmd('hi clear')
 	vim.cmd('syntax reset')
