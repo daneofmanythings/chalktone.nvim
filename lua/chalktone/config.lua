@@ -12,7 +12,7 @@ local _generate_default = function()
 					'Comment',
 				},
 			},
-			builtin_bg_focus = {
+			builtin_bg_fading = {
 				groups = {
 					'NormalNC',
 					'NormalFloatNC',

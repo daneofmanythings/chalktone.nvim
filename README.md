@@ -34,42 +34,67 @@ end
 
 ## Setup
 
+The basic setup structure:
 ```lua
 require('chalktone').setup({
-    -- defaults
-    theme = 'default', -- currently the only theme
+    theme = 'default', -- This is currently the only theme
     formatting = {
-        -- Coming soon
+        -- Apply stylings to multiple highlight groups at once.
     },
     format_by_group = {
-        -- Examples
-        -- Comment = {
-        --     italic = false,
-        -- },
-        -- String = {
-        --     italic = false,
-        -- },
+        -- Apply stylings to a single group at a time. 
+        -- Overwites stylings from formatting. 
     },
 })
 ```
 
-There are currently no supported aggregate configuration options availible. 
-Under format_by_group, you may specifiy options to be passed to `vim.api.nvim_set_hl` for
-a Neovim highlight group (see `:h highlight-groups` and `:h group-name`). See `:h nvim_set_hl` for the fields and specifications that can be passed in.
-The options are restricted to `fg, bg, sp, bold, underline, undercurl, strikethrough, italic, link`.
-An example to change the highlight group 'Comment':
+This plugin exposes neovims highlighting api `:h nvim_set_hl` under 'formatting' and 'format_by_group'.
+A more detailed examination can be found in [CONFIGURATION](./CONFIGURTION.md). Below are some convenience formatting
+setups to aid in common alterations
+
+<details>
+<summary>no italics</summary>
 
 ```lua
 ...
-    Comment = { -- This won't look good.
-        fg = '#ffffff',
-        italic = false,
-        bold = true,
-        underline = true,
-        strikethrough = true,
+    formatting = {
+        builtin_strings = {
+            styling = { italic = false },
+        },
+    },
+...
+
+```
+</details>
+
+<details>
+<summary>transparent background</summary>
+
+```lua
+...
+    formatting = {
+        builtin_transparent = {
+            styling = { bg = 'None' },
+        },
     },
 ...
 ```
+</details>
+
+<details>
+<summary>no background fading</summary>
+
+```lua
+...
+    formatting = {
+        builtin_bg_fading = {
+            styling = { link = 'Normal' },
+        },
+    },
+...
+```
+
+</details>
 
 ## Integrations
 
