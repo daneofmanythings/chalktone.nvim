@@ -4,63 +4,76 @@ local _generate_default = function()
 	local options = {
 		theme = 'default',
 		formatting = {
-			comments = {
+			builtin_strings = {
 				styling = { italic = true },
-				groups = {
-					'Comment',
-					'WildMenu',
-					'CmpItemAbbr',
-				},
-			},
-			conditionals = {},
-			constants = {},
-			keywords = {},
-			numbers = {},
-			operators = {},
-			strings = {
-				styling = {
-					italic = true,
-				},
 				groups = {
 					'String',
 					'Character',
+					'Comment',
 				},
 			},
-			types = {},
-			variables = {},
+			builtin_bg_fading = {
+				groups = {
+					'NormalNC',
+					'NormalFloatNC',
+				},
+			},
+			builtin_transparent = {
+				groups = {
+					'Normal',
+					'NormalNC',
+					'NormalFloat',
+					'NormalFloatNC',
+					'SignColumn',
+					'StatusLine',
+					'StatusLineNC',
+					'Pmenu',
+					'WinSeparator',
+					'VertSplit',
+					'Folded',
+					-- integrations
+					'FlashBackdrop',
+				},
+			},
 		},
 		format_by_group = {
-			-- Examples:
-			Comment = {
-				italic = true,
-				-- underline = true,
-			},
-			String = {
-				italic = true,
-				-- 	fg = '#ff0000'
-			},
+			-- Comment = { italic = false, },
+			-- String = { italic = false, },
 		},
 	}
 
 	return options
 end
 
-M.options = _generate_default()
--- M.options = options
+M._convert_formatting = function(formatting)
+	local converted = {}
+	for _, tbl in pairs(formatting or {}) do
+		local styling = tbl.styling
+		local groups = tbl.groups
+		for _, group in ipairs(groups or {}) do
+			if styling then
+				converted[group] = styling
+			end
+		end
+	end
 
-M.setup = function(opts)
-	local config = vim.tbl_deep_extend('force', M.options, opts or {})
-	-- local formatting = config.formatting
-	-- local by_groups = config.format_by_groups
-	-- local new_by_groups = {}
-	-- for _, style_grouping in ipairs(formatting) do
-	-- 	local groups = style_grouping.groups
-	-- 	local styling = style_grouping.styling
-	-- 	for _, group in ipairs(groups) do
-	-- 		new_by_groups[group] = vim.tbl_deep_extend('force', by_groups[group], styling)
-	-- 	end
-	-- end
-	-- config.format_by_groups = new_by_groups
+	return converted
+end
+
+M._squash_formatting = function(options)
+	local converted_formatting = M._convert_formatting(options.formatting)
+	options.formatting = nil
+	options.format_by_group = vim.tbl_deep_extend('force', converted_formatting, options.format_by_group or {})
+
+	return options
+end
+
+M.setup = function(options)
+	local defaults = _generate_default()
+
+	local config = vim.tbl_deep_extend('force', defaults, options or {})
+	config = M._squash_formatting(config)
+
 	M.options = config
 end
 

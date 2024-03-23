@@ -16,12 +16,12 @@ M.setup = function()
 		--            EDITOR             --
 		-----------------------------------
     -- stylua: ignore start
-		ColorColumn         = { link = "CursorLine" },
-		Conceal             = { link = 'Comment' },
+		ColorColumn         = { bg = p.cursorline },
+		Conceal             = { fg = p.comments },
 		CurSearch           = { fg = p.fg_main, bg = p.select_hl, bold = true, italic = false },
 		Cursor              = { fg = p.bg_main, bg = p.fg_main },
-		CursorColumn        = { link = 'CursorLine' },
-		CursorIM            = { link = 'Cursor' },
+		CursorColumn        = { bg = p.cursorline },
+		CursorIM            = { fg = p.bg_main, bg = p.fg_main },
 		CursorLine          = { bg = p.cursorline },
 		CursorLineNr        = { fg = p.cursor_line_nr },
 		DiffAdd             = { fg = p.ok },
@@ -31,14 +31,14 @@ M.setup = function()
 		EndOfBuffer         = { link = 'NonText' },
 		ErrorMsg            = { fg = p.error_light },
 		FloatBorder         = { link = 'NormalFloat' },
-		FloatTitle          = { link = 'Normal' },
+		FloatTitle          = { fg = p.fg_main, bg = p.bg_main },
 		FoldColumn          = { bg = p.bg_washed},
 		Folded              = { link = 'FoldColumn' },
 		IncSearch           = { link = 'CurSearch' },
 		LineNr              = { fg = p.ui_accent },
 		MatchParen          = { bg = p.select_hl },
-		ModeMsg             = { link = 'Normal' },
-		MoreMsg             = { link = 'Normal' },
+		ModeMsg             = { fg = p.fg_main, bg = p.bg_main },
+		MoreMsg             = { fg = p.fg_main, bg = p.bg_main },
 		NonText             = { fg = p.select_hl },
 		Normal              = { fg = p.fg_main, bg = p.bg_main },
 		NormalFloat         = { bg = p.bg_main },
@@ -71,7 +71,7 @@ M.setup = function()
 		-- TabLine             = {},
 		-- TabLineFill         = {},
 		-- TabLineSel          = {},
-		Title               = { link = 'CursorLineNr' },
+		Title               = { fg = p.cursor_line_nr },
 		-- VertSplit           = {},
 		Visual              = { bg = p.select_hl },
 		WarningMsg          = { fg = p.warn },
@@ -101,6 +101,8 @@ M.setup = function()
 		DiagnosticSignWarn      = { link = 'DiagnosticWarn' },
 		DiagnosticSignOk        = { link = 'DiagnosticOK' },
 
+    DiagnosticUnnecessary   = { fg = p.hint }, -- unused/empty code
+
 		-----------------------------------
 		--            SYNTAX             -- https://neovim.io/doc/user/syntax.html#highlight-groups
 		-----------------------------------
@@ -109,45 +111,45 @@ M.setup = function()
 		String              = { fg = p.string },
 		Character           = { fg = p.string },
 		Number              = { fg = p.constant },
-		Float               = { link = 'Number' },
-		Boolean             = { link = 'Number' },
+		Float               = { fg = p.constant },
+		Boolean             = { fg = p.constant },
 
 		Identifier          = { fg = p.fg_main },
 		Function            = { fg = p.func },
 
 		Keyword             = { fg = p.keyword },
-		Statement           = { link = 'Keyword' },
-		Label               = { link = 'Keyword' },
-		Exception           = { link = 'Keyword' },
-		Conditional         = { link = 'Keyword' },
-		Repeat              = { link = 'Keyword' },
+		Statement           = { fg = p.keyword },
+		Label               = { fg = p.keyword },
+		Exception           = { fg = p.keyword },
+		Conditional         = { fg = p.keyword },
+		Repeat              = { fg = p.keyword },
 
 		Operator            = { fg = p.operator },
 
 		PreProc             = { fg = p.preproc },
-		Include             = { link = 'PreProc' },
-		Define              = { link = 'PreProc' },
-		Macro               = { link = 'PreProc' },
-		PreCondit           = { link = 'PreProc' },
+		Include             = { fg = p.preproc },
+		Define              = { fg = p.preproc },
+		Macro               = { fg = p.preproc },
+		PreCondit           = { fg = p.preproc },
 
 		Type                = { fg = p.type },
-		TypeDef             = { link = 'Type' },
-		StorageClass        = { link = 'Type' },
-		Structure           = { link = 'Type' },
+		TypeDef             = { fg = p.type },
+		StorageClass        = { fg = p.type },
+		Structure           = { fg = p.type },
 
 		Special             = { fg = p.delimiter },
 		SpecialChar         = { link = 'Special' },
 		SpecialComment      = { link = 'Special' },
-		Tag                 = { link = 'Function' },
+		Tag                 = { fg = p.func },
 		Delimiter           = { fg = p.delimiter },
 
 		Underlined          = { underline = true }, -- ex html links
 		Bold                = { bold = true },
 		Italic              = { italic = true },
 
-		Error               = { link = 'ErrorMsg' },
+		Error               = { fg = p.error_light },
 		Todo                = { fg = p.comments },
-		Debug               = { link = 'Error' },
+		Debug               = { fg = p.error_light },
 
 		-- LspCodeLens = {},
 		-- LspCodeLensSeparator = {},
@@ -161,11 +163,11 @@ M.setup = function()
 		------------------------------------
 
 		-- Identifiers
-		['@variable']                   = { link = 'Identifiers' }, -- various variable names
+		['@variable']                   = { link = 'Identifier' }, -- various variable names
 		['@variable.builtin']           = { link = 'Keyword' }, -- built-in variable names (e.g. `this`)
 		['@variable.parameter']         = { fg = p.func_param }, -- parameters of a function
-		-- ['@variable.parameter.builtin'] = {}, -- special parameters (e.g. `_`, `it`)
-		-- ['@variable.member']            = { fg = p.jasmine }, -- object and struct fields
+		['@variable.parameter.builtin'] = { fg = p.func_param }, -- special parameters (e.g. `_`, `it`)
+		-- ['@variable.member']            = { fg = p.member }, -- object and struct fields
 
 		['@constant']         					= { link = 'Constant' }, -- constant identifiers
 		-- ['@constant.builtin'] 					= {}, -- built-in constant values
@@ -188,9 +190,9 @@ M.setup = function()
 		['@character']                  = { link = 'String' }, -- character literals
 		-- ['@character.special']          = {}, -- special characters (e.g. wildcards)
 
-		['@boolean']                    = { link = 'Number' }, -- boolean literals
+		['@boolean']                    = { link = 'Boolean' }, -- boolean literals
 		['@number']                     = { link = 'Number' }, -- numeric literals
-		['@number.float']               = { link = 'Number' }, -- floating-point number literals
+		['@number.float']               = { link = 'Float' }, -- floating-point number literals
 
 		-- Types
 		['@type']             					= { link = 'Structure' }, -- type or class definitions and annotations
@@ -200,19 +202,19 @@ M.setup = function()
 
 		['@attribute']                  = { link = 'PreProc' }, -- attribute annotations (e.g. Python decorators)
 		['@attribute.builtin']          = { link = 'PreProc' }, -- builtin annotations (e.g. `@property` in Python)
-		-- ['@property']                   = {}, -- the key in key/value pairs
+		-- ['@property']                   = { fg = p.member }, -- the key in key/value pairs
 
 		-- Functions
 		['@function']         					= { fg = p.func }, -- function definitions
 		['@function.builtin'] 					= { fg = p.func }, -- built-in functions
-		['@function.call']    					= { link = '@function' }, -- function calls
+		['@function.call']    					= { fg = p.func }, -- function calls
 		-- ['@function.macro']   					= {}, -- preprocessor macros
 
-		['@function.method']            = { fg = p.func}, -- method definitions
-		['@function.method.call']       = { link = '@function.method' }, -- method calls
+		['@function.method']            = { fg = p.func }, -- method definitions
+		['@function.method.call']       = { fg = p.func }, -- method calls
 
-		['@constructor']                = { link = 'Function' }, -- constructor calls and definitions
-    ['@constructor.lua']            = { link = 'Delimiter' },
+		['@constructor']                = { fg = p.func }, -- constructor calls and definitions
+    ['@constructor.lua']            = { fg = p.delimiter },
 		['@operator']                   = { link = 'Operator' }, -- symbolic operators (e.g. `+` / `*`)
 
 		-- Keywords
@@ -228,11 +230,11 @@ M.setup = function()
 		-- ['@keyword.debug']      				= {}, -- keywords related to debugging
 		['@keyword.exception']  				= { link = 'Exception' }, -- keywords related to exceptions (e.g. `throw` / `catch`)
 
-		['@keyword.conditional']         = { link = 'Keyword' }, -- keywords related to conditionals (e.g. `if` / `else`)
+		['@keyword.conditional']        = { fg = p.keyword }, -- keywords related to conditionals (e.g. `if` / `else`)
 		-- ['@keyword.conditional.ternary'] = { link = 'Operator' }, -- ternary operator (e.g. `?` / `:`)
 
-		['@keyword.directive']          = { link = 'PreProc' }, -- various preprocessor directives & shebangs
-		['@keyword.directive.define']   = { link = 'Define' }, -- preprocessor definition directives
+		['@keyword.directive']          = { fg = p.preproc }, -- various preprocessor directives & shebangs
+		['@keyword.directive.define']   = { fg = p.preproc }, -- preprocessor definition directives
 
 		-- Punctuation
 		-- ['@punctuation.delimiter']      = { link = 'Delimiter' }, -- delimiters (e.g. `;` / `.` / `,`)
@@ -243,8 +245,8 @@ M.setup = function()
 		['@comment']                    = { link = 'Comment' }, -- line and block comments
 		-- ['@comment.documentation']      = {}, -- comments documenting code
 
-		['@comment.error']              = { link = 'ErrorMsg' }, -- error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
-		['@comment.warning']            = { link = 'WarningMsg' }, -- warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
+		['@comment.error']              = { fg = p.error_light }, -- error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
+		['@comment.warning']            = { fg = p.warn }, -- warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
 		['@comment.todo']               = { fg = p.hint }, -- todo-type comments (e.g. `TODO`, `WIP`)
 		['@comment.note']               = { fg = p.info }, -- note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
 
@@ -256,19 +258,19 @@ M.setup = function()
 		['@markup.strikethrough'] 			= { strikethrough = true }, -- struck-through text
 		['@markup.underline']     			= { link = 'Underlined' }, -- underlined text (only for literal underline markup!)
 
-		['@markup.heading']   					= { link = 'CursorLineNr' }, -- headings, titles (including markers)
-		-- ['@markup.heading.1'] 					= { link = 'Type' }, -- top-level heading
-		-- ['@markup.heading.2'] 					= { fg = p.field }, -- section heading
-		-- ['@markup.heading.3'] 					= { link = 'Function' }, -- subsection heading
-		-- ['@markup.heading.4'] 					= { fg = p.string }, -- and so on
-		-- ['@markup.heading.5'] 					= { link = 'Constant' }, -- and so forth
-		['@markup.heading.6'] 					= { fg = p.func_param }, -- six levels ought to be enough for anybody
+		['@markup.heading']   					= { fg = p.header1 }, -- headings, titles (including markers)
+		-- ['@markup.heading.1'] 					= { fg = p.header1 }, -- top-level heading
+		-- ['@markup.heading.2'] 					= { fg = p.header2 }, -- section heading
+		-- ['@markup.heading.3'] 					= { fg = p.header3 }, -- subsection heading
+		-- ['@markup.heading.4'] 					= { fg = p.header4 }, -- and so on
+		-- ['@markup.heading.5'] 					= { fg = p.header5 }, -- and so forth
+		-- ['@markup.heading.6'] 					= { fg = p.header6 }, -- six levels ought to be enough for anybody
 		--
 		-- ['@markup.quote']               = {}, -- block quotes
 		-- ['@markup.math']                = {}, -- math environments (e.g. `$ ... $` in LaTeX)
 		--
 		['@markup.link']        				= { underline = false }, -- text references, footnotes, citations, etc.
-		['@markup.link.label']  				= { fg = p.func_param }, -- link, reference descriptions
+		['@markup.link.label']  				= { fg = p.preproc }, -- link, reference descriptions
 		['@markup.link.url']    				= { link = 'String' }, -- URL-style links
 		--
 		['@markup.raw']         				= { fg = p.fg_main }, -- literal or verbatim text (e.g. inline code)
@@ -292,63 +294,63 @@ M.setup = function()
 
     -- LEGACY  TODO: Remove with v10
 
-    -- ['@parameter'] = { link = '@variable.parameter' },
-    -- ['@field'] = { link = '@variable.member' },
-    -- ['@namespace'] = { link = '@module' },
-    -- ['@float'] = { link = '@number.float' },
-    -- ['@symbol'] = { link = '@string.special.symbol' },
-    -- ['@string.regex'] = { link = '@string.regexp' },
-    --
-    -- ['@text'] = { link = '@markup' },
-    -- ['@text.strong'] = { link = '@markup.strong' },
-    -- ['@text.emphasis'] = { link = '@markup.italic' },
-    -- ['@text.underline'] = { link = '@markup.underline' },
-    -- ['@text.strike'] = { link = '@markup.strikethrough' },
-    -- ['@text.uri'] = { link = '@markup.link.url' },
-    -- ['@text.math'] = { link = '@markup.math' },
-    -- ['@text.environment'] = { link = '@markup.environment' },
-    -- ['@text.environment.name'] = { link = '@markup.environment.name' },
-    --
-    -- ['@text.title'] = { link = '@markup.heading' },
-    -- ['@text.literal'] = { link = '@markup.raw' },
-    -- ['@text.reference'] = { link = '@markup.link' },
-    --
-    -- ['@text.todo.checked'] = { link = '@markup.list.checked' },
-    -- ['@text.todo.unchecked'] = { link = '@markup.list.unchecked' },
-    --
-    -- -- @text.todo is now for todo comments, not todo notes like in markdown
-    -- ['@text.todo'] = { link = '@comment.todo' },
-    -- ['@text.warning'] = { link = '@comment.warning' },
-    -- ['@text.note'] = { link = '@comment.note' },
-    -- ['@text.danger'] = { link = '@comment.error' },
-    --
-    -- -- @text.uri is now
-    -- -- > @markup.link.url in markup links
-    -- -- > @string.special.url outside of markup
-    -- -- ['@text.uri'] = { link = '@markup.link.uri' },
-    --
-    -- ['@method'] = { link = '@function.method' },
-    -- ['@method.call'] = { link = '@function.method.call' },
-    --
-    -- ['@text.diff.add'] = { link = '@diff.plus' },
-    -- ['@text.diff.delete'] = { link = '@diff.minus' },
-    --
-    -- ['@define'] = { link = '@keyword.directive.define' },
-    -- ['@preproc'] = { link = '@keyword.directive' },
-    -- ['@storageclass'] = { link = '@keyword.storage' },
-    -- ['@conditional'] = { link = '@keyword.conditional' },
-    -- ['@exception'] = { link = '@keyword.exception' },
-    -- ['@include'] = { link = '@keyword.import' },
-    -- ['@repeat'] = { link = '@keyword.repeat' },
-    --
-    -- ['@variable.member.yaml'] = { link = '@field.yaml' },
-    --
-    -- ['@text.title.1.markdown'] = { link = '@markup.heading.1.markdown' },
-    -- ['@text.title.2.markdown'] = { link = '@markup.heading.2.markdown' },
-    -- ['@text.title.3.markdown'] = { link = '@markup.heading.3.markdown' },
-    -- ['@text.title.4.markdown'] = { link = '@markup.heading.4.markdown' },
-    -- ['@text.title.5.markdown'] = { link = '@markup.heading.5.markdown' },
-    -- ['@text.title.6.markdown'] = { link = '@markup.heading.6.markdown' },
+    ['@parameter'] = { link = '@variable.parameter' },
+    ['@field'] = { link = '@variable.member' },
+    ['@namespace'] = { link = '@module' },
+    ['@float'] = { link = '@number.float' },
+    ['@symbol'] = { link = '@string.special.symbol' },
+    ['@string.regex'] = { link = '@string.regexp' },
+
+    ['@text'] = { link = '@markup' },
+    ['@text.strong'] = { link = '@markup.strong' },
+    ['@text.emphasis'] = { link = '@markup.italic' },
+    ['@text.underline'] = { link = '@markup.underline' },
+    ['@text.strike'] = { link = '@markup.strikethrough' },
+    ['@text.uri'] = { link = '@markup.link.url' },
+    ['@text.math'] = { link = '@markup.math' },
+    ['@text.environment'] = { link = '@markup.environment' },
+    ['@text.environment.name'] = { link = '@markup.environment.name' },
+
+    ['@text.title'] = { link = '@markup.heading' },
+    ['@text.literal'] = { link = '@markup.raw' },
+    ['@text.reference'] = { link = '@markup.link' },
+
+    ['@text.todo.checked'] = { link = '@markup.list.checked' },
+    ['@text.todo.unchecked'] = { link = '@markup.list.unchecked' },
+
+    -- @text.todo is now for todo comments, not todo notes like in markdown
+    ['@text.todo'] = { link = '@comment.todo' },
+    ['@text.warning'] = { link = '@comment.warning' },
+    ['@text.note'] = { link = '@comment.note' },
+    ['@text.danger'] = { link = '@comment.error' },
+
+    -- @text.uri is now
+    -- > @markup.link.url in markup links
+    -- > @string.special.url outside of markup
+    -- ['@text.uri'] = { link = '@markup.link.uri' },
+
+    ['@method'] = { link = '@function.method' },
+    ['@method.call'] = { link = '@function.method.call' },
+
+    ['@text.diff.add'] = { link = '@diff.plus' },
+    ['@text.diff.delete'] = { link = '@diff.minus' },
+
+    ['@define'] = { link = '@keyword.directive.define' },
+    ['@preproc'] = { link = '@keyword.directive' },
+    ['@storageclass'] = { link = '@keyword.storage' },
+    ['@conditional'] = { link = '@keyword.conditional' },
+    ['@exception'] = { link = '@keyword.exception' },
+    ['@include'] = { link = '@keyword.import' },
+    ['@repeat'] = { link = '@keyword.repeat' },
+
+    ['@variable.member.yaml'] = { link = '@field.yaml' },
+
+    ['@text.title.1.markdown'] = { link = '@markup.heading.1.markdown' },
+    ['@text.title.2.markdown'] = { link = '@markup.heading.2.markdown' },
+    ['@text.title.3.markdown'] = { link = '@markup.heading.3.markdown' },
+    ['@text.title.4.markdown'] = { link = '@markup.heading.4.markdown' },
+    ['@text.title.5.markdown'] = { link = '@markup.heading.5.markdown' },
+    ['@text.title.6.markdown'] = { link = '@markup.heading.6.markdown' },
 
 		------------------------------------
 		--   LSP SEMANTIC TOKEN GROUPS    -- https://neovim.io/doc/user/lsp.html#lsp-semantic-highlight
@@ -364,7 +366,7 @@ M.setup = function()
 		--         CMP HIGHLIGHTS         --
 		------------------------------------
 		CmpDocumentation            = { link = 'Normal' },
-		CmpDocumentationBorder      = { link = 'CmpDocumentationBorder' },
+		CmpDocumentationBorder      = { link = 'Normal' },
 
 		CmpItemAbbr                 = { fg = p.comments },
 		CmpItemAbbrDeprecated       = { fg = p.ui_accent, italic = true },
@@ -372,7 +374,7 @@ M.setup = function()
 		CmpItemAbbrMatchFuzzy       = { fg = p.fg_main },
 
 		CmpItemKindDefault          = { fg = p.fg_main },
-		CmpItemMenu                 = { link = 'Comment' },
+		CmpItemMenu                 = { fg = p.comments },
 
 		CmpItemKindKeyword          = { link = 'Identifier' },
 
@@ -465,12 +467,12 @@ M.setup = function()
 		------------------------------------
 		--              NEORG             --
 		------------------------------------
-    ['@neorg.headings.1.title'] = { fg = p.operator },
-    ['@neorg.headings.2.title'] = { fg = p.type },
-    ['@neorg.headings.3.title'] = { fg = p.field },
-    ['@neorg.headings.4.title'] = { fg = p.func },
-    ['@neorg.headings.5.title'] = { fg = p.string },
-    ['@neorg.headings.6.title'] = { fg = p.preproc },
+    ['@neorg.headings.1.title'] = { fg = p.header1 },
+    ['@neorg.headings.2.title'] = { fg = p.header2 },
+    ['@neorg.headings.3.title'] = { fg = p.header3 },
+    ['@neorg.headings.4.title'] = { fg = p.header4 },
+    ['@neorg.headings.5.title'] = { fg = p.header5 },
+    ['@neorg.headings.6.title'] = { fg = p.header6 },
     ['@neorg.headings.1.prefix'] = { link = 'Identifier' },
     ['@neorg.headings.2.prefix'] = { link = 'Identifier' },
     ['@neorg.headings.3.prefix'] = { link = 'Identifier' },
@@ -497,7 +499,7 @@ M.setup = function()
 		-- ['@neorg.lists.ordered.prefix'] = {},
 		--
 		-- ['@neorg.markup.verbatim'] = {},
-		['@neorg.tags.ranged_verbatim.name.norg'] = { link = 'Keyword' },
+		['@neorg.tags.ranged_verbatim.name.norg'] = { fg = p.keyword },
 		-- ['@neorg.links'] = {},
 		-- ['@neorg.links.file'] = {},
 		-- ['@neorg.links.description'] = {},
@@ -538,19 +540,19 @@ local _valid_attr_names = { -- :h nvim_set_hl
   -- stylua: ignore start
 	fg            = true, -- color name or "#RRGGBB"
 	bg            = true, -- color name or "#RRGGBB"
-	sp            = true, --:q color name or "#RRGGBB"
-	blend         = false, -- integer between 0 and 100
+	sp            = true, -- color name or "#RRGGBB"
+	blend         = true, -- integer between 0 and 100
 	bold          = true, -- boolean
-	standout      = false, -- boolean
+	standout      = true, -- boolean
 	underline     = true, -- boolean
 	undercurl     = true, -- boolean
-	underdouble   = false, -- boolean
-	underdotted   = false, -- boolean
-	underdashed   = false, -- boolean
+	underdouble   = true, -- boolean
+	underdotted   = true, -- boolean
+	underdashed   = true, -- boolean
 	strikethrough = true, -- boolean
 	italic        = true, -- boolean
-	reverse       = false, -- boolean
-	nocombine     = false, -- boolean
+	reverse       = true, -- boolean
+	nocombine     = true, -- boolean
 	link          = true, -- name of another highlight group to link to. :hi-link
 	-- stylua: ignore end
 }

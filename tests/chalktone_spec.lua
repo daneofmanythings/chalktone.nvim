@@ -8,48 +8,59 @@ describe('config.lua |', function()
 		default = require('chalktone.config').options
 	end)
 
-	it('merge_options: nil opts', function()
-		local opts = nil
-		local expected = default
-		local result = cfg._merge_options(opts)
-		assert.are.same(result, expected)
+	it('convert formatting...', function()
+		local formatting = {
+			comment = {
+				styling = { italic = true },
+				groups = { 'Comment', 'String' },
+			},
+		}
+		local expected = {
+			Comment = { italic = true },
+			String = { italic = true },
+		}
+		local result = cfg._convert_formatting(formatting)
+		assert.are.same(expected, result)
 	end)
 
-	it('merge_options: non-overlapping opts', function()
-		local opts = { test = { test = true } }
-		local result = cfg._merge_options(opts)
-		local expected = default
-		expected.test = { test = true }
-		assert.are.same(result, default)
+	it('squash formatting...', function()
+		local options = {
+			formatting = {
+				comment = {
+					styling = { italic = true },
+					groups = { 'Comment', 'String' },
+				},
+			},
+		}
+		local expected = {
+			format_by_group = {
+				Comment = { italic = true },
+				String = { italic = true },
+			},
+		}
+		local result = cfg._squash_formatting(options)
+		assert.are.same(expected, result)
 	end)
-
-	-- it('merge_options: overlapping opts', function()
-	-- 	local opts = { formatting = { Comment = { italic = false } } }
-	-- 	local result = cfg.merge_options(opts)
-	-- 	local expected = default
-	-- 	expected.formatting.Comment = { italic = false, bold = true }
-	-- 	assert.are.same(result, expected)
-	-- end)
 end)
 
 describe('theme', function()
 	local theme = require('chalktone.theme')
 
-	-- it('apply_styling: basic', function()
-	-- 	local hls = { Comment = { fg = 'test', bg = 'test' } }
-	-- 	local style = { Comment = { fg = 'not test', italic = true } }
-	-- 	local expected = { Comment = { fg = 'not test', bg = 'test', italic = true } }
-	-- 	local result = theme._apply_raw_formatting(style, hls)
-	-- 	assert.are.same(expected, result)
-	-- end)
-	--
-	-- it('apply_styling: invalid attr', function()
-	-- 	local hls = { Comment = { fg = 'test', bg = 'test' } }
-	-- 	local style = { Comment = { fg = 'not test', deez = true } }
-	-- 	local expected = { Comment = { fg = 'not test', bg = 'test' } }
-	-- 	local result = theme._apply_raw_formatting(style, hls)
-	-- 	assert.are.same(expected, result)
-	-- end)
+	it('apply_styling: basic', function()
+		local hls = { Comment = { fg = 'test', bg = 'test' } }
+		local style = { Comment = { fg = 'not test', italic = true } }
+		local expected = { Comment = { fg = 'not test', bg = 'test', italic = true } }
+		local result = theme._apply_raw_formatting(hls, style)
+		assert.are.same(expected, result)
+	end)
+
+	it('apply_styling: invalid attr', function()
+		local hls = { Comment = { fg = 'test', bg = 'test' } }
+		local style = { Comment = { fg = 'not test', deez = true } }
+		local expected = { Comment = { fg = 'not test', bg = 'test' } }
+		local result = theme._apply_raw_formatting(hls, style)
+		assert.are.same(expected, result)
+	end)
 
 	it('validate_styling: deez', function()
 		local style = 'deez'
@@ -63,33 +74,12 @@ describe('theme', function()
 		assert.are.same(true, result)
 	end)
 
-	-- it('setup: check opts', function()
-	-- 	local opts = require('chalktone.config').options
-	-- 	local theme = theme.setup()
-	-- end)
-
 	it('sanity check 1', function()
 		local hls = { a = { b = true, c = false } }
 		local styling = { a = { c = true, d = true } }
 		local expected = { a = { b = true, c = true, d = true } }
 		local result = vim.tbl_deep_extend('force', hls, styling)
 		assert.are.same(expected, result)
-	end)
-end)
-
-describe('init:', function()
-	it('config stored: no opts ', function()
-		local m = require('chalktone')
-		m.setup()
-		local expected = { palette_name = 'Default', formatting = { Comment = { italic = true, bold = true } } }
-		assert(expected, m.__config)
-	end)
-
-	it('config stored: some opts ', function()
-		local m = require('chalktone')
-		m.setup({ formatting = { Comment = { italic = false } } })
-		local expected = { palette_name = 'Default', formatting = { Comment = { italic = false, bold = true } } }
-		assert(expected, m.__config)
 	end)
 end)
 
@@ -227,7 +217,7 @@ describe('colors.lua |', function()
 		end
 	end)
 
-	it('hex_trans...', function()
+	it('hex_trans_with_hsl...', function()
 		local test_cases = {
 			{ name = 'no transformation', hex = '#ff0000', rot_t = 0, sat_t = 0, lum_t = 0, expected = '#ff0000' },
 			{ name = '120 rot', hex = '#ff0000', rot_t = 120, sat_t = 0, lum_t = 0, expected = '#00ff00' },
@@ -238,7 +228,7 @@ describe('colors.lua |', function()
 		}
 		for _, tc in ipairs(test_cases) do
 			it('testing case: ' .. tc.name, function()
-				local result = C.hex_trans(tc.hex, tc.rot_t, tc.sat_t, tc.lum_t)
+				local result = C.hex_trans_with_hsl(tc.hex, tc.rot_t, tc.sat_t, tc.lum_t)
 				-- print(tc.hex .. ' | ' .. result)
 				assert.are.equal(hex_equality_tolerance(tc.expected, result), true)
 			end)

@@ -195,7 +195,7 @@ end
 ---@param hex2 Hex
 ---@param weight number [0, 1]
 ---@return Hex
-M.blend_hex_colors = function(hex1, hex2, weight)
+M.hex_blend_with_rgb = function(hex1, hex2, weight)
 	local rgb1 = M.hex_to_rgb(hex1)
 	local rgb2 = M.hex_to_rgb(hex2)
 

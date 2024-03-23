@@ -1,10 +1,11 @@
 local colors = require('chalktone.colors')
+local M = {}
 
 ---@alias Palette table<string, Hex>
 
 --- Generate the default palette
 ---@return Palette
-local _generate_default = function()
+M._generate_default = function()
 	local base = {
     -- stylua: ignore start
     fg_main       	  = "#ECE1D7",
@@ -74,24 +75,31 @@ end
 
 -- NOTE: Add the color palettes here by name
 local _builtin_palettes = {
-	default = _generate_default,
+	default = M._generate_default,
 }
-
-local M = {}
 
 ---@param palette_name string
 ---@return Palette
 local _setup_palette = function(palette_name)
 	local name = palette_name or 'default'
-	local p = _builtin_palettes[palette_name]()
-	local blend = colors.blend_hex_colors
+	local p = _builtin_palettes[name]()
+	local blend = colors.hex_blend_with_rgb
 	local trans = colors.hex_trans_with_hsl
 
   -- stylua: ignore start
 	p.bg_statusline1  = blend(p.select_hl, p.bg_main, 0.6)
 	p.bg_statusline2  = blend(p.select_hl, p.bg_main, 0.2)
+
 	p.func_param      = trans(p.fg_main, -15, -75, -10)
+  p.member          = blend(p.string, p.fg_main, .5)
 	p.hint            = trans(p.hint, 20, 10, 10) -- tweaking
+
+  p.header1         = p.cursor_line_nr
+  p.header2         = blend(p.cursor_line_nr, p.preproc, .2)
+  p.header3         = blend(p.cursor_line_nr, p.preproc, .4)
+  p.header4         = blend(p.cursor_line_nr, p.preproc, .6)
+  p.header5         = blend(p.cursor_line_nr, p.preproc, .8)
+  p.header6         = p.preproc
 	-- stylua: ignore end
 
 	return p
