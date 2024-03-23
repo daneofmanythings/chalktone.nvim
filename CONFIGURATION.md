@@ -2,11 +2,11 @@
 
 ### intro
 
-First, I will give a quick rundown on what highlight groups are. A highlight group is a named entry in
-a table that corresponds to a table of data defining how that group will display in neovim (also vim).
-There are predefined groups that neovim will look for when it comes time to render the screen. You can read
-about the most relevant ones here. You don't need to read them right away, but they will be a good reference
-later.
+First, I will give a functional rundown on what highlight groups are. A highlight group is a key in
+a table whos value is a table of data defining how that group will display in neo/vim. You can see all the
+highlight groups currently defined for your setup with `:hi`. There are predefined groups that neovim 
+will look for when it comes time to render the screen. You can read about the most relevant ones below
+through the help docs. You don't need to read them right away, but they will be a good reference later.
 
 - Editor: `:h highlight-groups`
 - Syntax: `:h group-name`
@@ -14,13 +14,13 @@ later.
 - LSP: `:h lsp-highlight`
 
 
-The configuration of chalktone works around one simple principle: Once the theme has been defined
-in the call to `setup()` in [theme.lua](./lua/chalktone/theme.lua), the users options are forcefully merged into the theme
-before it is passed to be used to set highlight groups through `vim.api.nvim_set_hl()`. If you are unsure
-about how that function works, I reccommend reading `:h nvim_set_hl` for more details. 
+The configuration of chalktone works around one mechanism: Once the theme has been defined
+in the call to `setup()` in [theme.lua](./lua/chalktone/theme.lua), the users options are forcefully 
+merged into the setup theme table before it is used to set highlight groups through
+`vim.api.nvim_set_hl()`. If you are unsure about how that function works, I reccommend 
+reading `:h nvim_set_hl` for more details. 
 
-I have somewhat restricted access to the `opts` portion of the `nvim_set_hl` api. These are the fields
-that will be recognized and applied:
+These fields from the `opts` of `nvim_set_hl` are likely the most useful to your styling needs.
 
 - `fg: color name (ex. 'red') or hex string (ex. '#ff0000')`
 - `bg: color name (ex. 'red') or hex string (ex. '#ff0000')`
@@ -35,10 +35,10 @@ that will be recognized and applied:
 ###### NOTE: link will override all other styling data and defer styling to the linked group
 
 
-There is functionally no difference between the two sections other than the convenience of setting large
-batches of groups with the same styling (it also allows me to preconfigure some common use cases). You 
-can see in the full config table below that the 'builtin_transparent' section has quite a few highlight
-groups defined! 
+There is functionally no difference between the two main sections ('formatting' and 'format_by_group') 
+of the config other than the convenience of setting large batches of groups with the same styling
+(it also allows me to preconfigure some common use cases). You can see in the full config table below
+that the 'builtin_transparent' section has quite a few highlight groups defined! 
 
 
 

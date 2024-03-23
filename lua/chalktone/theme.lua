@@ -541,18 +541,18 @@ local _valid_attr_names = { -- :h nvim_set_hl
 	fg            = true, -- color name or "#RRGGBB"
 	bg            = true, -- color name or "#RRGGBB"
 	sp            = true, -- color name or "#RRGGBB"
-	-- blend         = true, -- integer between 0 and 100
+	blend         = true, -- integer between 0 and 100
 	bold          = true, -- boolean
-	-- standout      = true, -- boolean
+	standout      = true, -- boolean
 	underline     = true, -- boolean
 	undercurl     = true, -- boolean
-	-- underdouble   = true, -- boolean
-	-- underdotted   = true, -- boolean
-	-- underdashed   = true, -- boolean
+	underdouble   = true, -- boolean
+	underdotted   = true, -- boolean
+	underdashed   = true, -- boolean
 	strikethrough = true, -- boolean
 	italic        = true, -- boolean
-	-- reverse       = true, -- boolean
-	-- nocombine     = true, -- boolean
+	reverse       = true, -- boolean
+	nocombine     = true, -- boolean
 	link          = true, -- name of another highlight group to link to. :hi-link
 	-- stylua: ignore end
 }
