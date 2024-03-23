@@ -83,7 +83,7 @@ local _builtin_palettes = {
 local _setup_palette = function(palette_name)
 	local name = palette_name or 'default'
 	local p = _builtin_palettes[name]()
-	local blend = colors.blend_hex_colors
+	local blend = colors.hex_blend_with_rgb
 	local trans = colors.hex_trans_with_hsl
 
   -- stylua: ignore start

@@ -49,7 +49,7 @@ require('chalktone').setup({
 ```
 
 This plugin exposes neovims highlighting api `:h nvim_set_hl` under 'formatting' and 'format_by_group'.
-A more detailed examination can be found in [CONFIGURATION](./CONFIGURTION.md). Below are some convenience formatting
+A more detailed examination can be found in [CONFIGURATION](./CONFIGURATION.md). Below are some convenience formatting
 setups to aid in common alterations
 
 <details>
