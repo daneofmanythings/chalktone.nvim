@@ -93,6 +93,7 @@ local _setup_palette = function(palette_name)
 	p.func_param      = trans(p.fg_main, -15, -75, -10)
   p.member          = blend(p.string, p.fg_main, .5)
 	p.hint            = trans(p.hint, 20, 10, 10) -- tweaking
+  p.type_builtin    = blend(p.type, p.field, .5)
 
   p.header1         = p.cursor_line_nr
   p.header2         = blend(p.cursor_line_nr, p.preproc, .2)

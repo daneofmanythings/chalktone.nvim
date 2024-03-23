@@ -147,7 +147,7 @@ config = function()
 end
 ```
 
-A note about the hsl transformation function: It handles all three aspects of h, s, and l
+A note about the hsl transformation function: It handles hue, saturation, and luminance manipulation
 at once. It will ignore arguements left as 0. Hue is manipulated as an absolute rotation,
 where saturation and luminance are manipulated as relative through a lerp function. As 
 an example, transforming a color with 10% saturation by 50% will be a larger jump than

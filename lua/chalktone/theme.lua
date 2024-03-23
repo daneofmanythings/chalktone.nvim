@@ -359,6 +359,11 @@ M.setup = function()
 		['@lsp.type.enum'] = { link = '@type' },
     ['@lsp.type.variable'] = { link = 'Identifier' },
     ['@lsp.type.parameter'] = { link = '@variable.parameter' },
+    ['@lsp.type.namespace'] = { fg = p.field },
+    ['@lsp.typemod.type.defaultLibrary'] = { fg = p.field },
+    ['@lsp.typemod.function.defaultLibrary'] = { fg = p.func },
+
+    -- ['@lsp.type.type']      = {fg = p.type_builtin },
     -- ['@lsp.type.variable.go'] = { link = '@variable.parameter' },
     -- ['@lsp.typemod.property'] = { fg = p.jasmine },
 
