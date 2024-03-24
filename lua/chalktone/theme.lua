@@ -12,21 +12,21 @@ M.setup = function()
 	local p = require('chalktone.palettes').setup(theme_name)
 
 	local highlights = {
-		-----------------------------------
-		--            EDITOR             --
-		-----------------------------------
+    -----------------------------------
+    --            EDITOR             --
+    -----------------------------------
     -- stylua: ignore start
-		ColorColumn         = { bg = p.cursorline },
-		Conceal             = { fg = p.comments },
-		CurSearch           = { fg = p.fg_main, bg = p.select_hl, bold = true, italic = false },
-		Cursor              = { fg = p.bg_main, bg = p.fg_main },
-		CursorColumn        = { bg = p.cursorline },
-		CursorIM            = { fg = p.bg_main, bg = p.fg_main },
-		CursorLine          = { bg = p.cursorline },
-		CursorLineNr        = { fg = p.cursor_line_nr },
-		DiffAdd             = { fg = p.ok },
-		DiffChange          = { fg = p.warn },
-		DiffDelete          = { fg = p.error_light },
+    ColorColumn         = { bg = p.cursorline },
+    Conceal             = { fg = p.comments },
+    CurSearch           = { fg = p.fg_main, bg = p.select_hl, bold = true, italic = false },
+    Cursor              = { fg = p.bg_main, bg = p.fg_main },
+    CursorColumn        = { bg = p.cursorline },
+    CursorIM            = { fg = p.bg_main, bg = p.fg_main },
+    CursorLine          = { bg = p.cursorline },
+    CursorLineNr        = { fg = p.cursor_line_nr },
+    DiffAdd             = { fg = p.ok },
+    DiffChange          = { fg = p.warn },
+    DiffDelete          = { fg = p.error_light },
 		Directory           = { link = 'String' },
 		EndOfBuffer         = { link = 'NonText' },
 		ErrorMsg            = { fg = p.error_light },
@@ -419,8 +419,8 @@ M.setup = function()
 		------------------------------------
 		--             FLASH              --
 		------------------------------------
-		FlashBackdrop = { fg = p.comments, bg = p.black, italic = false },
-		FlashLabel    = { fg = p.black, bg = p.pop1, bold = false },
+		FlashBackdrop = { fg = p.comments, bg = '#000000', italic = false },
+		FlashLabel    = { fg = p.bg_main, bg = p.pop1, bold = false },
 
 		------------------------------------
 		--            WHICHKEY            -- 
@@ -507,7 +507,7 @@ M.setup = function()
 		['@neorg.tags.ranged_verbatim.name.norg'] = { fg = p.keyword },
 		-- ['@neorg.links'] = {},
 		-- ['@neorg.links.file'] = {},
-		-- ['@neorg.links.description'] = {},
+		['@neorg.links.description'] = { fg = p.preproc },
 		--
 		-- ['@neorg.delimiters.horizontal_line'] = {},
 

@@ -1,5 +1,7 @@
 local colors = require('chalktone.colors')
 local M = {}
+local blend = colors.hex_blend_with_rgb
+local trans = colors.hex_trans_with_hsl
 
 ---@alias Palette table<string, Hex>
 
@@ -13,14 +15,12 @@ M._generate_default = function()
     cursorline    	  = "#403d3b",
     bg_washed     	  = "#34302C",
     bg_main       	  = "#292522",
-    black         	  = "#000000",
 
     comments      	  = "#91908e",
     ui_accent     	  = "#a08264",
     cursor_line_nr    = "#f9a03f",
     delimiter     	  = "#d7b475",
 
-    var_main      	  = "#ECE1D7",
     func          	  = "#9fc6b8",
     method            = "#8fd1b9",
     string        	  = "#9db2d2",
@@ -44,6 +44,25 @@ M._generate_default = function()
 	}
 
 	return base
+end
+
+M._generate_saturated = function()
+	local p = M._generate_default()
+  -- stylua: ignore start
+	p.bg_main     = blend('#000000', p.bg_main,   0.3)
+	p.bg_washed   = blend('#000000', p.bg_washed, 0.85)
+
+	p.func        = trans(p.func,     0, 30, 0)
+	p.string      = trans(p.string,   0, 30, 0)
+	p.type        = trans(p.type,     0, 30, 0)
+	p.field       = trans(p.field,    0, 30, 0)
+	p.keyword     = trans(p.keyword,  0, 20, 10)
+	p.constant    = trans(p.constant, 0, 20, 30)
+	p.preproc     = trans(p.preproc,  0, 30, 0)
+	p.operator    = trans(p.operator, 0, 15, 10)
+	-- stylua: ignore end
+
+	return p
 end
 
 local _generate_testers = function()
@@ -76,6 +95,7 @@ end
 -- NOTE: Add the color palettes here by name
 local _builtin_palettes = {
 	default = M._generate_default,
+	saturated = M._generate_saturated,
 }
 
 ---@param palette_name string
@@ -83,8 +103,6 @@ local _builtin_palettes = {
 local _setup_palette = function(palette_name)
 	local name = palette_name or 'default'
 	local p = _builtin_palettes[name]()
-	local blend = colors.hex_blend_with_rgb
-	local trans = colors.hex_trans_with_hsl
 
   -- stylua: ignore start
 	p.bg_statusline1  = blend(p.select_hl, p.bg_main, 0.6)

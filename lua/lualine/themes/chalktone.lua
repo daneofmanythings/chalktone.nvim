@@ -2,7 +2,7 @@ local p = require('chalktone.palettes').palette
 
 local chalktone = {
 	normal = {
-		a = { fg = p.black, bg = p.fg_main, gui = 'bold' },
+		a = { fg = p.bg_main, bg = p.fg_main, gui = 'bold' },
 		b = { fg = p.fg_main, bg = p.bg_statusline1 },
 		c = { fg = p.fg_main, bg = p.bg_statusline2 },
 	},
