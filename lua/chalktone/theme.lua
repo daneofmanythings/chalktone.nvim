@@ -12,9 +12,9 @@ M.setup = function()
 	local p = require('chalktone.palettes').setup(theme_name)
 
 	local highlights = {
-		-----------------------------------
-		--            EDITOR             --
-		-----------------------------------
+		----------------------------------
+		--            EDITOR            --
+		----------------------------------
 		-- stylua: ignore start
 		ColorColumn         = { bg = p.cursorline },
 		Conceal             = { fg = p.comments },
@@ -27,22 +27,22 @@ M.setup = function()
 		DiffAdd             = { fg = p.ok },
 		DiffChange          = { fg = p.warn },
 		DiffDelete          = { fg = p.error_light },
-		Directory		       = { link = 'String' },
-		EndOfBuffer		     = { link = 'NonText' },
-		ErrorMsg		        = { fg = p.error_light },
-		FloatBorder		     = { link = 'NormalFloat' },
-		FloatTitle		      = { fg = p.fg_main, bg = p.bg_main },
-		FoldColumn		      = { bg = p.bg_washed},
-		Folded		          = { link = 'FoldColumn' },
-		IncSearch		       = { link = 'CurSearch' },
-		LineNr		          = { fg = p.ui_accent },
-		MatchParen		      = { bg = p.select_hl },
-		ModeMsg		         = { fg = p.fg_main, bg = p.bg_main },
-		MoreMsg		         = { fg = p.fg_main, bg = p.bg_main },
-		NonText		         = { fg = p.select_hl },
-		Normal		          = { fg = p.fg_main, bg = p.bg_main },
-		NormalFloat		     = { bg = p.bg_main },
-		NormalNC		        = { fg = p.fg_main, bg = p.bg_washed },
+		Directory           = { link = 'String' },
+		EndOfBuffer         = { link = 'NonText' },
+		ErrorMsg            = { fg = p.error_light },
+		FloatBorder         = { link = 'NormalFloat' },
+		FloatTitle          = { fg = p.fg_main, bg = p.bg_main },
+		FoldColumn          = { bg = p.bg_washed},
+		Folded              = { link = 'FoldColumn' },
+		IncSearch           = { link = 'CurSearch' },
+		LineNr              = { fg = p.ui_accent },
+		MatchParen          = { bg = p.select_hl },
+		ModeMsg             = { fg = p.fg_main, bg = p.bg_main },
+		MoreMsg             = { fg = p.fg_main, bg = p.bg_main },
+		NonText             = { fg = p.select_hl },
+		Normal              = { fg = p.fg_main, bg = p.bg_main },
+		NormalFloat         = { bg = p.bg_main },
+		NormalNC            = { fg = p.fg_main, bg = p.bg_washed },
 		NormalFloatNC       = { bg = p.bg_washed },
 		NvimInternalError   = { fg = p.fg_main, bg = p.error_dark },
 		Pmenu               = { link = 'NormalFloat' },
@@ -58,54 +58,54 @@ M.setup = function()
 		Search              = { link = 'CurSearch' },
 		SignColumn          = { bg = p.bg_main },
 		SignColumnSB        = { link = 'SignColumn' },
-		-- SpecialKey		      = {},
-		-- SpellBad		        = {},
-		-- SpellCap		        = {},
-		-- SpellLocal		      = {},
-		-- SpellRare		       = {},
-		-- StatusLine		      = {},
+		-- SpecialKey         = {},
+		-- SpellBad           = {},
+		-- SpellCap           = {},
+		-- SpellLocal         = {},
+		-- SpellRare          = {},
+		-- StatusLine         = {},
 		StatusLineNC        = { bg = p.bg_washed },
-		-- StatusLineTerm		  = {},
-		-- StatusLineTermNC		= {},
+		-- StatusLineTerm     = {},
+		-- StatusLineTermNC   = {},
 		Substitute          = { link = 'IncSearch' },
-		-- TabLine		         = {},
-		-- TabLineFill		     = {},
-		-- TabLineSel		      = {},
+		-- TabLine            = {},
+		-- TabLineFill        = {},
+		-- TabLineSel         = {},
 		Title               = { fg = p.cursor_line_nr },
-		-- VertSplit		       = {},
+		-- VertSplit          = {},
 		Visual              = { bg = p.select_hl },
 		WarningMsg          = { fg = p.warn },
 		WildMenu            = { bg = p.comments },
-		-- WinBar		          = {},
-		-- WinBarNC		        = {},
+		-- WinBar             = {},
+		-- WinBarNC           = {},
 		WinSeparator        = { fg = p.ui_accent },
 
-		-----------------------------------
-		--		     DIAGNOSTICS           --
-		-----------------------------------
+		-----------------------------------=
+		--          DIAGNOSTICS           --
+		-----------------------------------=
 		DiagnosticError         = { fg = p.error_light },
-		DiagnosticHint		  		= { fg = p.hint },
-		DiagnosticInfo		  		= { fg = p.info },
-		DiagnosticWarn		  		= { fg = p.warn },
-		DiagnosticOK		    		= { fg = p.ok },
+		DiagnosticHint          = { fg = p.hint },
+		DiagnosticInfo          = { fg = p.info },
+		DiagnosticWarn          = { fg = p.warn },
+		DiagnosticOK            = { fg = p.ok },
 
 		DiagnosticFloatingError = { link = 'DiagnosticError' },
 		DiagnosticFloatingHint  = { link = 'DiagnosticHint' },
 		DiagnosticFloatingInfo  = { link = 'DiagnosticInfo' },
 		DiagnosticFloatingWarn  = { link = 'DiagnosticWarn' },
-		DiagnosticFloatingOk		= { link = 'DiagnosticOK' },
+		DiagnosticFloatingOk    = { link = 'DiagnosticOK' },
 
 		DiagnosticSignError     = { link = 'DiagnosticError' },
-		DiagnosticSignHint		  = { link = 'DiagnosticHint' },
-		DiagnosticSignInfo		  = { link = 'DiagnosticInfo' },
-		DiagnosticSignWarn		  = { link = 'DiagnosticWarn' },
-		DiagnosticSignOk		    = { link = 'DiagnosticOK' },
+		DiagnosticSignHint      = { link = 'DiagnosticHint' },
+		DiagnosticSignInfo      = { link = 'DiagnosticInfo' },
+		DiagnosticSignWarn      = { link = 'DiagnosticWarn' },
+		DiagnosticSignOk        = { link = 'DiagnosticOK' },
 
 		DiagnosticUnnecessary   = { fg = p.hint }, -- unused/empty code
 
-		-----------------------------------
-		--		        SYNTAX             -- https://neovim.io/doc/user/syntax.html#highlight-groups
-		-----------------------------------
+		------------------------------------
+		--              SYNTAX            -- https://neovim.io/doc/user/syntax.html#highlight-groups
+		------------------------------------
 		Comment             = { fg = p.comments },
 		Constant            = { fg = p.constant },
 		String              = { fg = p.string },
@@ -151,15 +151,15 @@ M.setup = function()
 		Todo                = { fg = p.comments },
 		Debug               = { fg = p.error_light },
 
-		-- LspCodeLens = {},
-		-- LspCodeLensSeparator = {},
-		-- LspInlayHint = {},
-		-- LspReferenceRead = {},
-		-- LspReferenceText = {},
-		-- LspReferenceWrite = {},
+		-- LspCodeLens            = {},
+		-- LspCodeLensSeparator   = {},
+		-- LspInlayHint           = {},
+		-- LspReferenceRead       = {},
+		-- LspReferenceText       = {},
+		-- LspReferenceWrite      = {},
 
 		------------------------------------
-		--		       TREESITTER           -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
+		--          TREESITTER           -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
 		------------------------------------
 
 		-- Identifiers
@@ -167,15 +167,15 @@ M.setup = function()
 		['@variable.builtin']           = { link = 'Keyword' }, -- built-in variable names (e.g. `this`)
 		['@variable.parameter']         = { fg = p.func_param }, -- parameters of a function
 		['@variable.parameter.builtin'] = { fg = p.func_param }, -- special parameters (e.g. `_`, `it`)
-		-- ['@variable.member']		        = { fg = p.member }, -- object and struct fields
+		-- ['@variable.member']           = { fg = p.member }, -- object and struct fields
 
 		['@constant']                   = { link = 'Constant' }, -- constant identifiers
-		-- ['@constant.builtin'] 					= {}, -- built-in constant values
+		-- ['@constant.builtin']          = {}, -- built-in constant values
 		['@constant.macro']             = { link = 'Constant' }, -- constants defined by the preprocessor
 
 		['@module']                     = { fg = p.field }, -- modules or namespaces
 		['@module.builtin']             = { link = '@module' }, -- built-in modules or namespaces
-		-- ['@label']		      						= {}, -- GOTO and other labels (e.g. `label:` in C), including heredoc labels
+		-- ['@label']                     = {}, -- GOTO and other labels (e.g. `label:` in C), including heredoc labels
 
 		-- Literals
 		['@string']                     = { link = 'String' }, -- string literals
@@ -353,9 +353,8 @@ M.setup = function()
 		['@text.title.6.markdown']      = { link = '@markup.heading.6.markdown' },
 
 		------------------------------------
-		--   LSP SEMANTIC TOKEN GROUPS		-- https://neovim.io/doc/user/lsp.html#lsp-semantic-highlight
+		--    LSP SEMANTIC TOKEN GROUPS   -- https://neovim.io/doc/user/lsp.html#lsp-semantic-highlight
 		------------------------------------
-
 		['@lsp.type.enum']                        = { link = '@type' },
 		['@lsp.type.variable']                    = { link = 'Identifier' },
 		['@lsp.type.parameter']                   = { link = '@variable.parameter' },
@@ -363,12 +362,8 @@ M.setup = function()
 		['@lsp.typemod.type.defaultLibrary']      = { fg = p.field },
 		['@lsp.typemod.function.defaultLibrary']  = { fg = p.func },
 
-		-- ['@lsp.type.type']      = {fg = p.type_builtin },
-		-- ['@lsp.type.variable.go'] = { link = '@variable.parameter' },
-		-- ['@lsp.typemod.property'] = { fg = p.jasmine },
-
 		------------------------------------
-		--		     CMP HIGHLIGHTS         --
+		--          CMP HIGHLIGHTS        --
 		------------------------------------
 		CmpDocumentation            = { link = 'Normal' },
 		CmpDocumentationBorder      = { link = 'Normal' },
@@ -410,20 +405,20 @@ M.setup = function()
 		CmpItemKindSnippet          = { fg = p.preproc },
 
 		------------------------------------
-		--		        GITSIGNS            --
+		--            GITSIGNS            --
 		------------------------------------
 		GitSignsAdd       = { fg = p.ok },
 		GitSignsChange    = { fg = p.warn },
 		GitSignsDelete    = { fg = p.error_light },
 
-		------------------------------------
-		--		         FLASH              --
-		------------------------------------
+		-------------------------------------
+		--              FLASH              --
+		-------------------------------------
 		FlashBackdrop     = { fg = p.comments, bg = '#000000', italic = false },
 		FlashLabel        = { fg = p.bg_main, bg = p.pop1, bold = false },
 
 		------------------------------------
-		--		        WHICHKEY            -- 
+		--            WHICHKEY            -- 
 		------------------------------------
 		-- WhichKey           = {}, -- the key
 		-- WhichKeyGroup      = {}, -- a group
@@ -434,7 +429,7 @@ M.setup = function()
 		-- WhichKeyValue      = {}, -- used by plugins that provide values
 
 		------------------------------------
-		--		          LAZY              --
+		--              LAZY              --
 		------------------------------------
 		-- LazyButton           = { 'CursorLine' },
 		-- LazyButtonActive     = { 'Visual' },
@@ -470,20 +465,20 @@ M.setup = function()
 		-- LazyValue            = { '@string' }, -- value of a property
 
 		------------------------------------
-		--		          NEORG             --
+		--              NEORG             --
 		------------------------------------
-		['@neorg.headings.1.title'] = { fg = p.header1 },
-		['@neorg.headings.2.title'] = { fg = p.header2 },
-		['@neorg.headings.3.title'] = { fg = p.header3 },
-		['@neorg.headings.4.title'] = { fg = p.header4 },
-		['@neorg.headings.5.title'] = { fg = p.header5 },
-		['@neorg.headings.6.title'] = { fg = p.header6 },
-		['@neorg.headings.1.prefix'] = { link = 'Identifier' },
-		['@neorg.headings.2.prefix'] = { link = 'Identifier' },
-		['@neorg.headings.3.prefix'] = { link = 'Identifier' },
-		['@neorg.headings.4.prefix'] = { link = 'Identifier' },
-		['@neorg.headings.5.prefix'] = { link = 'Identifier' },
-		['@neorg.headings.6.prefix'] = { link = 'Identifier' },
+		['@neorg.headings.1.title']   = { fg = p.header1 },
+		['@neorg.headings.2.title']   = { fg = p.header2 },
+		['@neorg.headings.3.title']   = { fg = p.header3 },
+		['@neorg.headings.4.title']   = { fg = p.header4 },
+		['@neorg.headings.5.title']   = { fg = p.header5 },
+		['@neorg.headings.6.title']   = { fg = p.header6 },
+		['@neorg.headings.1.prefix']  = { link = 'Identifier' },
+		['@neorg.headings.2.prefix']  = { link = 'Identifier' },
+		['@neorg.headings.3.prefix']  = { link = 'Identifier' },
+		['@neorg.headings.4.prefix']  = { link = 'Identifier' },
+		['@neorg.headings.5.prefix']  = { link = 'Identifier' },
+		['@neorg.headings.6.prefix']  = { link = 'Identifier' },
 
 		-- ['@neorg.links.location.heading.1'] = {},
 		-- ['@neorg.links.location.heading.2'] = {},
@@ -492,14 +487,14 @@ M.setup = function()
 		-- ['@neorg.links.location.heading.5'] = {},
 		-- ['@neorg.links.location.heading.6'] = {},
 		--
-		['@neorg.todo_items.undone'] = { fg = p.delimiter },
-		['@neorg.todo_items.done'] = { fg = p.func },
-		['@neorg.todo_items.on_hold'] = { fg = p.ui_accent },
+		['@neorg.todo_items.undone']    = { fg = p.delimiter },
+		['@neorg.todo_items.done']      = { fg = p.func },
+		['@neorg.todo_items.on_hold']   = { fg = p.ui_accent },
 		['@neorg.todo_items.cancelled'] = { fg = p.comments },
 		['@neorg.todo_items.uncertain'] = { fg = p.string },
-		['@neorg.todo_items.pending'] = { fg = p.field },
+		['@neorg.todo_items.pending']   = { fg = p.field },
 		['@neorg.todo_items.recurring'] = { fg = p.preproc },
-		['@neorg.todo_items.urgent'] = { fg = p.operator },
+		['@neorg.todo_items.urgent']    = { fg = p.operator },
 		-- ['@neorg.lists.unordered.prefix'] = {},
 		-- ['@neorg.lists.ordered.prefix'] = {},
 		--
@@ -507,7 +502,7 @@ M.setup = function()
 		['@neorg.tags.ranged_verbatim.name.norg'] = { fg = p.keyword },
 		-- ['@neorg.links'] = {},
 		-- ['@neorg.links.file'] = {},
-		['@neorg.links.description'] = { fg = p.preproc },
+		['@neorg.links.description']  = { fg = p.preproc },
 		--
 		-- ['@neorg.delimiters.horizontal_line'] = {},
 
@@ -543,22 +538,22 @@ end
 
 local _valid_attr_names = { -- :h nvim_set_hl
   -- stylua: ignore start
-	fg		        = true, -- color name or "#RRGGBB"
-	bg		        = true, -- color name or "#RRGGBB"
-	sp		        = true, -- color name or "#RRGGBB"
-	blend		     = true, -- integer between 0 and 100
-	bold		      = true, -- boolean
-	standout		  = true, -- boolean
-	underline		 = true, -- boolean
-	undercurl		 = true, -- boolean
+	fg            = true, -- color name or "#RRGGBB"
+	bg            = true, -- color name or "#RRGGBB"
+	sp            = true, -- color name or "#RRGGBB"
+	blend         = true, -- integer between 0 and 100
+	bold          = true, -- boolean
+	standout      = true, -- boolean
+	underline     = true, -- boolean
+	undercurl     = true, -- boolean
 	underdouble   = true, -- boolean
 	underdotted   = true, -- boolean
 	underdashed   = true, -- boolean
 	strikethrough = true, -- boolean
-	italic		    = true, -- boolean
-	reverse		   = true, -- boolean
-	nocombine		 = true, -- boolean
-	link		      = true, -- name of another highlight group to link to. :hi-link
+	italic        = true, -- boolean
+	reverse       = true, -- boolean
+	nocombine     = true, -- boolean
+  link          = true, -- name of another highlight group to link to. :hi-link
 	-- stylua: ignore end
 }
 
