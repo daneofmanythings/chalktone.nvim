@@ -37,7 +37,7 @@ end
 The basic setup structure:
 ```lua
 require('chalktone').setup({
-    theme = 'default', -- This is currently the only theme
+    theme = 'default', -- pick between 'default', 'saturated'
     formatting = {
         -- Apply stylings to multiple highlight groups at once.
     },
