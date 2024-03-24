@@ -120,7 +120,7 @@ the blend and transform functions availble in the api.
 config = function()
     local P = require('palettes') -- pulling in the palettes module that contains the color data
     local C = require('colors') -- pulling in the color module that contains color manipulation functions
-    local palette = p._generate_default() -- generating the default colors for the default palette
+    local palette = p.generate_default() -- generating the default colors for the default palette
 
     local blend = C.hex_blend_with_rgb -- a manipulation function that blends two hex colors by converting
                                        -- them to rgb, linearly blending, and converting back  
