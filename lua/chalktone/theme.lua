@@ -13,7 +13,7 @@ M.setup = function()
 
 	local highlights = {
 		----------------------------------
-		--            EDITOR            --
+		--            EDITOR            -- :h highlight-groups
 		----------------------------------
 		-- stylua: ignore start
 		ColorColumn         = { bg = p.cursorline },
@@ -27,7 +27,7 @@ M.setup = function()
 		DiffAdd             = { fg = p.ok },
 		DiffChange          = { fg = p.warn },
 		DiffDelete          = { fg = p.error_light },
-		Directory           = { link = 'String' },
+		Directory           = { fg = p.string },
 		EndOfBuffer         = { link = 'NonText' },
 		ErrorMsg            = { fg = p.error_light },
 		FloatBorder         = { link = 'NormalFloat' },
@@ -80,9 +80,9 @@ M.setup = function()
 		-- WinBarNC           = {},
 		WinSeparator        = { fg = p.ui_accent },
 
-		-----------------------------------=
+		------------------------------------
 		--          DIAGNOSTICS           --
-		-----------------------------------=
+		------------------------------------
 		DiagnosticError         = { fg = p.error_light },
 		DiagnosticHint          = { fg = p.hint },
 		DiagnosticInfo          = { fg = p.info },
@@ -101,9 +101,9 @@ M.setup = function()
 		DiagnosticSignWarn      = { link = 'DiagnosticWarn' },
 		DiagnosticSignOk        = { link = 'DiagnosticOK' },
 
-		DiagnosticUnnecessary   = { fg = p.hint }, -- unused/empty code
+		DiagnosticUnnecessary   = { fg = p.delimiter }, -- unused/empty code
 
-		------------------------------------
+		------------------------------------ :h group-name
 		--              SYNTAX            -- https://neovim.io/doc/user/syntax.html#highlight-groups
 		------------------------------------
 		Comment             = { fg = p.comments },
@@ -158,7 +158,7 @@ M.setup = function()
 		-- LspReferenceText       = {},
 		-- LspReferenceWrite      = {},
 
-		------------------------------------
+		------------------------------------ :h treesitter-highlight
 		--          TREESITTER           -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
 		------------------------------------
 
@@ -352,7 +352,7 @@ M.setup = function()
 		['@text.title.5.markdown']      = { link = '@markup.heading.5.markdown' },
 		['@text.title.6.markdown']      = { link = '@markup.heading.6.markdown' },
 
-		------------------------------------
+		------------------------------------ :h lsp-highlight
 		--    LSP SEMANTIC TOKEN GROUPS   -- https://neovim.io/doc/user/lsp.html#lsp-semantic-highlight
 		------------------------------------
 		['@lsp.type.enum']                        = { link = '@type' },
