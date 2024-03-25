@@ -184,7 +184,7 @@ M.setup = function()
 		-- ['@string.escape']             = {}, -- escape sequences
 		-- ['@string.special']            = {}, -- other special strings (e.g. dates)
 		-- ['@string.special.symbol']     = {}, -- symbols or atoms
-		-- ['@string.special.url']        = {}, -- URIs (e.g. hyperlinks)
+		['@string.special.url']         = { fg = p.link }, -- URIs (e.g. hyperlinks)
 		-- ['@string.special.path']       = {}, -- filenames
 
 		['@character']                  = { link = 'String' }, -- character literals
@@ -258,7 +258,7 @@ M.setup = function()
 		['@markup.strikethrough'] 			= { strikethrough = true }, -- struck-through text
 		['@markup.underline']           = { link = 'Underlined' }, -- underlined text (only for literal underline markup!)
 
-		['@markup.heading']             = { fg = p.header1 }, -- headings, titles (including markers)
+		['@markup.heading']             = { fg = p.type }, -- headings, titles (including markers)
 		-- ['@markup.heading.1']          = { fg = p.header1 }, -- top-level heading
 		-- ['@markup.heading.2']          = { fg = p.header2 }, -- section heading
 		-- ['@markup.heading.3']          = { fg = p.header3 }, -- subsection heading
@@ -271,7 +271,7 @@ M.setup = function()
 		--
 		['@markup.link']                = { underline = false }, -- text references, footnotes, citations, etc.
 		['@markup.link.label']          = { fg = p.preproc }, -- link, reference descriptions
-		['@markup.link.url']            = { fg = p.string }, -- URL-style links
+		['@markup.link.url']            = { fg = p.link }, -- URL-style links
 		--
 		['@markup.raw']                 = { fg = p.fg_main }, -- literal or verbatim text (e.g. inline code)
 		['@markup.raw.block']           = { fg = p.fg_main }, -- literal or verbatim text as a stand-alone block
@@ -291,6 +291,11 @@ M.setup = function()
 		--
 		-- ['@spell']                     = {}, -- for defining regions to be spellchecked
 		-- ['@nospell']                   = {}, -- for defining regions that should NOT be spellchecked
+
+    ['@tag.html']                   = { fg = p.keyword },
+    ['@tag.css']                    = { fg = p.keyword },
+    ['@tag.delimiter.html']         = { fg = p.delimiter },
+    ['@string.css']                 = { fg = p.string },
 
 		-- LEGACY  TODO: Remove with v10
 
