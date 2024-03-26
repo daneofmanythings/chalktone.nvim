@@ -101,10 +101,19 @@ local _builtin_palettes = {
 }
 
 ---@param palette_name string
+---@return any
+local _get_palette = function(palette_name)
+	if type(palette_name) ~= 'string' then
+		return _builtin_palettes['default']()
+	else
+		return _builtin_palettes[palette_name or 'default']()
+	end
+end
+
+---@param palette table
 ---@return Palette
-local setup_palette = function(palette_name)
-	local name = palette_name or 'default'
-	local p = _builtin_palettes[name]()
+M.setup_palette = function(palette)
+	local p = palette
 
   -- stylua: ignore start
 	p.bg_statusline1  = blend(p.select_hl, p.bg_main, 0.6)
@@ -126,11 +135,18 @@ local setup_palette = function(palette_name)
 	return p
 end
 
---- Grabs the palette from the builtins then extends and returns it.
----@param palette_name string
+---@param theme string
+---@param palette table
 ---@return Palette
-M.setup = function(palette_name)
-	M.palette = setup_palette(palette_name)
+M.setup = function(theme, palette)
+	local base = _get_palette(theme)
+	if type(palette) ~= 'table' then
+		M.palette = M.setup_palette(base)
+	else
+		local custom = vim.tbl_deep_extend('keep', palette, base)
+		M.palette = M.setup_palette(custom)
+	end
+
 	return M.palette
 end
 

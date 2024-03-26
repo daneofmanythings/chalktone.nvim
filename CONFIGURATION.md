@@ -46,6 +46,7 @@ that the 'builtin_transparent' section has quite a few highlight groups defined!
 ```lua
 options = {
     theme = 'default',
+    palettet = {},
     formatting = {
         builtin_strings = {
             styling = { italic = true },
@@ -159,4 +160,29 @@ highlight group help pages to find which groups you may want to modify. A large
 portion of [theme.lua](./lua/chalktone/theme.lua) is commented as to what each group controls.
 You may find it useful as a reference.
 
+#### Substituting a custom palette in your setup
 
+This plugin does not use many 'links' when setting its highlighting. This is to give the users
+more freedom to customize their colors. However, this comes at a cost. Changing the color that
+, for example, 'Function' is associated with, will not change all groups that use the color 
+'Function' does. You may want to easily implement this without listing out all highlight groups
+that use that color. This can be done by substituting a custom palette into the config. Here
+is an example of changing the color 'func' in the palette so all groups that use that color are
+changed.
+
+```lua
+config = function()
+    local P = require('chalktone.palettes')
+    local palette = P.generate_default()
+    local palette.func = '#ff0000'
+    require('chalktone').setup({
+        theme = 'default',
+        palette = palette,
+    })
+end
+```
+
+The names of the recognized colors in a palette table can be seen in [palettes.lua](./lua/chalktone/palettes.lua).
+You can submit any table with the schema { name = 'hexvalue' }. Any required names that aren't
+present in the supplied table will be gotten from the palette indicated in 'theme' field of the
+setup. In the above case, that is 'default'. If theme isn't specified, 'default' is selected.

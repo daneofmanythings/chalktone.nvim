@@ -3,6 +3,7 @@ local M = {}
 local _generate_default = function()
 	local options = {
 		theme = 'default',
+		palette = {},
 		formatting = {
 			builtin_strings = {
 				styling = { italic = true },

@@ -5,11 +5,12 @@ local M = {}
 
 ---@return Theme
 M.setup = function()
-	local config = require('chalktone.config')
-	local by_group = config.options.format_by_group
-	local theme_name = config.options.theme
+	local config = require('chalktone.config').options
+	local by_group = config.format_by_group
+	local theme = config.theme
+	local palette = config.palette
 
-	local p = require('chalktone.palettes').setup(theme_name)
+	local p = require('chalktone.palettes').setup(theme, palette)
 
 	local highlights = {
 		----------------------------------
@@ -63,7 +64,7 @@ M.setup = function()
 		-- SpellCap           = {},
 		-- SpellLocal         = {},
 		-- SpellRare          = {},
-		-- StatusLine         = {},
+		StatusLine          = { bg = p.bg_main },
 		StatusLineNC        = { bg = p.bg_washed },
 		-- StatusLineTerm     = {},
 		-- StatusLineTermNC   = {},
@@ -101,7 +102,7 @@ M.setup = function()
 		DiagnosticSignWarn      = { link = 'DiagnosticWarn' },
 		DiagnosticSignOk        = { link = 'DiagnosticOK' },
 
-		DiagnosticUnnecessary   = { fg = p.delimiter }, -- unused/empty code
+		DiagnosticUnnecessary   = { fg = p.comments }, -- unused/empty code
 
 		------------------------------------ :h group-name
 		--              SYNTAX            -- https://neovim.io/doc/user/syntax.html#highlight-groups
@@ -400,7 +401,7 @@ M.setup = function()
 		CmpItemKindClass            = { link = 'Type' },
 		CmpItemKindStruct           = { link = 'Type' },
 
-		CmpItemKindModule           = { link = 'Identifier' },
+		CmpItemKindModule           = { link = '@module' },
 
 		CmpItemKindProperty         = { link = '@property' },
 		CmpItemKindField            = { link = '@field' },
@@ -478,12 +479,12 @@ M.setup = function()
 		['@neorg.headings.4.title']   = { fg = p.header4 },
 		['@neorg.headings.5.title']   = { fg = p.header5 },
 		['@neorg.headings.6.title']   = { fg = p.header6 },
-		['@neorg.headings.1.prefix']  = { link = 'Identifier' },
-		['@neorg.headings.2.prefix']  = { link = 'Identifier' },
-		['@neorg.headings.3.prefix']  = { link = 'Identifier' },
-		['@neorg.headings.4.prefix']  = { link = 'Identifier' },
-		['@neorg.headings.5.prefix']  = { link = 'Identifier' },
-		['@neorg.headings.6.prefix']  = { link = 'Identifier' },
+		['@neorg.headings.1.prefix']  = { fg = p.fg_main },
+		['@neorg.headings.2.prefix']  = { fg = p.fg_main },
+		['@neorg.headings.3.prefix']  = { fg = p.fg_main },
+		['@neorg.headings.4.prefix']  = { fg = p.fg_main },
+		['@neorg.headings.5.prefix']  = { fg = p.fg_main },
+		['@neorg.headings.6.prefix']  = { fg = p.fg_main },
 
 		-- ['@neorg.links.location.heading.1'] = {},
 		-- ['@neorg.links.location.heading.2'] = {},
