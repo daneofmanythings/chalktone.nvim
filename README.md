@@ -110,6 +110,7 @@ setups to aid in common alterations
 ## Extras
 
 - [alacritty](https://github.com/alacritty/alacritty): A cross-platform, OpenGL terminal emulator.
+- [zellij](https://zellij.dev/): A terminal workspace with batteries included.
 
 
 ## In Progress
