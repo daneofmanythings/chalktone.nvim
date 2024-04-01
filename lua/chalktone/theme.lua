@@ -506,6 +506,9 @@ M.setup = function()
 		--
 		-- ['@neorg.markup.verbatim'] = {},
 		['@neorg.tags.ranged_verbatim.name.norg'] = { fg = p.keyword },
+    -- NeorgMetaKey                    = { fg = p.comments },
+    ['@neorg.tags.ranged_verbatim.document_meta.key.norg_meta'] = { link = 'Comment' },
+    ['@neorg.tags.ranged_verbatim.document_meta.category'] = { fg = p.func },
 		-- ['@neorg.links'] = {},
 		-- ['@neorg.links.file'] = {},
 		['@neorg.links.description']  = { fg = p.preproc },

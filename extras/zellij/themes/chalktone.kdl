@@ -1,0 +1,17 @@
+// The theme is a placeholder until more detailed api is introduced for colors. 
+// https://github.com/zellij-org/zellij/issues/2297
+themes {  
+    chalktone { 
+        fg "#524f4c"
+        bg "#524f4c"
+        red "#ece1d7"
+        green "#9fc6b8"
+        yellow "#fbdc98"
+        blue "#9db2d2"
+        magenta "#dfaad2"
+        orange "#f1b47e"
+        cyan "#cfbfe3"
+        black "#292522"
+        white "#ece1d7"
+    }
+}

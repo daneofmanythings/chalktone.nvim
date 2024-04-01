@@ -10,10 +10,10 @@ local trans = colors.hex_trans_with_hsl
 M.generate_default = function()
 	local base = {
     -- stylua: ignore start
-    fg_main       	  = "#ECE1D7",
+    fg_main       	  = "#ece1d7",
     select_hl     	  = "#524f4c",
     cursorline    	  = "#403d3b",
-    bg_washed     	  = "#34302C",
+    bg_washed     	  = "#34302c",
     bg_main       	  = "#292522",
 
     comments      	  = "#91908e",
@@ -29,7 +29,7 @@ M.generate_default = function()
     keyword        	  = "#cd88b8",
     constant      	  = "#dfaad2", -- and numbers
     preproc        	  = "#cfbfe3",
-    operator      	  = "#D47766",
+    operator      	  = "#d47766",
     green          	  = "#89B3B6",
 
     ok            	  = "#78997A",
