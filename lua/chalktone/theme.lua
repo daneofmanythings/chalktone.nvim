@@ -505,11 +505,18 @@ M.setup = function()
 		-- ['@neorg.lists.ordered.prefix'] = {},
 		--
 		-- ['@neorg.markup.verbatim'] = {},
-		['@neorg.tags.ranged_verbatim.name.norg'] = { fg = p.keyword },
     -- NeorgMetaKey                    = { fg = p.comments },
-    ['@neorg.tags.ranged_verbatim.document_meta.key.norg_meta'] = { link = 'Comment' },
-    ['@neorg.tags.ranged_verbatim.document_meta.category'] = { fg = p.func },
-		-- ['@neorg.links'] = {},
+
+    -- This is all meta tag styling
+		['@neorg.tags.ranged_verbatim.name.word.norg'] = { fg = p.preproc },
+    ['@neorg.tags.ranged_verbatim.document_meta.key'] = { link = 'Comment' },
+    ['@neorg.tags.ranged_verbatim.document_meta.categories'] = { fg = p.func },
+    ['@neorg.tags.ranged_verbatim.document_meta.description'] = { fg = p.string},
+    ['@neorg.tags.ranged_verbatim.document_meta.created'] = { fg = p.func_param, italic = true},
+    ['@neorg.tags.ranged_verbatim.document_meta.updated'] = { fg = p.func_param, italic = true},
+    ['@neorg.tags.ranged_verbatim.document_meta.version'] = { fg = p.func_param, italic = true},
+
+    -- ['@neorg.links'] = {},
 		-- ['@neorg.links.file'] = {},
 		['@neorg.links.description']  = { fg = p.preproc },
 		--
