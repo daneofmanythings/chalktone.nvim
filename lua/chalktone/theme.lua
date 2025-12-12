@@ -64,7 +64,7 @@ M.setup = function()
         -- SpellCap           = {},
         -- SpellLocal         = {},
         -- SpellRare          = {},
-        StatusLine                                                = { fg = bg_main, bg = p.fg_main },
+        StatusLine                                                = { fg = p.bg_main, bg = p.fg_main },
         StatusLineNC                                              = { bg = p.bg_washed },
         -- StatusLineTerm     = {},
         -- StatusLineTermNC   = {},
