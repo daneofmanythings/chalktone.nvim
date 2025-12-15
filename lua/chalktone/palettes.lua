@@ -51,9 +51,9 @@ M.generate_saturated = function()
   -- stylua: ignore start
 	p.bg_main     = blend('#000000', p.bg_main,   0.3)
 	p.bg_washed   = blend('#000000', p.bg_washed, 0.85)
-  p.comments    = blend(p.fg_main, p.comments,  .7)
-  p.ui_accent   = blend(p.fg_main, p.ui_accent, 0.8)
-  p.string      = blend(p.fg_main, p.string,    0.8)
+    p.comments    = blend(p.fg_main, p.comments,  .7)
+    p.ui_accent   = blend(p.fg_main, p.ui_accent, 0.8)
+    p.string      = blend(p.fg_main, p.string,    0.8)
 
 	p.func        = trans(p.func,     0, 10, 10)
 	p.type        = trans(p.type,     0, 20, 10)
@@ -120,16 +120,16 @@ M.setup_palette = function(palette)
 	p.bg_statusline2  = blend(p.select_hl, p.bg_main, 0.2)
 
 	p.func_param      = trans(p.fg_main, -15, -75, -10)
-  p.member          = blend(p.string, p.fg_main, .5)
+    p.member          = blend(p.string, p.fg_main, .5)
 	p.hint            = trans(p.hint, 0, 10, 50) -- tweaking
-  p.type_builtin    = blend(p.type, p.field, .5)
+    p.type_builtin    = blend(p.type, p.field, .5)
 
-  p.header1         = p.cursor_line_nr
-  p.header2         = blend(p.cursor_line_nr, p.preproc, .2)
-  p.header3         = blend(p.cursor_line_nr, p.preproc, .4)
-  p.header4         = blend(p.cursor_line_nr, p.preproc, .6)
-  p.header5         = blend(p.cursor_line_nr, p.preproc, .8)
-  p.header6         = p.preproc
+    p.header1         = p.cursor_line_nr
+    p.header2         = blend(p.cursor_line_nr, p.preproc, .2)
+    p.header3         = blend(p.cursor_line_nr, p.preproc, .4)
+    p.header4         = blend(p.cursor_line_nr, p.preproc, .6)
+    p.header5         = blend(p.cursor_line_nr, p.preproc, .8)
+    p.header6         = p.preproc
 	-- stylua: ignore end
 
 	return p
